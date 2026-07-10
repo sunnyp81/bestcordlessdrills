@@ -178,3 +178,96 @@ h1, h2, h3, h4 {
   transition-duration: 160ms;
   transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
 }
+
+/* ==========================================================================
+   Hero band - the dark, wide, high-contrast entry point every page opens
+   with. This is where "engineered instrument" has to actually show up,
+   not just live in the token list. Blueprint dot-grid + one amber glow,
+   nothing more - the brand is restrained, not flat.
+   ========================================================================== */
+.shell {
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.hero-band {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-ink-950);
+  border-bottom: 1px solid var(--color-ink-800);
+  padding: 3.25rem 0 3rem;
+}
+@media (min-width: 768px) {
+  .hero-band { padding: 4.5rem 0 3.75rem; }
+}
+.hero-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(154, 163, 173, 0.35) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 100% at 100% 0%, black 0%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 100% at 100% 0%, black 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-band::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 34rem;
+  height: 34rem;
+  background: radial-gradient(circle, rgba(228, 116, 14, 0.22), transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+.hero-band__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+.hero-band__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-amber-300);
+  margin-bottom: 1rem;
+}
+.hero-band__eyebrow::before {
+  content: "";
+  width: 1.5rem;
+  height: 2px;
+  background: var(--color-amber-500);
+  flex-shrink: 0;
+}
+.hero-band__title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  font-size: clamp(2.1rem, 4.4vw + 1rem, 3.5rem);
+  max-width: 46rem;
+}
+.hero-band--page .hero-band__title { font-size: clamp(1.9rem, 3vw + 1rem, 2.75rem); }
+.hero-band__lede {
+  margin-top: 1.1rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-steel-300);
+  max-width: 42rem;
+}
+.hero-band__meta {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}

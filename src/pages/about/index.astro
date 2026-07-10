@@ -30,18 +30,17 @@ const methodologyRows = [
 ];
 ---
 <BaseLayout {title} {description} ogImage="/og/about.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Independent &middot; UK &middot; Research-led</p>
+      <h1 class="hero-band__title">About Best Cordless Drills</h1>
+      <p class="hero-band__lede">Best Cordless Drills scores UK cordless drills, combi drills and impact drivers on price, warranty and battery platform data instead of lab tests.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about/' }]} />
 
-    <header class="page__header">
-      <p class="page__eyebrow">Independent · UK · Research-led</p>
-      <h1 class="page__title">About Best Cordless Drills</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>Best Cordless Drills scores UK cordless drills, combi drills and impact drivers on price, warranty and battery platform data instead of lab tests.</p>
 
       <p>The site compares retailer own-brand tool lines such as Erbauer, Mac Allister, Titan and Ozito against premium trade brands such as Makita, DeWalt, Bosch and Milwaukee. Every verdict traces back to a spec sheet, a live UK price and a warranty term a reader can check independently.</p>
 
@@ -228,32 +227,12 @@ const methodologyRows = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.75rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
   .badge-row {
     display: flex;

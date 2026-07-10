@@ -34,8 +34,13 @@ const rows: { label: string; value: string }[] = [
 ];
 ---
 <div class="spec-panel" data-verdict={verdict}>
+  <div class="spec-panel__rail-top" aria-hidden="true"></div>
   <div class="spec-panel__body">
     <p class="spec-panel__name">{spec.name}</p>
+    <p class="spec-panel__headline">
+      <span class="figure spec-panel__headline-value">{spec.torqueNm}<span class="spec-panel__headline-unit">Nm</span></span>
+      <span class="spec-panel__headline-label">torque</span>
+    </p>
     <dl class="spec-panel__grid">
       {rows.map((r) => (
         <div class="spec-panel__row">
@@ -54,23 +59,57 @@ const rows: { label: string; value: string }[] = [
   .spec-panel {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 22px;
-    background: var(--color-card);
-    border: 1px solid var(--color-hairline);
-    border-radius: 4px;
+    grid-template-columns: 1fr 34px;
+    background: var(--color-ink-950);
+    border-radius: 6px;
     overflow: hidden;
+    box-shadow: 0 12px 28px -12px rgba(22, 24, 28, 0.35);
+  }
+  .spec-panel__rail-top {
+    position: absolute;
+    inset: 0 34px 0 0;
+    background-image: radial-gradient(circle, rgba(154, 163, 173, 0.18) 1px, transparent 1px);
+    background-size: 16px 16px;
+    mask-image: linear-gradient(to bottom, black, transparent 85%);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
+    pointer-events: none;
   }
   .spec-panel__body {
-    padding: 1.25rem 1.5rem 1.5rem;
+    position: relative;
+    padding: 1.4rem 1.6rem 1.6rem;
   }
   .spec-panel__name {
     font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 1.15rem;
+    color: #fff;
+    margin: 0 0 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-ink-800);
+  }
+  .spec-panel__headline {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0 0 1.15rem;
+  }
+  .spec-panel__headline-value {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-amber-300);
+  }
+  .spec-panel__headline-unit {
     font-size: 1.1rem;
-    color: var(--color-ink-950);
-    margin: 0 0 0.85rem;
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid var(--color-hairline);
+    margin-left: 0.15rem;
+    color: var(--color-amber-500);
+  }
+  .spec-panel__headline-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-steel-300);
   }
   .spec-panel__grid {
     display: grid;
@@ -83,23 +122,24 @@ const rows: { label: string; value: string }[] = [
     justify-content: space-between;
     align-items: baseline;
     gap: 0.75rem;
-    padding: 0.4rem 0;
-    border-bottom: 1px dashed var(--color-hairline);
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--color-ink-800);
   }
   .spec-panel__row dt {
     font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--color-steel-500);
+    color: var(--color-steel-300);
     font-family: var(--font-sans);
   }
   .spec-panel__row dd {
     margin: 0;
     font-weight: 500;
-    color: var(--color-ink-900);
+    color: var(--color-steel-300);
     font-size: 0.95rem;
   }
   .spec-panel__rail {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,8 +148,9 @@ const rows: { label: string; value: string }[] = [
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
+    font-weight: 600;
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
     color: #fff;
     white-space: nowrap;

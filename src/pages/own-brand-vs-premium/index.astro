@@ -94,19 +94,17 @@ const schema = [
 ];
 ---
 <BaseLayout {title} {description} ogImage="/og/own-brand-vs-premium.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Independent &middot; UK &middot; Research-led</p>
+      <h1 class="hero-band__title">Own-brand vs premium cordless drills: are retailer drills worth it?</h1>
+      <p class="hero-band__lede">Erbauer, Titan and Ozito match Makita and DeWalt on torque and no-load speed for most home jobs. The real gap between own-brand and premium cordless drills is warranty terms and battery-platform lock-in, not raw drilling power.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' }]} />
 
-    <header class="page__header">
-      <p class="page__eyebrow">Independent · UK · Research-led</p>
-      <h1 class="page__title">Own-brand vs premium cordless drills: are retailer drills worth it?</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>Erbauer, Titan and Ozito match Makita and DeWalt on torque and no-load speed for most home jobs. The real gap between own-brand and premium cordless drills is warranty terms and battery-platform lock-in. It is not raw drilling power.</p>
-
       <p>An own-brand drill suits occasional DIY. A premium drill's registered warranty and shared battery platform earn back the higher price under regular or heavy use.</p>
 
       <Disclosure />
@@ -319,32 +317,12 @@ const schema = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.75rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
   .prose-drills h3 :global(.verdict-badge) {
     margin-left: 0.6rem;

@@ -131,18 +131,18 @@ const schema = [
 ];
 ---
 <BaseLayout {title} {description} ogImage="/og/best-combi-drill.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Independent &middot; UK &middot; Combi Drill Buying Guide</p>
+      <h1 class="hero-band__title">Best Cordless Combi Drill UK</h1>
+      <p class="hero-band__lede">The best cordless combi drill for most UK buyers is the DeWalt DCD796N: 70 Nm of maximum torque and a genuine hammer action strong enough for brick and blockwork on the widely stocked DeWalt XR platform.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Best Combi Drill', url: '/best-combi-drill/' }]} />
 
-    <header class="page__header">
-      <p class="page__eyebrow">Independent · UK · Combi Drill Buying Guide</p>
-      <h1 class="page__title">Best Cordless Combi Drill UK</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>The best cordless combi drill for most UK buyers is the DeWalt DCD796N. It delivers 70 Nm of maximum torque and a genuine hammer action strong enough for brick and blockwork on the widely stocked DeWalt XR battery platform. Buyers who already own Makita or Bosch batteries get equally masonry-capable performance from the Makita DHP484Z or Bosch GSB 18V-55 Professional instead; buyers working to a tighter budget get real hammer-drill capability from Screwfix's own Titan TTI1257COM for under £80.</p>
+      <p>Buyers who already own Makita or Bosch batteries get equally masonry-capable performance from the Makita DHP484Z or Bosch GSB 18V-55 Professional instead. Buyers working to a tighter budget get real hammer-drill capability from Screwfix's own Titan TTI1257COM for under £80.</p>
 
       <p>This guide ranks 9 real cordless combi drills sold in the UK by torque, battery capacity and price across both own-brand and premium tiers. It only covers combi drills. Plain drill drivers and impact drivers are covered separately.</p>
 
@@ -403,29 +403,9 @@ const schema = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.75rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
     padding-top: 2rem;

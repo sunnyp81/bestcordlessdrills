@@ -81,6 +81,13 @@ const costRows = [
 ];
 ---
 <BaseLayout {title} {description} ogImage="/og/makita-vs-ozito.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Head-to-Head &middot; UK Prices Checked</p>
+      <h1 class="hero-band__title">Makita vs Ozito: Is It Worth Paying More?</h1>
+      <p class="hero-band__lede">Paying more for a Makita DHP484Z over a cheap Ozito PXBHS is worth it for regular or frequent DIY use, not for a few light jobs a year.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={[
       { name: 'Home', url: '/' },
@@ -88,15 +95,7 @@ const costRows = [
       { name: 'Makita vs Ozito', url: '/makita-vs-ozito/' },
     ]} />
 
-    <header class="page__header">
-      <p class="page__eyebrow">Head-to-Head · UK Prices Checked</p>
-      <h1 class="page__title">Makita vs Ozito: Is It Worth Paying More?</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>Paying more for a Makita DHP484Z over a cheap Ozito PXBHS is worth it for regular or frequent DIY use, not for a few light jobs a year.</p>
 
       <p>Both tools are 18V brushless combi drills built for driving screws and drilling wood, metal and masonry. The Makita costs £52.95 to £65 body-only. The Ozito is priced around £75 bare-tool, though that figure is not independently verified.</p>
 
@@ -287,29 +286,9 @@ const costRows = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.75rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
     padding-top: 2rem;

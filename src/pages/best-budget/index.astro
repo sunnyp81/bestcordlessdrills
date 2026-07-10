@@ -100,18 +100,18 @@ const titanSpec = {
 };
 ---
 <BaseLayout {title} {description} ogImage="/og/best-budget.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Buying guide &middot; UK &middot; Under £100</p>
+      <h1 class="hero-band__title">Best Budget Cordless Drill UK: Full Buying Guide</h1>
+      <p class="hero-band__lede">The Titan TTI1257COM is the best budget cordless drill in the UK for most buyers: £79.99, 50 Nm of torque, a 2-year guarantee and two 2.0Ah batteries in the box.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={breadcrumbItems} />
 
-    <header class="page__header">
-      <p class="page__eyebrow">Buying guide · UK · Under £100</p>
-      <h1 class="page__title">Best Budget Cordless Drill UK: Full Buying Guide</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>The Titan TTI1257COM is the best budget cordless drill in the UK for most buyers. It costs £79.99, delivers 50 Nm of torque and comes with a 2-year manufacturer guarantee and two 2.0Ah batteries. Screwfix's own Mac Allister MCD18-Li-2 costs less at £60. B&amp;Q has not published a torque or weight figure for it though.</p>
+      <p>Screwfix's own Mac Allister MCD18-Li-2 costs less at £60, but B&amp;Q has not published a torque or weight figure for it, which is why the Titan takes the top spot: it is the only budget-tier drill in this guide with every spec confirmed.</p>
 
       <p>A budget cordless drill in this guide means an 18V combi drill under roughly £100 from a retailer own-brand or value range: Erbauer and Titan from Screwfix, Mac Allister from B&amp;Q, Ozito, and seasonal special-buys from Aldi (Ferrex) and Lidl (Parkside). All four core models drive screws and drill masonry, wood and metal through a keyless 13mm chuck with a hammer setting.</p>
 
@@ -291,29 +291,9 @@ const titanSpec = {
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.5rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
     padding-top: 2rem;

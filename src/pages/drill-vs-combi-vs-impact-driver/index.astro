@@ -67,15 +67,15 @@ const schema = [
 ];
 ---
 <BaseLayout {title} {description} canonical={`https://bestcordlessdrills.uk${pageUrl}`} ogImage="/og/drill-vs-combi-vs-impact-driver.png" {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Decision tool &middot; UK DIY &middot; No hype, no test lab</p>
+      <h1 class="hero-band__title">Drill vs combi drill vs impact driver: which one do you actually need?</h1>
+      <p class="hero-band__lede">A drill driver bores holes and drives screws with no hammer action. A combi drill adds a hammer mode for brick and masonry. An impact driver uses a different mechanism entirely, built for driving fasteners fast, not for drilling holes.</p>
+    </div>
+  </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Drill vs Combi vs Impact Driver', url: pageUrl }]} />
-
-    <header class="page__header">
-      <p class="page__eyebrow">Decision tool · UK DIY · No hype, no test lab</p>
-      <h1 class="page__title">Drill vs combi drill vs impact driver: which one do you actually need?</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
 
     <div class="prose-drills">
       <h2 id="quick-answer">The quick answer</h2>
@@ -272,32 +272,12 @@ const schema = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.18;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.5rem; }
+    padding: 2rem 1.25rem 1.5rem;
   }
   .prose-drills {
-    padding-top: 2rem;
+    padding-top: 1rem;
   }
   .content-visual {
     margin: 2rem 0;

@@ -135,16 +135,16 @@ const schema = [
 ];
 ---
 <BaseLayout {title} {description} {schema}>
+  <div class="hero-band">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Independent &middot; UK &middot; Research-led</p>
+      <h1 class="hero-band__title">Best Cordless Drills UK: The Sourced Buying Guide</h1>
+      <p class="hero-band__lede">The best cordless drill for most UK home DIY is a premium 18V combi drill from a brand with strong parts and battery support, such as the DeWalt DCD796N or the Makita DHP484Z. If you only drill a handful of pilot holes and hang the odd shelf a few times a year, a well-specified own-brand combi drill like the Screwfix Titan TTI1257COM costs roughly half as much and will not leave you short.</p>
+    </div>
+  </div>
   <div class="page">
-    <header class="page__header">
-      <p class="page__eyebrow">Independent · UK · Research-led</p>
-      <h1 class="page__title">Best Cordless Drills UK: The Sourced Buying Guide</h1>
-    </header>
-
-    <div class="tick-divider" aria-hidden="true"></div>
-
     <div class="prose-drills">
-      <p>The best cordless drill for most UK home DIY is a premium 18V combi drill from a brand with strong parts and battery support, such as the DeWalt DCD796N or the Makita DHP484Z. If you only drill a handful of pilot holes and hang the odd shelf a few times a year, a well-specified own-brand combi drill like the Screwfix Titan TTI1257COM costs roughly half as much and will not leave you short. The right pick depends on how often you will use it, what walls you are drilling into and which battery platform you can already borrow from, not one best drill that suits everyone.</p>
+      <p>The right pick depends on how often you will use it, what walls you are drilling into and which battery platform you can already borrow from, not one best drill that suits everyone.</p>
 
       <p>Best Cordless Drills UK compares retailer own-brand combi drills, Erbauer and Titan at Screwfix, Mac Allister at B&amp;Q, Ozito, and the Aldi and Lidl special-buys Ferrex and Parkside, against established premium brands including Makita, DeWalt, Bosch, Milwaukee and Ryobi. Every comparison runs on real UK retail prices, published warranty terms and owner reviews, not a physical test bench.</p>
 
@@ -341,32 +341,12 @@ const schema = [
 
 <style>
   .page {
-    max-width: 44rem;
+    max-width: 58rem;
     margin: 0 auto;
-    padding: 2.5rem 1.25rem 1.5rem;
-  }
-  .page__header {
-    padding: 0.5rem 0 2rem;
-  }
-  .page__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-    margin-bottom: 0.75rem;
-  }
-  .page__title {
-    font-size: 2.1rem;
-    font-weight: 700;
-    line-height: 1.15;
-    color: var(--color-ink-950);
-  }
-  @media (min-width: 768px) {
-    .page__title { font-size: 2.75rem; }
+    padding: 2.75rem 1.25rem 1.5rem;
   }
   .prose-drills {
-    padding-top: 2rem;
+    padding-top: 0.5rem;
   }
 
   .pick {

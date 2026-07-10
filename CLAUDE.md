@@ -19,7 +19,7 @@ Sunny twice called the first build "bland, flavourless". Three follow-up passes:
 
 Correction to the earlier note: on reading them, the "other 6 pages" were NOT methodology-first — every one already led with an answer-first hero lede and kept methodology at the foot. What they lacked was only the scannable card band, which is what pass 3 added. To reuse the band on a new page: import `TopPicks`, define a `picks[]` const, drop `<TopPicks heading sub picks>` right after `<Breadcrumbs>`.
 
-⚠️ **Still not pixel-verified.** Browser screenshot/read_page tooling times out on every page (`document_idle` never fires) — root cause is the `G-PLACEHOLDER000` GA4 script in `BaseLayout.astro` blocking page-idle. Verification this session was: clean `npm run build`, structural HTML checks (band present on 6 pages, all jump-link anchors resolve), and CSS identical to the already-live homepage band. Swapping in a real GA4 ID should also unblock the browser tooling.
+RESOLVED 2026-07-10: the browser-tooling hang was the `G-PLACEHOLDER000` GA4 script; a real GA4 ID is now live (see Deploy) and claude-in-chrome navigates the site fine again.
 
 ## Content status
 
@@ -37,7 +37,7 @@ All 7 wave-1 pages live, each passed `/semantic-audit` >=85: `/` (91), `/own-bra
 - Cloudflare Pages project: `bestcordlessdrills` (sunnypat81 account, `aba0a6722a4510842ca473315a8ba13e`). Deploy: `npm run build && npx wrangler pages deploy dist --project-name bestcordlessdrills --commit-dirty=true`.
 - **Live URL right now: https://bestcordlessdrills.pages.dev/** — this is the real, current, working site.
 - **Custom domain bestcordlessdrills.uk is NOT yet attached.** `bestcordlessdrills.uk` is not a zone in the sunnypat81 Cloudflare account, and the wrangler OAuth token available this session lacked zone-create permission. **[MANUAL: Sunny]** needs to either confirm the domain's current registrar/nameserver state and point it at Cloudflare, or supply a token with zone-create scope, then the custom domain can be attached to the Pages project in a few minutes.
-- GA4 is wired in `BaseLayout.astro` with placeholder ID `G-PLACEHOLDER000` — **[MANUAL: Sunny]** create a real GA4 property and swap it in. (This placeholder also breaks claude-in-chrome screenshot/read_page — see Design state.)
+- GA4 LIVE 2026-07-10: property `545150526`, measurement ID `G-7XMX22KJW1` (CC App Sites account), auto-provisioned + deployed via `claude-config/scripts/ga4-admin/ga4-provision.py` (commit `b51024b`). Tag verified in live HTML; realtime not yet confirmed (desktop Chrome blocks GA via an extension; a phone visit or `verify --attest` will confirm).
 - ⚠️ **Amazon Associates tag is `chainsaw0f6-21` in `src/lib/affiliate.ts` — this is bestchainsaw's tracking ID, copy-pasted into this build.** Convention is a per-site tag (`cthome-21`, `thebestmowers-21`). Commissions still land in Sunny's account but report under the wrong site. **Sunny decided 2026-07-10 to leave it as-is for now** rather than swap in an unverified new tag that would earn nothing until created in Associates. Do NOT "fix" it without Sunny giving the correct existing tracking ID. (The growth-plan's mention of `chainsaw0f6-21` reflects this known issue, not a correct value.)
 
 ## Technical SEO

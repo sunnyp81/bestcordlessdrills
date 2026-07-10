@@ -10,6 +10,14 @@ Brand: **Best Cordless Drills**. UK cordless-drill and power-tool buying guide f
 
 Astro 5 + Tailwind 4, static output, self-hosted fonts (Space Grotesk / IBM Plex Sans / IBM Plex Mono via fontsource), Satori-generated OG images (build-time, `scripts/generate-og.mjs`), no server/API routes.
 
+## Design state (2026-07-10, after 2 fix passes)
+
+Sunny twice called the first build "bland, flavourless". Two follow-up passes:
+1. Chrome fix (commit `de6677e`, all 7 pages + shared components): full-bleed dark `.hero-band` (dot-grid + amber glow) on every page, page shell widened 44rem->58rem, `SpecPanel.astro` rebuilt as a dark instrument plate with an amber headline figure, `VerdictBadge.astro` switched to solid-fill.
+2. Picks-first restructure (commit `49879de`, **homepage `/` ONLY so far**): a `.toppicks` "picks at a glance" card band directly under the hero (1 dark featured card + 3 light, Spec Ledger mono figures + verdict badges + jump links); intro trimmed to one line; "how we score" methodology moved from top to foot of page; use-case decision diagram moved next to the picks. Content reordered, not rewritten.
+
+⚠️ **The other 6 pages still have the old methodology-first / buried-answer order** — they have NOT had the picks-first treatment yet (was paused for Sunny to judge the homepage first). If rolling it out, replicate the `.toppicks` pattern from `src/pages/index.astro`. Nothing this session was ever *visually* verified rendered — browser screenshot tooling was dead all session; verification was DOM inspection + live-HTML source order only.
+
 ## Content status
 
 All 7 wave-1 pages live, each passed `/semantic-audit` >=85: `/` (91), `/own-brand-vs-premium/` (92, flagship USP page), `/drill-vs-combi-vs-impact-driver/` (90), `/best-budget/` (89), `/best-combi-drill/` (92), `/makita-vs-ozito/` (91), `/about/` (91). 18 more pages planned across waves 2-3, see `docs/growth-plan.md`.

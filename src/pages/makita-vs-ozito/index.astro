@@ -1,0 +1,481 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { productSchema, reviewSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
+
+const title = 'Makita vs Ozito: Is It Worth Paying More?';
+const description = 'A Makita earns its premium over an Ozito through regular DIY use, not occasional jobs. Compare torque, warranty and battery platform for the real cost per year.';
+
+const faqs = [
+  {
+    q: 'Is it worth paying more for a Makita over a cheap Ozito or Parkside drill?',
+    a: "Yes, for regular or frequent DIY use: the Makita DHP484Z's extra 25Nm of torque, confirmed 3-year warranty and larger LXT battery platform justify the price gap over an Ozito PXBHS. For light, occasional jobs a few times a year, a budget drill such as the Ozito or a Parkside model covers the work without issue. The premium then buys headroom you will not use.",
+  },
+  {
+    q: 'What is the real difference between Makita LXT and Ozito PXC batteries?',
+    a: "Makita's 18V LXT platform is one of the largest cordless battery ecosystems in the world, built up across dozens of tools over decades. Ozito's 18V PXC platform is a real but far smaller system, so it offers less scope to expand into other tools later.",
+  },
+  {
+    q: "Can you trust Ozito's claimed 5-year warranty?",
+    a: "Not without checking it yourself first. This site could not verify Ozito's claimed 5-year warranty against a published set of terms and conditions, so treat it as an unconfirmed retailer claim rather than a documented policy like Makita's confirmed 3-year, register-within-30-days cover.",
+  },
+];
+
+const schema = [
+  productSchema({
+    name: 'Makita DHP484Z 18V LXT Brushless Combi Drill (Body Only)',
+    brand: 'Makita',
+    description: '18V LXT brushless combi drill, 65Nm max torque, body only, 3-year warranty on 30-day registration.',
+    url: '/makita-vs-ozito/',
+    priceLow: 52.95,
+    priceHigh: 65,
+  }),
+  productSchema({
+    name: 'Ozito PXBHS 18V Brushless Combi Drill',
+    brand: 'Ozito',
+    description: '18V PXC brushless combi drill, 40Nm max torque, bare-tool. Price and warranty term are not independently verified.',
+    url: '/makita-vs-ozito/',
+  }),
+  reviewSchema({
+    itemReviewedName: 'Makita DHP484Z 18V LXT Brushless Combi Drill',
+    rating: 4,
+    url: '/makita-vs-ozito/',
+    reviewBody: 'Recommended over the Ozito PXBHS for regular or frequent DIY use, on the strength of its confirmed 3-year warranty, higher torque and the breadth of the LXT battery platform. Not a necessary upgrade for light, occasional jobs.',
+    datePublished: '2026-07-10',
+  }),
+  faqSchema(faqs),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' },
+    { name: 'Makita vs Ozito', url: '/makita-vs-ozito/' },
+  ]),
+];
+
+const glanceColumns = [
+  { heading: 'Makita DHP484Z', subheading: '18V LXT, body only', verdict: 'good' as const },
+  { heading: 'Ozito PXBHS', subheading: '18V PXC, bare-tool', verdict: 'caution' as const },
+];
+const glanceRows = [
+  { label: 'UK price', values: ['£52.95-£65 body-only', '~£75 bare-tool (unverified)'] },
+  { label: 'Max torque', values: ['65 Nm', '40 Nm'] },
+  { label: 'Chuck', values: ['1.5-13mm keyless', '13mm keyless metal'] },
+  { label: 'Weight', values: ['1.2kg net, 1.6-2.2kg w/ battery', 'Not confirmed'] },
+  { label: 'Battery platform', values: ['18V LXT', '18V PXC'] },
+  { label: 'Warranty', values: ['3yr on 30-day registration (confirmed)', '~5yr claimed (unverified)'] },
+];
+
+const costColumns = [
+  { heading: 'Makita DHP484Z', verdict: 'good' as const },
+  { heading: 'Ozito PXBHS', verdict: 'caution' as const },
+];
+const costRows = [
+  { label: 'Representative price', values: ['£59', '~£75 (unverified)'] },
+  { label: 'Confirmed warranty term', values: ['3 years', 'Not confirmed'] },
+  { label: 'Cost per year (confirmed)', values: ['£19.67/yr', 'No reliable figure'] },
+  { label: 'Cost per year (if claim holds)', values: ['n/a', '~£15/yr, if the 5yr claim is accurate'] },
+];
+---
+<BaseLayout {title} {description} ogImage="/og/makita-vs-ozito.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={[
+      { name: 'Home', url: '/' },
+      { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' },
+      { name: 'Makita vs Ozito', url: '/makita-vs-ozito/' },
+    ]} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Head-to-Head · UK Prices Checked</p>
+      <h1 class="page__title">Makita vs Ozito: Is It Worth Paying More?</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <p>Paying more for a Makita DHP484Z over a cheap Ozito PXBHS is worth it for regular or frequent DIY use, not for a few light jobs a year.</p>
+
+      <p>Both tools are 18V brushless combi drills built for driving screws and drilling wood, metal and masonry. The Makita costs £52.95 to £65 body-only. The Ozito is priced around £75 bare-tool, though that figure is not independently verified.</p>
+
+      <p>The Makita produces 65 Nm of max torque against 40 Nm from the Ozito. Makita's 3-year warranty is confirmed and documented; Ozito's claimed 5-year cover has no confirmed terms behind it.</p>
+
+      <p>The real premium sits in Makita's LXT battery platform, not the drill alone. LXT ranks among the largest cordless ecosystems in the world. Ozito's PXC range is real but far smaller.</p>
+
+      <p>This guide compares price, torque, warranty, cost per year of cover and battery platform breadth. It ends with a verdict based on how often you will actually use the drill.</p>
+
+      <Disclosure />
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" class="visual-cost">
+          <title id="chart-title-1">Cost per year of warranty cover: Makita DHP484Z vs Ozito PXBHS</title>
+          <desc id="chart-desc-1">A bar chart comparing cost per year of warranty cover between the Makita DHP484Z and Ozito PXBHS cordless drills. The Makita figure of £19.67 per year is confirmed, based on a £59 price divided by a documented three year warranty on 30 day registration. The Ozito figure of around £15 per year is unverified and only holds true if Ozito's claimed five year warranty turns out to be accurate.</desc>
+          <defs>
+            <pattern id="visual-cost-hatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+              <rect width="8" height="8" class="visual-cost__hatch-bg" />
+              <line x1="0" y1="0" x2="0" y2="8" class="visual-cost__hatch-line" />
+            </pattern>
+          </defs>
+          <rect class="visual-cost__bg" x="0" y="0" width="640" height="340" />
+          <text class="visual-cost__title" x="320" y="26" text-anchor="middle">Cost per year of warranty cover</text>
+
+          <rect class="visual-cost__tag visual-cost__tag--confirmed" x="200" y="54" width="92" height="18" rx="2" />
+          <text class="visual-cost__tag-text" x="246" y="67" text-anchor="middle">CONFIRMED</text>
+          <text class="visual-cost__label" x="200" y="86">Makita DHP484Z</text>
+          <rect class="visual-cost__bar visual-cost__bar--makita" x="200" y="90" width="295" height="36" />
+          <text class="visual-cost__value" x="505" y="112">£19.67/yr</text>
+
+          <rect class="visual-cost__tag visual-cost__tag--unverified" x="200" y="150" width="185" height="18" rx="2" />
+          <text class="visual-cost__tag-text" x="292" y="163" text-anchor="middle">UNVERIFIED, IF CLAIM HOLDS</text>
+          <text class="visual-cost__label" x="200" y="182">Ozito PXBHS</text>
+          <rect class="visual-cost__bar visual-cost__bar--ozito" x="200" y="192" width="225" height="36" />
+          <text class="visual-cost__value" x="435" y="214">~£15/yr</text>
+
+          <line class="visual-cost__axis" x1="200" y1="250" x2="500" y2="250" />
+          <line class="visual-cost__tick" x1="200" y1="250" x2="200" y2="256" />
+          <line class="visual-cost__tick" x1="275" y1="250" x2="275" y2="256" />
+          <line class="visual-cost__tick" x1="350" y1="250" x2="350" y2="256" />
+          <line class="visual-cost__tick" x1="425" y1="250" x2="425" y2="256" />
+          <line class="visual-cost__tick" x1="500" y1="250" x2="500" y2="256" />
+          <text class="visual-cost__tick-label" x="200" y="270" text-anchor="middle">£0</text>
+          <text class="visual-cost__tick-label" x="275" y="270" text-anchor="middle">£5</text>
+          <text class="visual-cost__tick-label" x="350" y="270" text-anchor="middle">£10</text>
+          <text class="visual-cost__tick-label" x="425" y="270" text-anchor="middle">£15</text>
+          <text class="visual-cost__tick-label" x="500" y="270" text-anchor="middle">£20</text>
+
+          <text class="visual-cost__footnote" x="200" y="300">Ozito's figure only holds if its unverified 5-year warranty claim is accurate.</text>
+          <text class="visual-cost__footnote" x="200" y="316">No reliable cost-per-year figure exists for the Ozito without confirmed terms.</text>
+        </svg>
+        <figcaption>Makita's £19.67-a-year warranty cost is confirmed; Ozito's cheaper-looking ~£15-a-year figure depends on an unverified warranty claim.</figcaption>
+      </figure>
+
+      <h2 id="at-a-glance">Makita DHP484Z vs Ozito PXBHS at a glance</h2>
+
+      <p>Makita's DHP484Z and Ozito's PXBHS are both 18V brushless combi drills. They sit at opposite ends of this site's own-brand-versus-premium spectrum.</p>
+
+      <p>The DHP484Z delivers 65 Nm max torque (54 Nm and 30 Nm across its two fastening speeds), a 1.5-13mm keyless chuck and weighs 1.2kg net, 1.6 to 2.2kg with a battery fitted. It runs on Makita's 18V LXT platform and carries a 3-year warranty once registered online within 30 days of purchase.</p>
+
+      <p>The PXBHS delivers 40 Nm max torque and a 13mm keyless metal chuck. It runs on Ozito's 18V PXC platform and is priced around £75 bare-tool, though that figure is not independently verified. Its warranty is claimed at around 5 years, with no confirmed terms and conditions behind that number.</p>
+
+      <ComparisonTable
+        caption="Makita DHP484Z vs Ozito PXBHS: price, torque, warranty and battery platform"
+        columns={glanceColumns}
+        rows={glanceRows}
+      />
+
+      <p>The headline numbers already show where the gap sits: torque, documented warranty terms and battery platform breadth, not chuck size or basic build.</p>
+
+      <div class="cta-row">
+        <a class="cta-button cta-button--good" href={buildAmazonLink('B01LYXFYLB')} rel={AFFILIATE_REL} target="_blank">Check Makita DHP484Z price on Amazon UK</a>
+        <a class="cta-button cta-button--caution" href={amazonSearchLink('Ozito PXBHS 18V Brushless Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search Ozito PXBHS on Amazon UK</a>
+      </div>
+
+      <h2 id="price-and-torque">Price and torque: what the gap actually buys</h2>
+
+      <p>The roughly £10 to £20 difference in list price buys 25 Nm of extra max torque. That is the difference between a drill that copes with repeated masonry plugs and long screws and one that starts to labour under the same job.</p>
+
+      <p>Makita's DHP484Z produces 65 Nm max torque against the Ozito PXBHS's 40 Nm. That gap matters most in two-speed fastening: Makita's 54 Nm and 30 Nm settings give more headroom for driving long screws into solid timber or repeated masonry fixings without stalling.</p>
+
+      <p>Torque alone does not decide value. A drill used for hanging three shelves a year rarely reaches either tool's torque ceiling. The extra 25 Nm goes unused in light, occasional DIY.</p>
+
+      <p>Match the torque gap to the job: masonry-heavy or repeated fastening work benefits from the Makita's headroom. Occasional shelf-hanging does not.</p>
+
+      <h2 id="warranty">Warranty: one real number, one unverified claim</h2>
+
+      <p>Makita's 3-year warranty on the DHP484Z is confirmed and documented: register the tool online within 30 days of purchase and cover extends from the 1-year default to 3 years. Ozito's claimed warranty of around 5 years on the PXBHS has no confirmed terms and conditions behind it.</p>
+
+      <p>The Makita mechanic is a standard UK power tool pattern: register within 30 days, keep the serial number and proof of purchase, and the extension applies. This site checked that mechanic directly against Makita's own registration process.</p>
+
+      <p>The Ozito figure is a claim, not a documented policy this site could verify. Treat it as an unconfirmed retailer claim until a published set of terms and conditions can be checked.</p>
+
+      <p>Do not compare an unverified 5-year claim against a confirmed 3-year warranty as if they carry equal weight. Only one of those numbers is backed by paperwork.</p>
+
+      <h2 id="cost-per-year">Cost per year of warranty cover</h2>
+
+      <p>A Makita DHP484Z priced at a representative £59 (within its confirmed £52.95 to £65 range) and registered for the full 3-year term works out at £19.67 per year of cover. No equivalent confirmed figure exists for the Ozito.</p>
+
+      <p>£59 divided by 3 confirmed years of warranty gives £19.67 per year for the Makita. That number is backed by Makita's own registration terms, not a retailer claim.</p>
+
+      <p>An Ozito PXBHS priced around £75 works out at roughly £15 per year if its claimed 5-year warranty is accurate. That figure only holds if the 5-year claim turns out to be true. No reliable cost-per-year figure exists for the Ozito at all without a verified warranty document.</p>
+
+      <ComparisonTable
+        caption="Cost per year of warranty cover: a confirmed figure against an unverified claim"
+        columns={costColumns}
+        rows={costRows}
+      />
+
+      <p>Warranty length alone does not decide value. Build quality, battery platform breadth and resale value all factor into real cost of ownership, not one pounds-per-year figure.</p>
+
+      <h2 id="battery-platform">Battery platform: the real premium you are buying</h2>
+
+      <p>Makita's 18V LXT platform is one of the largest cordless battery ecosystems in the world; Ozito's 18V PXC platform is real but far smaller. That gap is the strongest reason to pay more for a Makita beyond the tool itself.</p>
+
+      <p>An LXT battery bought for the DHP484Z also fits Makita saws, grinders, vacuums and dozens of other tools built up across a range developed over decades. That cross-compatibility holds resale value and cuts the cost of adding a second tool later.</p>
+
+      <p>Ozito's PXC platform covers a smaller range of tools, largely sold through the same retailer. It still works as a self-contained system for a single tool or two. It does not offer the same breadth to expand into later.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" class="visual-platform">
+          <title id="chart-title-2">Battery platform breadth: Makita 18V LXT vs Ozito 18V PXC</title>
+          <desc id="chart-desc-2">An illustrative comparison of battery platform breadth. Makita's 18V LXT platform is shown as a wide grid of tool nodes, reflecting its position as one of the world's largest cordless battery ecosystems built up over decades. Ozito's 18V PXC platform is shown as a smaller, narrower grid: a real system that covers far fewer tools than Makita LXT. Node counts are illustrative, not an exact product tally.</desc>
+          <rect class="visual-platform__panel-a" x="0" y="0" width="320" height="400" />
+          <rect class="visual-platform__panel-b" x="330" y="0" width="310" height="400" />
+          <rect class="visual-platform__divider" x="318" y="0" width="4" height="400" />
+
+          <text class="visual-platform__heading-a" x="160" y="40" text-anchor="middle">Makita 18V LXT</text>
+          <text class="visual-platform__sub-a" x="160" y="64" text-anchor="middle">One of the world's largest cordless platforms</text>
+
+          <text class="visual-platform__heading-b" x="485" y="40" text-anchor="middle">Ozito 18V PXC</text>
+          <text class="visual-platform__sub-b" x="485" y="64" text-anchor="middle">A real but far smaller range</text>
+
+          <rect class="visual-platform__node-a" x="40" y="100" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="110" y="100" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="180" y="100" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="250" y="100" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="40" y="165" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="110" y="165" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="180" y="165" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="250" y="165" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="40" y="230" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="110" y="230" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="180" y="230" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="250" y="230" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="40" y="295" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="110" y="295" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="180" y="295" width="22" height="22" rx="3" />
+          <rect class="visual-platform__node-a" x="250" y="295" width="22" height="22" rx="3" />
+
+          <rect class="visual-platform__node-b" x="435" y="150" width="26" height="26" rx="3" />
+          <rect class="visual-platform__node-b" x="525" y="150" width="26" height="26" rx="3" />
+          <rect class="visual-platform__node-b" x="435" y="240" width="26" height="26" rx="3" />
+          <rect class="visual-platform__node-b" x="525" y="240" width="26" height="26" rx="3" />
+
+          <text class="visual-platform__footnote" x="320" y="414" text-anchor="middle">Illustrative only: relative range size, not an exact product count.</text>
+        </svg>
+        <figcaption>Makita's LXT battery platform spans a far wider tool range than Ozito's smaller PXC system (illustrative only).</figcaption>
+      </figure>
+
+      <h2 id="verdict">The verdict: it depends on how often you will use it</h2>
+
+      <p>Paying more for the Makita is worth it for regular or frequent DIY use. It is not worth it for a few light jobs a year.</p>
+
+      <p>Light, occasional DIY, a few jobs a year such as flat-pack furniture, curtain rails or the odd shelf, rarely pushes either drill near its torque ceiling. The Ozito PXBHS covers this use case without issue, and the extra £10 to £20 for a Makita buys torque and warranty headroom that goes unused.</p>
+
+      <div class="verdict-row">
+        <VerdictBadge verdict="good" label="Ozito: good enough" />
+        <span class="verdict-row__note">Light, occasional DIY</span>
+      </div>
+
+      <p>Regular or frequent use, monthly projects, work across more than one property or masonry-heavy period homes, changes the maths. Makita's extra torque avoids stalling on repeated fixings, and its confirmed 3-year warranty and LXT platform breadth pay off over years of use rather than one project.</p>
+
+      <div class="verdict-row">
+        <VerdictBadge verdict="good" label="Makita: recommended" />
+        <VerdictBadge verdict="caution" label="Ozito: caution" />
+        <span class="verdict-row__note">Regular or frequent use</span>
+      </div>
+
+      <p>Base the decision on how often the drill leaves the cupboard, not on torque numbers alone.</p>
+
+      <FAQ faqs={faqs} />
+
+      <p class="further-reading">Read more of our <a href="/battery-platforms-explained/">battery platforms explained</a> guide and our wider <a href="/own-brand-vs-premium/">own-brand vs premium</a> comparisons, or head back to <a href="/">Best Cordless Drills</a> for the full buying guide.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.75rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .further-reading {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-hairline);
+    font-size: 0.9rem;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 160ms cubic-bezier(0.2, 0, 0, 1), color 160ms cubic-bezier(0.2, 0, 0, 1), border-color 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .cta-button--good {
+    background: var(--color-ink-950);
+    color: #fff;
+    border: 1px solid var(--color-ink-950);
+  }
+  .cta-button--good:hover {
+    background: var(--color-amber-500);
+    border-color: var(--color-amber-500);
+    color: var(--color-ink-950);
+  }
+  .cta-button--caution {
+    background: transparent;
+    color: var(--color-ink-900);
+    border: 1px solid var(--color-steel-300);
+  }
+  .cta-button--caution:hover {
+    border-color: var(--color-amber-900);
+    color: var(--color-amber-900);
+  }
+  .verdict-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0 0 1.5rem;
+  }
+  .verdict-row__note {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-steel-500);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  /* Visual 1: cost-per-year-of-warranty bar chart */
+  .visual-cost__bg { fill: var(--color-paper); }
+  .visual-cost__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-cost__tag-text {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    fill: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .visual-cost__tag--confirmed { fill: var(--color-verdict-good); }
+  .visual-cost__tag--unverified { fill: var(--color-verdict-caution); }
+  .visual-cost__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 14px;
+    fill: var(--color-ink-950);
+  }
+  .visual-cost__bar--makita { fill: var(--color-amber-500); }
+  .visual-cost__bar--ozito {
+    fill: url(#visual-cost-hatch);
+    stroke: var(--color-steel-300);
+    stroke-width: 1.5;
+  }
+  .visual-cost__value {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    fill: var(--color-ink-950);
+  }
+  .visual-cost__axis { stroke: var(--color-steel-300); stroke-width: 1.5; }
+  .visual-cost__tick { stroke: var(--color-steel-300); stroke-width: 1.5; }
+  .visual-cost__tick-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--color-steel-500);
+  }
+  .visual-cost__footnote {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+  .visual-cost__hatch-bg { fill: var(--color-card); }
+  .visual-cost__hatch-line { stroke: var(--color-steel-300); stroke-width: 4; }
+
+  /* Visual 2: battery platform breadth panels */
+  .visual-platform__panel-a { fill: var(--color-ink-950); }
+  .visual-platform__panel-b { fill: var(--color-paper); }
+  .visual-platform__divider { fill: var(--color-amber-500); }
+  .visual-platform__heading-a {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    fill: var(--color-amber-500);
+  }
+  .visual-platform__sub-a {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-300);
+  }
+  .visual-platform__heading-b {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    fill: var(--color-ink-950);
+  }
+  .visual-platform__sub-b {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+  .visual-platform__node-a { fill: var(--color-amber-500); opacity: 0.9; }
+  .visual-platform__node-b {
+    fill: var(--color-amber-500);
+    stroke: var(--color-ink-900);
+    stroke-width: 1;
+  }
+  .visual-platform__footnote {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--color-steel-500);
+  }
+</style>

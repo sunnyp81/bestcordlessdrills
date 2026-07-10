@@ -1,0 +1,427 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import SpecPanel from '../../components/SpecPanel.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { itemListSchema, productSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
+
+const title = 'Best Budget Cordless Drill UK: Ranked Under £100';
+const description = "Titan, Mac Allister, Ozito and Erbauer's budget cordless drills ranked on price, torque and warranty, plus honest advice on Aldi and Lidl special buys.";
+
+const breadcrumbItems = [
+  { name: 'Home', url: '/' },
+  { name: 'Best Budget Cordless Drill', url: '/best-budget/' },
+];
+
+const rankedItems = [
+  { name: 'Titan TTI1257COM', url: '/best-budget/#titan-tti1257com', position: 1 },
+  { name: 'Mac Allister MCD18-Li-2', url: '/best-budget/#mac-allister-mcd18-li-2', position: 2 },
+  { name: 'Ozito PXBHS', url: '/best-budget/#ozito-pxbhs', position: 3 },
+  { name: 'Erbauer ERI1107COM', url: '/best-budget/#erbauer-eri1107com', position: 4 },
+];
+
+const faqs = [
+  {
+    q: 'Are Aldi and Lidl special-buy cordless drills any good?',
+    aHtml: `<p>Aldi's Ferrex and Lidl's Parkside cordless drills can be genuinely good value on the week they're in stock. Neither is a year-round buy though. Both appear only as periodic Specialbuy or Middle of Lidl promotions, carry thinner spec and warranty information than Screwfix, B&amp;Q or Ozito's own-brand lines, and are not sold on Amazon UK at all. Buy one if the price and stock line up when you need a drill. Do not delay a purchase waiting for either to come back.</p>`,
+    aText: "Aldi's Ferrex and Lidl's Parkside cordless drills can be good value on the week they're in stock. Neither is a year-round buy though. Both appear only as periodic Specialbuy or Middle of Lidl promotions, carry thinner spec and warranty information than the own-brand lines, and are not sold on Amazon UK at all. Buy one if the price and stock line up when you need a drill. Do not delay a purchase waiting for either to come back.",
+  },
+  {
+    q: 'Should I buy a bare tool or a kit with batteries and a case?',
+    aHtml: `<p>Buy a complete kit with batteries, charger and case unless you already own compatible batteries from the same battery platform. A bare tool looks cheaper on the shelf. Ozito's PXBHS runs about £75 with no battery included. Two fresh 18V batteries plus a charger can add £40 to £60 back onto that price for a first-time buyer. Kits such as Titan's TTI1257COM at £79.99 or Mac Allister's MCD18-Li-2 at £60 already include everything a first-time buyer needs. That usually makes the kit the cheaper route in.</p>`,
+    aText: "Buy a complete kit with batteries, charger and case unless you already own compatible batteries from the same battery platform. A bare tool looks cheaper on the shelf. Ozito's PXBHS runs about £75 with no battery included. Two fresh 18V batteries plus a charger can add £40 to £60 back onto that price for a first-time buyer. Kits such as Titan's TTI1257COM at £79.99 or Mac Allister's MCD18-Li-2 at £60 already include everything a first-time buyer needs. That usually makes the kit the cheaper route in.",
+  },
+];
+
+const schema = [
+  itemListSchema({ name: 'Best budget cordless drills UK, ranked', url: '/best-budget/', items: rankedItems }),
+  productSchema({
+    name: 'Titan TTI1257COM 18V TXP Combi Drill',
+    brand: 'Titan',
+    description: 'Titan TTI1257COM 18V TXP combi drill, a Screwfix own-brand tool. 50 Nm torque, 2x2.0Ah battery kit, 13mm keyless chuck, 2-year manufacturer guarantee.',
+    url: '/best-budget/#titan-tti1257com',
+    priceLow: 79.99,
+    priceHigh: 79.99,
+  }),
+  productSchema({
+    name: 'Mac Allister MCD18-Li-2 18V Combi Drill',
+    brand: 'Mac Allister',
+    description: 'Mac Allister MCD18-Li-2 18V brushed combi drill, a B&Q own-brand tool. 2x2.0Ah battery kit, 13mm keyless chuck, 2-year warranty. Torque and weight not published by B&Q.',
+    url: '/best-budget/#mac-allister-mcd18-li-2',
+    priceLow: 60,
+    priceHigh: 60,
+  }),
+  productSchema({
+    name: 'Ozito PXBHS 18V Brushless Combi Drill',
+    brand: 'Ozito',
+    description: 'Ozito PXBHS 18V brushless combi drill, sold as a bare tool. 40 Nm torque, metal 13mm keyless chuck, Ozito PXC battery platform. Weight and warranty terms need verifying.',
+    url: '/best-budget/#ozito-pxbhs',
+  }),
+  productSchema({
+    name: 'Erbauer ERI1107COM 18V EXT Brushless Combi Drill',
+    brand: 'Erbauer',
+    description: 'Erbauer ERI1107COM 18V EXT brushless combi drill, a Screwfix own-brand tool priced above this guide\'s £100 budget line. 2x5.0Ah battery kit. Torque and weight not confirmed.',
+    url: '/best-budget/#erbauer-eri1107com',
+    priceLow: 159.99,
+    priceHigh: 159.99,
+  }),
+  faqSchema(faqs.map((f) => ({ q: f.q, a: f.aText }))),
+  breadcrumbSchema(breadcrumbItems),
+];
+
+const comparisonColumns = [
+  { heading: 'Titan', subheading: 'TTI1257COM', verdict: 'good' as const },
+  { heading: 'Mac Allister', subheading: 'MCD18-Li-2', verdict: 'good' as const },
+  { heading: 'Ozito', subheading: 'PXBHS', verdict: 'caution' as const },
+  { heading: 'Erbauer', subheading: 'ERI1107COM', verdict: 'caution' as const },
+];
+const comparisonRows = [
+  { label: 'Price', values: ['£79.99', '£60 (was £80)', '~£75 bare tool', '£159.99'] },
+  { label: 'Torque', values: ['50 Nm', 'Not published', '40 Nm', 'Not confirmed'] },
+  { label: 'Chuck', values: ['13mm keyless', '13mm keyless', '13mm keyless (metal)', '13mm keyless'] },
+  { label: 'Battery kit', values: ['2x2.0Ah', '2x2.0Ah', 'Bare tool (2x2.0Ah/1x4.0Ah kits exist)', '2x5.0Ah'] },
+  { label: 'Warranty', values: ['2yr guarantee', '2yr', '~5yr claimed, verify terms', '1yr standard'] },
+  { label: 'Weight', values: ['1.8kg w/ battery', 'Not listed', 'Not confirmed', 'Not confirmed'] },
+];
+
+const titanSpec = {
+  name: 'Titan TTI1257COM 18V TXP Combi Drill',
+  torqueNm: 50,
+  voltage: 18,
+  weightKg: 1.8,
+  chuckSizeMm: 13,
+  priceGBP: 79.99,
+  warrantyYears: 2,
+  batteryPlatform: 'Titan TXP',
+};
+---
+<BaseLayout {title} {description} ogImage="/og/best-budget.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={breadcrumbItems} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Buying guide · UK · Under £100</p>
+      <h1 class="page__title">Best Budget Cordless Drill UK: Full Buying Guide</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <p>The Titan TTI1257COM is the best budget cordless drill in the UK for most buyers. It costs £79.99, delivers 50 Nm of torque and comes with a 2-year manufacturer guarantee and two 2.0Ah batteries. Screwfix's own Mac Allister MCD18-Li-2 costs less at £60. B&amp;Q has not published a torque or weight figure for it though.</p>
+
+      <p>A budget cordless drill in this guide means an 18V combi drill under roughly £100 from a retailer own-brand or value range: Erbauer and Titan from Screwfix, Mac Allister from B&amp;Q, Ozito, and seasonal special-buys from Aldi (Ferrex) and Lidl (Parkside). All four core models drive screws and drill masonry, wood and metal through a keyless 13mm chuck with a hammer setting.</p>
+
+      <p>Torque separates this field more than price does. Titan's 50 Nm beats Ozito's 40 Nm. Mac Allister and Erbauer have not published a torque figure for their current models. This guide flags that gap rather than guessing at a number.</p>
+
+      <p>Warranty terms matter as much as the spec sheet in this tier. Mac Allister and Titan both carry a 2-year guarantee with no registration step. Ozito's advertised cover needs its terms checked before you buy.</p>
+
+      <p>This guide ranks Titan, Mac Allister, Ozito and Erbauer against each other, covers Aldi and Lidl's special-buy drills honestly, and answers whether a bare tool or a battery kit makes more sense for a first buy. See <a href="/about/#how-we-research">how we research and score every drill</a> for the method behind these picks.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" class="visual-price">
+          <title id="chart-title-1">UK budget cordless drill prices compared, July 2026</title>
+          <desc id="chart-desc-1">Bar chart comparing UK prices for five budget and own-brand cordless drills: Aldi Ferrex at £14.99 tool only, Mac Allister MCD18-Li-2 at £60, Ozito PXBHS at approximately £75 bare tool, Titan TTI1257COM at £79.99, and Erbauer ERI1107COM at £159.99, with a marker showing this guide's roughly £100 budget line.</desc>
+          <rect class="visual-price__bg" x="0" y="0" width="640" height="460" />
+          <text class="visual-price__title" x="320" y="26" text-anchor="middle">Budget cordless drill prices, compared</text>
+
+          <line x1="413.5" y1="55" x2="413.5" y2="405" class="visual-price__budget-line" />
+          <text x="413.5" y="45" text-anchor="middle" class="visual-price__budget-label">~£100 budget line</text>
+
+          <!-- Aldi Ferrex: £14.99 tool-only -->
+          <text x="180" y="105" text-anchor="end" class="visual-price__label">Aldi Ferrex*</text>
+          <rect x="190" y="85" width="34" height="30" class="visual-price__bar visual-price__bar--neutral" />
+          <text x="232" y="105" text-anchor="start" class="visual-price__value">£14.99*</text>
+
+          <!-- Mac Allister: £60 -->
+          <text x="180" y="177" text-anchor="end" class="visual-price__label">Mac Allister</text>
+          <rect x="190" y="157" width="134" height="30" class="visual-price__bar visual-price__bar--good" />
+          <text x="332" y="177" text-anchor="start" class="visual-price__value">£60</text>
+
+          <!-- Ozito: ~£75 bare -->
+          <text x="180" y="249" text-anchor="end" class="visual-price__label">Ozito PXBHS&#8224;</text>
+          <rect x="190" y="229" width="168" height="30" class="visual-price__bar visual-price__bar--caution" />
+          <text x="366" y="249" text-anchor="start" class="visual-price__value">~£75&#8224;</text>
+
+          <!-- Titan: £79.99 -->
+          <text x="180" y="321" text-anchor="end" class="visual-price__label">Titan</text>
+          <rect x="190" y="301" width="179" height="30" class="visual-price__bar visual-price__bar--good" />
+          <text x="377" y="321" text-anchor="start" class="visual-price__value">£79.99</text>
+
+          <!-- Erbauer: £159.99 -->
+          <text x="180" y="393" text-anchor="end" class="visual-price__label">Erbauer</text>
+          <rect x="190" y="373" width="358" height="30" class="visual-price__bar visual-price__bar--caution" />
+          <text x="556" y="393" text-anchor="start" class="visual-price__value">£159.99</text>
+
+          <text x="190" y="428" class="visual-price__footnote">* Tool only, battery sold separately.</text>
+          <text x="190" y="446" class="visual-price__footnote">&#8224; Approximate price, unverified at time of writing.</text>
+        </svg>
+        <figcaption>Titan and Mac Allister sit closest to this guide's £100 budget line; Erbauer's own-brand kit costs more than double Titan's price.</figcaption>
+      </figure>
+
+      <h2 id="ranked-list">The best budget cordless drills UK 2026, ranked</h2>
+
+      <p>Titan, Mac Allister, Ozito and Erbauer make up this guide's ranked list. Each verdict below weighs price against torque, warranty and battery platform, not against a lab test this site does not run.</p>
+
+      <ComparisonTable
+        caption="Screwfix, B&Q and Ozito's current budget cordless drills compared on price, torque and warranty, checked July 2026."
+        columns={comparisonColumns}
+        rows={comparisonRows}
+      />
+
+      <p>Headline price tells you the least useful part of this story. A £60 Mac Allister with no published torque figure and a £79.99 Titan with a confirmed 50 Nm cost roughly the same after two years of shelf-hanging and flatpack builds. Only one of them lets you check what you're actually buying before you hand over the money.</p>
+
+      <h3 id="titan-tti1257com">1. Titan TTI1257COM: best value pick</h3>
+
+      <p>Titan's TTI1257COM is the best value budget cordless drill in the UK right now. It costs £79.99, produces 50 Nm of torque and includes two 2.0Ah batteries plus a 2-year manufacturer guarantee with no registration step required.</p>
+
+      <p>Titan's spec sheet is the only one in this budget tier with every field confirmed. That completeness is exactly why it takes the top spot. Some buying guides list Titan as a Toolstation exclusive. That is incorrect: Toolstation carries no house-brand power tools at all and resells trade brands such as DeWalt, Milwaukee, Makita, Bosch and Draper instead. Titan and Erbauer are Screwfix's own two ranges.</p>
+
+      <SpecPanel spec={titanSpec} verdict="good" verdictLabel="Best value pick" />
+
+      <p>
+        <a href={amazonSearchLink('Titan TTI1257COM combi drill')} rel={AFFILIATE_REL} target="_blank">Check Titan TTI1257COM prices on Amazon UK</a>.
+      </p>
+
+      <h3 id="mac-allister-mcd18-li-2">2. Mac Allister MCD18-Li-2: cheapest kit that's still decent</h3>
+
+      <p>B&amp;Q's Mac Allister MCD18-Li-2 is the cheapest complete kit in this guide. It costs £60, a price cut from £80. It ships with two 2.0Ah batteries and a 2-year warranty. B&amp;Q has not published a torque or weight figure for this model.</p>
+
+      <p>That missing spec is a real gap, not a red flag. Buyers who need a confirmed torque figure before choosing should check B&amp;Q's own listing directly. Titan is the safer alternative for roughly the same money once any offer price is accounted for.</p>
+
+      <div class="badge-row">
+        <VerdictBadge verdict="good" label="Cheapest kit, decent" />
+      </div>
+
+      <p>
+        <a href={amazonSearchLink('Mac Allister MCD18-Li-2 combi drill')} rel={AFFILIATE_REL} target="_blank">Check Mac Allister MCD18-Li-2 prices on Amazon UK</a>.
+      </p>
+
+      <h3 id="ozito-pxbhs">3. Ozito PXBHS: cheapest if you already own Ozito batteries</h3>
+
+      <p>Ozito's PXBHS costs around £75 as a bare tool. That undercuts Titan if you already own compatible 18V Ozito PXC batteries. It manages 40 Nm of torque through a metal 13mm keyless chuck. That beats Mac Allister and Erbauer on the one confirmed torque figure this guide has for either model.</p>
+
+      <p>Ozito claims roughly a 5-year warranty on some of its range. That claim needs checking against the PXBHS's actual terms before buying. This guide is not treating it as confirmed. Weight is also not confirmed for this model.</p>
+
+      <div class="badge-row">
+        <VerdictBadge verdict="caution" label="Bare tool, verify warranty" />
+      </div>
+
+      <p>
+        <a href={amazonSearchLink('Ozito PXBHS combi drill')} rel={AFFILIATE_REL} target="_blank">Check Ozito PXBHS prices on Amazon UK</a>.
+      </p>
+
+      <h3 id="erbauer-eri1107com">4. Erbauer ERI1107COM: Screwfix's higher-spec own-brand, if you can stretch past £100</h3>
+
+      <p>Erbauer's ERI1107COM sits above this guide's £100 budget line at £159.99. That makes it the exception on this list rather than the average pick. It ships with two 5.0Ah batteries, a genuinely large kit for an own-brand tool. Its torque and weight figures could not be confirmed at the time of writing.</p>
+
+      <p>Check Erbauer's own Screwfix listing for current torque and weight before buying at this price.</p>
+
+      <div class="badge-row">
+        <VerdictBadge verdict="caution" label="Above budget, verify specs" />
+      </div>
+
+      <p>
+        <a href={amazonSearchLink('Erbauer ERI1107COM combi drill')} rel={AFFILIATE_REL} target="_blank">Check Erbauer ERI1107COM prices on Amazon UK</a>.
+      </p>
+
+      <Disclosure compact />
+
+      <h2 id="aldi-lidl-special-buys">What about Aldi Ferrex and Lidl Parkside special-buy drills?</h2>
+
+      <p>Aldi's Ferrex and Lidl's Parkside cordless drills undercut every own-brand tool in this guide on price. Neither carries a year-round Amazon UK listing or a fully confirmed spec sheet. Aldi's Ferrex 20V combi drill costs £14.99 tool-only with the battery sold separately. Lidl's Parkside PSBSAP 20-Li C3 has no reliably confirmed current price.</p>
+
+      <p>Both only show up during periodic in-store Specialbuy or Middle of Lidl promotions, not as a permanent stock line. That seasonal pattern is the real reason this guide gives them a mention rather than a firm recommendation: a drill in stock in March and gone by June cannot carry a "best budget pick" claim a reader can act on in October.</p>
+
+      <p>Buy Ferrex or Parkside if it happens to be in stock when you need a drill and the price beats everything else that week. Do not wait for a restock. Check the separate battery cost before assuming £14.99 is the full price of the tool.</p>
+
+      <h2 id="skip-budget-for-premium">Should you skip budget and buy a premium drill instead?</h2>
+
+      <p>Budget own-brand drills handle occasional DIY well. Premium brands win on warranty length and battery platform longevity instead. Makita, DeWalt and Bosch Professional extend a 1-year warranty to 3 years on 30-day registration. None of this guide's own-brand picks currently match that mechanic.</p>
+
+      <p>That gap matters more over 5+ years of ownership than it does on day one. Read the full breakdown of where own-brand tools close the gap and where they still fall short in our <a href="/own-brand-vs-premium/">own-brand vs premium cordless drill comparison</a>.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" class="visual-kitflow">
+          <title id="chart-title-2">Bare tool vs complete cordless drill kit: which should you buy?</title>
+          <desc id="chart-desc-2">Decision flow for choosing between a bare cordless drill tool and a complete kit with batteries and a case. Buyers who already own compatible 18V batteries can buy a cheaper bare tool such as the Ozito PXBHS at about £75. First-time buyers are better off with a complete kit such as the Titan TTI1257COM at £79.99 or the Mac Allister MCD18-Li-2 at £60, both of which include batteries and a charger.</desc>
+          <rect class="visual-kitflow__bg" x="0" y="0" width="640" height="440" />
+          <text class="visual-kitflow__title" x="320" y="26" text-anchor="middle">Bare tool or complete kit?</text>
+
+          <rect x="100" y="46" width="440" height="90" rx="4" class="visual-kitflow__question" />
+          <text x="320" y="82" text-anchor="middle" class="visual-kitflow__question-text">Do you already own compatible 18V</text>
+          <text x="320" y="104" text-anchor="middle" class="visual-kitflow__question-text">batteries and a charger for this platform?</text>
+
+          <line x1="230" y1="136" x2="172" y2="232" class="visual-kitflow__arrow" />
+          <polygon points="172,238 166,224 179,227" class="visual-kitflow__arrow-head" />
+          <text x="185" y="190" text-anchor="middle" class="visual-kitflow__branch-label">Yes</text>
+
+          <line x1="410" y1="136" x2="468" y2="232" class="visual-kitflow__arrow" />
+          <polygon points="468,238 461,227 474,224" class="visual-kitflow__arrow-head" />
+          <text x="455" y="190" text-anchor="middle" class="visual-kitflow__branch-label">No</text>
+
+          <rect x="40" y="238" width="260" height="150" rx="4" class="visual-kitflow__outcome" />
+          <text x="170" y="268" text-anchor="middle" class="visual-kitflow__outcome-heading">Buy the bare tool</text>
+          <text x="170" y="294" text-anchor="middle" class="visual-kitflow__outcome-sub">Cheaper if you already own 18V</text>
+          <text x="170" y="312" text-anchor="middle" class="visual-kitflow__outcome-sub">batteries and a charger</text>
+          <text x="170" y="336" text-anchor="middle" class="visual-kitflow__outcome-sub">e.g. Ozito PXBHS, about £75</text>
+          <text x="170" y="354" text-anchor="middle" class="visual-kitflow__outcome-sub">body only (price approximate)</text>
+
+          <rect x="340" y="238" width="260" height="150" rx="4" class="visual-kitflow__outcome" />
+          <text x="470" y="268" text-anchor="middle" class="visual-kitflow__outcome-heading">Buy a complete kit</text>
+          <text x="470" y="294" text-anchor="middle" class="visual-kitflow__outcome-sub">Batteries, charger and case</text>
+          <text x="470" y="312" text-anchor="middle" class="visual-kitflow__outcome-sub">already included</text>
+          <text x="470" y="336" text-anchor="middle" class="visual-kitflow__outcome-sub">e.g. Titan TTI1257COM £79.99 or</text>
+          <text x="470" y="354" text-anchor="middle" class="visual-kitflow__outcome-sub">Mac Allister MCD18-Li-2 £60</text>
+        </svg>
+        <figcaption>For most first-time buyers a complete kit like Titan's £79.99 TTI1257COM works out cheaper than buying a bare tool and batteries separately.</figcaption>
+      </figure>
+
+      <FAQ faqs={faqs.map((f) => ({ q: f.q, a: f.aHtml }))} />
+
+      <div class="tick-divider" aria-hidden="true"></div>
+
+      <p>Browse every buying guide from the <a href="/">Best Cordless Drills homepage</a>. Go straight to the <a href="/own-brand-vs-premium/">own-brand vs premium</a> and <a href="/best-combi-drill/">best combi drill</a> guides for the wider picture beyond the sub-£100 tier.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.5rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+
+  /* Visual 1: price comparison bar chart */
+  .visual-price__bg { fill: var(--color-paper); }
+  .visual-price__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-price__label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    fill: var(--color-ink-900);
+  }
+  .visual-price__value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--color-ink-950);
+  }
+  .visual-price__bar--neutral { fill: var(--color-steel-500); }
+  .visual-price__bar--good { fill: var(--color-verdict-good); }
+  .visual-price__bar--caution { fill: var(--color-verdict-caution); }
+  .visual-price__budget-line {
+    stroke: var(--color-amber-500);
+    stroke-width: 2;
+    stroke-dasharray: 5 4;
+  }
+  .visual-price__budget-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    fill: var(--color-amber-900);
+  }
+  .visual-price__footnote {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    fill: var(--color-steel-500);
+  }
+
+  /* Visual 2: bare tool vs kit decision flow */
+  .visual-kitflow__bg { fill: var(--color-paper); }
+  .visual-kitflow__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-kitflow__question {
+    fill: var(--color-ink-950);
+  }
+  .visual-kitflow__question-text {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    fill: #fff;
+  }
+  .visual-kitflow__arrow { stroke: var(--color-steel-300); stroke-width: 2; }
+  .visual-kitflow__arrow-head { fill: var(--color-steel-300); }
+  .visual-kitflow__branch-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--color-steel-500);
+  }
+  .visual-kitflow__outcome {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-kitflow__outcome-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15px;
+    fill: var(--color-ink-950);
+  }
+  .visual-kitflow__outcome-sub {
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    fill: var(--color-steel-500);
+  }
+</style>

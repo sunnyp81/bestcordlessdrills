@@ -1,0 +1,555 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import SpecPanel from '../../components/SpecPanel.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import FAQ from '../../components/FAQ.astro';
+import { itemListSchema, productSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
+import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
+
+const title = 'Best Cordless Combi Drill UK: 9 Ranked and Compared';
+const description = 'The DeWalt DCD796N ranks best overall in this 9-drill combi drill comparison by torque, Ah and price, checked against live UK retailer prices.';
+
+const rankedItems = [
+  { name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill', url: '/best-combi-drill/#dewalt-dcd796n', position: 1 },
+  { name: 'Makita DHP484Z 18V LXT Brushless Combi Drill', url: '/best-combi-drill/#makita-dhp484z', position: 2 },
+  { name: 'Bosch GSB 18V-55 Professional Combi Drill', url: '/best-combi-drill/#bosch-gsb-18v-55', position: 3 },
+  { name: 'Titan TTI1257COM 18V TXP Combi Drill', url: '/best-combi-drill/#titan-tti1257com', position: 4 },
+  { name: 'Ryobi R18PD3 18V ONE+ Combi Drill', url: '/best-combi-drill/#ryobi-r18pd3', position: 5 },
+  { name: 'Milwaukee M18 BPD-402C Compact Combi Drill', url: '/best-combi-drill/#milwaukee-m18-bpd-402c', position: 6 },
+  { name: 'Ozito PXBHS 18V Brushless Combi Drill', url: '/best-combi-drill/#ozito-pxbhs', position: 7 },
+  { name: 'Erbauer ERI1107COM 18V EXT Brushless Combi Drill', url: '/best-combi-drill/#erbauer-eri1107com', position: 8 },
+  { name: 'Mac Allister MCD18-Li-2 18V Combi Drill', url: '/best-combi-drill/#mac-allister-mcd18-li-2', position: 9 },
+];
+
+const faqs = [
+  {
+    q: 'What is the best cordless combi drill for UK DIY right now?',
+    a: 'The DeWalt DCD796N is the best cordless combi drill for most UK DIYers. It delivers 70 Nm of torque on a widely stocked XR battery platform. Buyers on a tighter budget get real hammer-drill capability from the Titan TTI1257COM for under £80. Existing Makita owners should buy the body-only Makita DHP484Z instead.',
+  },
+  {
+    q: 'Do I need a combi drill or would a plain drill driver do?',
+    a: "Buy a combi drill if you'll ever drill into brick, block or masonry. A plain drill driver has no hammer action. It can't switch to percussion mode for masonry work. See our <a href=\"/drill-vs-combi-vs-impact-driver/\">drill vs combi drill vs impact driver guide</a> for the full three-way comparison.",
+  },
+  {
+    q: 'How much torque does a cordless combi drill need for masonry?',
+    a: 'Aim for 40 Nm or more with hammer action switched on for solid brick or blockwork. Lighter jobs like plasterboard fixings or softwood screws need under 20 Nm. Dense timber or decking work sits around 20 to 40 Nm.',
+  },
+  {
+    q: 'Is an own-brand combi drill like Erbauer, Titan or Mac Allister good enough for masonry?',
+    a: "Some are. Titan's TTI1257COM publishes a genuine 50 Nm torque figure that's high enough for masonry work. Mac Allister's MCD18-Li-2 doesn't publish a torque figure at all. Check the published spec sheet for the exact model before assuming an own-brand drill matches a premium one.",
+  },
+  {
+    q: 'Is 18V the same as 20V Max?',
+    a: "18V and 20V Max batteries use the same underlying lithium-ion cells. 20V Max states the battery's peak voltage straight off the charger. 18V states its nominal running voltage instead. Both labels describe the same battery platform rather than 2 different voltages. See our <a href=\"/battery-platforms-explained/\">battery platforms explained</a> guide for how this affects real-world runtime.",
+  },
+];
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Best Combi Drill', url: '/best-combi-drill/' },
+  ]),
+  itemListSchema({
+    name: 'Best cordless combi drills, ranked for UK buyers',
+    url: '/best-combi-drill/',
+    items: rankedItems,
+  }),
+  productSchema({
+    name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill',
+    brand: 'DeWalt',
+    description: '18V XR combi drill with 70 Nm max torque, a two-speed gearbox and a 15-position clutch. Sold body-only or as a kit with one 4.0Ah battery.',
+    url: '/best-combi-drill/#dewalt-dcd796n',
+    priceLow: 65.10,
+    priceHigh: 109.99,
+  }),
+  productSchema({
+    name: 'Makita DHP484Z 18V LXT Brushless Combi Drill',
+    brand: 'Makita',
+    description: '18V LXT combi drill with 65 Nm max torque, sold body-only for buyers who already own Makita LXT batteries.',
+    url: '/best-combi-drill/#makita-dhp484z',
+    priceLow: 52.95,
+    priceHigh: 65,
+  }),
+  productSchema({
+    name: 'Bosch GSB 18V-55 Professional Combi Drill',
+    brand: 'Bosch',
+    description: 'Bosch Professional 18V combi drill with 55 Nm max torque, sold as a kit with two 5.0Ah batteries.',
+    url: '/best-combi-drill/#bosch-gsb-18v-55',
+    priceLow: 149.99,
+    priceHigh: 149.99,
+  }),
+  productSchema({
+    name: 'Titan TTI1257COM 18V TXP Combi Drill',
+    brand: 'Titan',
+    description: "Screwfix own-brand 18V combi drill with a published 50 Nm torque figure, sold as a kit with two 2.0Ah batteries and a 2-year guarantee.",
+    url: '/best-combi-drill/#titan-tti1257com',
+    priceLow: 79.99,
+    priceHigh: 79.99,
+  }),
+  productSchema({
+    name: 'Ryobi R18PD3 18V ONE+ Combi Drill',
+    brand: 'Ryobi',
+    description: '18V ONE+ combi drill with 50 Nm torque and 24 clutch settings, sold as a kit with two 2.0Ah batteries.',
+    url: '/best-combi-drill/#ryobi-r18pd3',
+    priceLow: 67.98,
+    priceHigh: 67.98,
+  }),
+  productSchema({
+    name: 'Milwaukee M18 BPD-402C Compact Combi Drill',
+    brand: 'Milwaukee',
+    description: '18V M18 combi drill with 60 Nm torque and 18 clutch settings, sold as a kit with two 4.0Ah REDLITHIUM batteries.',
+    url: '/best-combi-drill/#milwaukee-m18-bpd-402c',
+    priceLow: 159.98,
+    priceHigh: 219.99,
+  }),
+  productSchema({
+    name: 'Ozito PXBHS 18V Brushless Combi Drill',
+    brand: 'Ozito',
+    description: "Ozito PXC platform 18V brushless combi drill with 40 Nm torque. That's the lowest torque figure in this ranking that still counts as masonry-capable.",
+    url: '/best-combi-drill/#ozito-pxbhs',
+  }),
+  productSchema({
+    name: 'Erbauer ERI1107COM 18V EXT Brushless Combi Drill',
+    brand: 'Erbauer',
+    description: 'Screwfix own-brand 18V EXT brushless combi drill, sold as a kit with two 5.0Ah batteries. Torque figure unverified at time of writing.',
+    url: '/best-combi-drill/#erbauer-eri1107com',
+    priceLow: 159.99,
+    priceHigh: 159.99,
+  }),
+  productSchema({
+    name: 'Mac Allister MCD18-Li-2 18V Combi Drill',
+    brand: 'Mac Allister',
+    description: "B&Q own-brand 18V brushed combi drill, sold as a kit with two 2.0Ah batteries and a 2-year warranty. No torque figure published.",
+    url: '/best-combi-drill/#mac-allister-mcd18-li-2',
+    priceLow: 60,
+    priceHigh: 60,
+  }),
+  faqSchema(faqs),
+];
+---
+<BaseLayout {title} {description} ogImage="/og/best-combi-drill.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Best Combi Drill', url: '/best-combi-drill/' }]} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Independent · UK · Combi Drill Buying Guide</p>
+      <h1 class="page__title">Best Cordless Combi Drill UK</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <p>The best cordless combi drill for most UK buyers is the DeWalt DCD796N. It delivers 70 Nm of maximum torque and a genuine hammer action strong enough for brick and blockwork on the widely stocked DeWalt XR battery platform. Buyers who already own Makita or Bosch batteries get equally masonry-capable performance from the Makita DHP484Z or Bosch GSB 18V-55 Professional instead; buyers working to a tighter budget get real hammer-drill capability from Screwfix's own Titan TTI1257COM for under £80.</p>
+
+      <p>This guide ranks 9 real cordless combi drills sold in the UK by torque, battery capacity and price across both own-brand and premium tiers. It only covers combi drills. Plain drill drivers and impact drivers are covered separately.</p>
+
+      <Disclosure />
+
+      <h2 id="why-torque-and-hammer-action-matter">Why torque and hammer action matter in a combi drill</h2>
+
+      <p>A cordless combi drill needs 2 things a plain drill driver doesn't. It needs enough torque to drive long fixings through dense material. It also needs a hammer action (also called percussion) that pulses the chuck forward as it spins.</p>
+
+      <p>Torque is measured in newton metres (Nm). Plasterboard and softwood fixing work needs under 20 Nm of torque. Dense timber and decking work needs around 20 to 40 Nm. Solid brick or blockwork drilling needs 40 Nm or more with hammer action switched on.</p>
+
+      <p>Hammer action is what actually lets a masonry bit bite into brick or block. Switch it off and the drill behaves like a rotation-only drill driver. A rotation-only drill driver skates across masonry instead of cutting into it.</p>
+
+      <p>Brushless motors matter too. Every premium drill in this ranking runs brushless. So do the Ozito and Erbauer own-brand picks. Mac Allister's MCD18-Li-2 is the one drill here still running an older brushed motor. A brushed motor runs hotter and wears out sooner under sustained masonry use.</p>
+
+      <p>This guide only ranks combi drills. Read our <a href="/drill-vs-combi-vs-impact-driver/">drill vs combi drill vs impact driver guide</a> for the full three-way breakdown of drill driver, combi drill and impact driver.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" class="visual-torque">
+          <title id="chart-title-1">Torque and hammer action needed by material for a cordless combi drill</title>
+          <desc id="chart-desc-1">A three-band guide showing how much torque in newton metres a cordless combi drill needs for plasterboard and softwood, for dense timber and decking, and for solid brick or blockwork, and whether rotation-only or rotation-plus-hammer action applies to each band.</desc>
+          <rect class="visual-torque__bg" x="0" y="0" width="640" height="460" />
+          <text class="visual-torque__title" x="320" y="26" text-anchor="middle">Torque and hammer action, by material</text>
+
+          <g>
+            <rect x="40" y="50" width="560" height="90" rx="4" class="visual-torque__row" />
+            <text x="64" y="84" class="visual-torque__label">Plasterboard &amp; softwood</text>
+            <text x="64" y="106" class="visual-torque__sub">Wall fixings, shelf brackets, stud walls</text>
+            <text x="576" y="84" text-anchor="end" class="visual-torque__value">Under 20 Nm</text>
+            <rect x="456" y="100" width="140" height="26" rx="3" class="visual-torque__mode-none" />
+            <text x="526" y="118" text-anchor="middle" class="visual-torque__mode-text visual-torque__mode-text--dark">Rotation only</text>
+          </g>
+
+          <g>
+            <rect x="40" y="160" width="560" height="90" rx="4" class="visual-torque__row" />
+            <text x="64" y="194" class="visual-torque__label">Dense timber &amp; decking</text>
+            <text x="64" y="216" class="visual-torque__sub">Decking screws, dense hardwood, heavy joinery</text>
+            <text x="576" y="194" text-anchor="end" class="visual-torque__value">20 to 40 Nm</text>
+            <rect x="456" y="210" width="140" height="26" rx="3" class="visual-torque__mode-helps" />
+            <text x="526" y="228" text-anchor="middle" class="visual-torque__mode-text visual-torque__mode-text--dark">Hammer helps</text>
+          </g>
+
+          <g>
+            <rect x="40" y="270" width="560" height="90" rx="4" class="visual-torque__row" />
+            <text x="64" y="304" class="visual-torque__label">Solid brick &amp; blockwork</text>
+            <text x="64" y="326" class="visual-torque__sub">Masonry plugs, brick ties, blockwork drilling</text>
+            <text x="576" y="304" text-anchor="end" class="visual-torque__value">40 Nm or more</text>
+            <rect x="456" y="320" width="140" height="26" rx="3" class="visual-torque__mode-required" />
+            <text x="526" y="338" text-anchor="middle" class="visual-torque__mode-text visual-torque__mode-text--dark">Hammer required</text>
+          </g>
+
+          <text x="320" y="410" text-anchor="middle" class="visual-torque__footer">Combi drills only earn a masonry-capable label at 40 Nm or higher with hammer action engaged.</text>
+        </svg>
+        <figcaption>Torque and hammer action needed for a cordless combi drill, matched to the material you're drilling into.</figcaption>
+      </figure>
+
+      <h2 id="how-we-ranked">How we ranked these 9 cordless combi drills</h2>
+
+      <p>This ranking weighs 3 figures for every drill: torque in Nm, battery capacity in Ah, and UK price at the point of checking. Torque and battery figures come from each manufacturer's published spec sheet. Price comes from live checks at Amazon UK, Screwfix, B&amp;Q and Toolstation in July 2026.</p>
+
+      <p>Premium brands including DeWalt, Makita and Bosch typically sell their combi drills body-only. This assumes a buyer already owns batteries on that platform. Own-brand and budget kits from Titan, Ozito, Erbauer and Mac Allister almost always bundle 2 batteries and a charger in the box.</p>
+
+      <p>That difference changes the real cost more than the headline price suggests. Every price below states whether it's a body-only figure or a full kit price. Warranty terms follow a similar pattern. Premium brands default to 1 year and extend to 3 years with free registration within 30 days. Own-brand ranges tend to publish a flat 2-year guarantee with no registration step.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" class="visual-bars">
+          <title id="chart-title-2">Torque comparison across 7 ranked cordless combi drills, in newton metres</title>
+          <desc id="chart-desc-2">A horizontal bar chart comparing maximum torque in newton metres for the DeWalt DCD796N, Makita DHP484Z, Milwaukee M18 BPD-402C, Bosch GSB 18V-55 Professional, Titan TTI1257COM, Ryobi R18PD3 and Ozito PXBHS. The Erbauer ERI1107COM and Mac Allister MCD18-Li-2 are left off this chart because neither publishes a verified torque figure.</desc>
+          <rect class="visual-bars__bg" x="0" y="0" width="640" height="420" />
+          <text class="visual-bars__title" x="320" y="26" text-anchor="middle">Maximum torque, in Nm</text>
+
+          <text x="190" y="80" text-anchor="end" class="visual-bars__label">DeWalt DCD796N</text>
+          <rect x="200" y="62" width="380" height="26" rx="3" class="visual-bars__bar" />
+          <text x="590" y="80" class="visual-bars__value">70 Nm</text>
+
+          <text x="190" y="124" text-anchor="end" class="visual-bars__label">Makita DHP484Z</text>
+          <rect x="200" y="106" width="353" height="26" rx="3" class="visual-bars__bar" />
+          <text x="563" y="124" class="visual-bars__value">65 Nm</text>
+
+          <text x="190" y="168" text-anchor="end" class="visual-bars__label">Milwaukee M18</text>
+          <rect x="200" y="150" width="326" height="26" rx="3" class="visual-bars__bar" />
+          <text x="536" y="168" class="visual-bars__value">60 Nm</text>
+
+          <text x="190" y="212" text-anchor="end" class="visual-bars__label">Bosch GSB 18V-55</text>
+          <rect x="200" y="194" width="299" height="26" rx="3" class="visual-bars__bar" />
+          <text x="509" y="212" class="visual-bars__value">55 Nm</text>
+
+          <text x="190" y="256" text-anchor="end" class="visual-bars__label">Titan TTI1257COM</text>
+          <rect x="200" y="238" width="271" height="26" rx="3" class="visual-bars__bar" />
+          <text x="481" y="256" class="visual-bars__value">50 Nm</text>
+
+          <text x="190" y="300" text-anchor="end" class="visual-bars__label">Ryobi R18PD3</text>
+          <rect x="200" y="282" width="271" height="26" rx="3" class="visual-bars__bar" />
+          <text x="481" y="300" class="visual-bars__value">50 Nm</text>
+
+          <text x="190" y="344" text-anchor="end" class="visual-bars__label">Ozito PXBHS</text>
+          <rect x="200" y="326" width="217" height="26" rx="3" class="visual-bars__bar" />
+          <text x="427" y="344" class="visual-bars__value">40 Nm</text>
+
+          <text x="320" y="390" text-anchor="middle" class="visual-bars__footer">Erbauer and Mac Allister are excluded: neither publishes a verified torque figure for this comparison.</text>
+        </svg>
+        <figcaption>Maximum torque compared across the 7 ranked cordless combi drills with a published figure, in newton metres.</figcaption>
+      </figure>
+
+      <p>Two models in this ranking carry a genuine data gap. The Erbauer ERI1107COM's published torque figure looked inconsistent with its class when checked against Screwfix. Mac Allister does not publish a torque figure at all for the MCD18-Li-2. Both gaps are stated plainly further down this page rather than filled in with a guess.</p>
+
+      <ComparisonTable
+        caption="All 9 ranked cordless combi drills, by torque, battery, price, warranty and platform"
+        columns={[
+          { heading: '1. DeWalt DCD796N', subheading: 'DeWalt XR', verdict: 'good' },
+          { heading: '2. Makita DHP484Z', subheading: 'Makita LXT', verdict: 'good' },
+          { heading: '3. Bosch GSB 18V-55', subheading: 'Bosch Professional', verdict: 'good' },
+          { heading: '4. Titan TTI1257COM', subheading: 'Titan TXP', verdict: 'good' },
+          { heading: '5. Ryobi R18PD3', subheading: 'Ryobi ONE+', verdict: 'caution' },
+          { heading: '6. Milwaukee M18', subheading: 'Milwaukee M18', verdict: 'caution' },
+          { heading: '7. Ozito PXBHS', subheading: 'Ozito PXC', verdict: 'caution' },
+          { heading: '8. Erbauer ERI1107COM', subheading: 'Erbauer EXT', verdict: 'caution' },
+          { heading: '9. Mac Allister MCD18', subheading: 'Mac Allister 18V', verdict: 'caution' },
+        ]}
+        rows={[
+          { label: 'Torque', values: ['70 Nm max', '65 Nm max', '55 Nm max', '50 Nm', '50 Nm', '60 Nm', '40 Nm', 'Unverified, not quoted', 'Not published'] },
+          { label: 'Battery', values: ['Body-only, or kit w/ 1×4.0Ah', 'Body-only; kits at 3.0/5.0Ah', '2×5.0Ah or 2×2.0Ah kit', '2×2.0Ah kit', '2×2.0Ah kit (Toolstation)', '2×4.0Ah REDLITHIUM kit', '2×2.0Ah (1×4.0Ah option)', '2×5.0Ah kit', '2×2.0Ah kit'] },
+          { label: 'UK price', values: ['£65.10 body-only, £109.99 kit', '£52.95 to £65 body-only', '£149.99 kit', '£79.99 kit', '£67.98 kit', '£159.98 to £219.99 kit', 'Around £75 body-only, unverified', '£159.99 kit', '£60 kit, was £80'] },
+          { label: 'Warranty', values: ['1 yr std, 3 yr registered', '1 yr std, 3 yr registered', '1 yr std, 3 yr tool/2 yr battery registered', '2 yr guarantee', 'Historically 2 yr std, not reconfirmed', '1 yr std, 3 yr registered', 'Long warranty claimed, unverified', '1 yr std', '2 yr'] },
+          { label: 'Platform', values: ['DeWalt XR 18V', 'Makita LXT 18V', 'Bosch Professional 18V', 'Titan TXP 18V', 'Ryobi ONE+ 18V', 'Milwaukee M18', 'Ozito PXC 18V', 'Erbauer EXT 18V', 'Mac Allister 18V'] },
+        ]}
+      />
+
+      <h2 id="ranked-list">The ranked list: all 9 cordless combi drills</h2>
+
+      <p>Every drill below carries the position it holds in the table above. 3 of the 9 earn a standout label as well as a rank: best overall, best if you already own a specific battery platform, and best value.</p>
+
+      <h3 id="dewalt-dcd796n">1. Best overall: DeWalt DCD796N</h3>
+
+      <p>The DeWalt DCD796N is the best cordless combi drill for most UK buyers who don't already own a battery platform. It delivers 70 Nm of maximum torque across a two-speed gearbox with a 15-position clutch. That's enough for masonry-capable work and fine enough for delicate fixings.</p>
+
+      <SpecPanel
+        spec={{ name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill (body only)', torqueNm: 70, voltage: 18, weightKg: 1.3, chuckSizeMm: 13, priceGBP: 65.10, warrantyYears: 3, batteryPlatform: 'DeWalt XR 18V' }}
+        verdict="good"
+        verdictLabel="Best overall"
+      />
+
+      <p>£65.10 buys the DCD796N body-only for existing DeWalt XR owners. Buyers starting from scratch should budget £109.99 for the kit version with 1 4.0Ah battery and a charger included. The 3-year warranty figure above needs free registration within 30 days of purchase. It defaults to 1 year if you skip that step.</p>
+
+      <p>DeWalt's DCD709D2T-GB kit is the nearest in-stock XR alternative at Toolstation if the DCD796N body-only listing is out of stock.</p>
+
+      <p><a class="buy-link" href={buildAmazonLink('B0F5WZQ12C')} rel={AFFILIATE_REL} target="_blank">Check the DeWalt DCD796N (body-only) on Amazon UK</a></p>
+
+      <h3 id="makita-dhp484z">2. Best if you already own Makita tools: Makita DHP484Z</h3>
+
+      <p>The Makita DHP484Z is the best cordless combi drill for anyone who already owns other Makita LXT tools. It's sold body-only. It only earns its place once you've already got 18V LXT batteries charging for another Makita tool.</p>
+
+      <SpecPanel
+        spec={{ name: 'Makita DHP484Z 18V LXT Brushless Combi Drill (body only)', torqueNm: 65, voltage: 18, weightKg: 1.2, chuckSizeMm: 13, priceGBP: 52.95, warrantyYears: 3, batteryPlatform: 'Makita LXT 18V' }}
+        verdict="good"
+        verdictLabel="Best if you own Makita"
+      />
+
+      <p>£52.95 to £65 buys the DHP484Z body-only depending on retailer. The panel above uses the lower figure. Net weight is 1.2kg body-only. That rises to 1.6 to 2.2kg once a battery's fitted. Buying a battery and charger from scratch on top of the body-only price erases most of the saving over a boxed kit from another brand.</p>
+
+      <p><a class="buy-link" href={buildAmazonLink('B01LYXFYLB')} rel={AFFILIATE_REL} target="_blank">Check the Makita DHP484Z (body-only) on Amazon UK</a></p>
+
+      <h3 id="bosch-gsb-18v-55">3. Bosch GSB 18V-55 Professional</h3>
+
+      <p><VerdictBadge verdict="good" label="Good masonry pick" /></p>
+
+      <p>The Bosch GSB 18V-55 Professional carries 55 Nm of maximum torque and a genuine Bosch Professional badge. That's not the cheaper Bosch DIY green range sold in supermarkets. £149.99 buys the current kit with 2 5.0Ah batteries. That's down from a £199.99 list price at the time of checking.</p>
+
+      <p>Registering within 30 days extends cover to 3 years on the tool and 2 years on the battery and charger. Skip registration and cover defaults to 1 year on the whole kit.</p>
+
+      <p><a class="buy-link" href={buildAmazonLink('B084GSNQLY')} rel={AFFILIATE_REL} target="_blank">Check the Bosch GSB 18V-55 Professional on Amazon UK</a></p>
+
+      <h3 id="titan-tti1257com">4. Best value: Titan TTI1257COM</h3>
+
+      <p>The Titan TTI1257COM is the best-value cordless combi drill in this ranking. £79.99 buys a complete kit with 2 2.0Ah batteries, a charger and a 2-year manufacturer guarantee. Its published 50 Nm torque figure is high enough for real masonry work.</p>
+
+      <SpecPanel
+        spec={{ name: 'Titan TTI1257COM 18V TXP Combi Drill', torqueNm: 50, voltage: 18, weightKg: 1.8, chuckSizeMm: 13, priceGBP: 79.99, warrantyYears: 2, batteryPlatform: 'Titan TXP 18V' }}
+        verdict="good"
+        verdictLabel="Best value"
+      />
+
+      <p>Titan is one of Screwfix's 2 own-brand tool ranges alongside Erbauer. It is not a Toolstation brand despite a common mix-up online. Toolstation resells trade brands like DeWalt, Milwaukee and Makita rather than running its own tool line.</p>
+
+      <p><a class="buy-link buy-link--search" href={amazonSearchLink('Titan TTI1257COM 18V TXP Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search for the Titan TTI1257COM on Amazon UK</a></p>
+      <p class="buy-note">This is an Amazon UK search link. It isn't a single confirmed product listing. Check the model number matches before you buy.</p>
+
+      <h3 id="ryobi-r18pd3">5. Ryobi R18PD3</h3>
+
+      <p><VerdictBadge verdict="caution" label="Check the kit before buying" /></p>
+
+      <p>The Ryobi R18PD3 delivers 50 Nm of torque across 24 clutch settings on the ONE+ platform. ONE+ is one of the widest battery platforms sold in the UK by number of compatible tools. Toolstation's in-branch kit bundles 2 2.0Ah batteries for £67.98. That's down from £84.98.</p>
+
+      <p>The Amazon UK listing for the R18PD3 ships as a 2×1.5Ah kit. That's a smaller pair of batteries than the 2×2.0Ah kit Toolstation stocks in branch. Check which kit you're buying before you order.</p>
+
+      <p><a class="buy-link" href={buildAmazonLink('B07YT5HGH3')} rel={AFFILIATE_REL} target="_blank">Check the Ryobi R18PD3 (2×1.5Ah kit) on Amazon UK</a></p>
+
+      <h3 id="milwaukee-m18-bpd-402c">6. Milwaukee M18 BPD-402C</h3>
+
+      <p><VerdictBadge verdict="caution" label="Pricier for the spec" /></p>
+
+      <p>The Milwaukee M18 BPD-402C delivers 60 Nm of torque across 18 clutch settings. The kit includes 2 4.0Ah REDLITHIUM batteries. Toolstation prices it between £159.98 and £219.99 depending on stock and bundle.</p>
+
+      <p>Milwaukee markets some registration offers as extending cover further than the standard 3-year figure. That specific claim wasn't independently confirmed at time of writing. This guide states only the standard 1-year default and 3-year registered figure.</p>
+
+      <p><a class="buy-link buy-link--search" href={amazonSearchLink('Milwaukee M18 BPD-402C Compact Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search for the Milwaukee M18 BPD-402C on Amazon UK</a></p>
+      <p class="buy-note">This is an Amazon UK search link. It isn't a single confirmed product listing. Check the model number matches before you buy.</p>
+
+      <h3 id="ozito-pxbhs">7. Ozito PXBHS</h3>
+
+      <p><VerdictBadge verdict="caution" label="Price and warranty unverified" /></p>
+
+      <p>The Ozito PXBHS is a brushless combi drill built around Ozito's PXC battery platform. The same batteries run Ozito's garden tools and workshop kit. It carries 40 Nm of torque. That's the lowest figure in this ranking that still counts as genuinely masonry-capable.</p>
+
+      <p>Retailers list it around £75 body-only. This guide couldn't confirm that figure or Ozito's advertised warranty length against a live listing at time of writing. Check both before you buy.</p>
+
+      <p><a class="buy-link buy-link--search" href={amazonSearchLink('Ozito PXBHS 18V Brushless Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search for the Ozito PXBHS on Amazon UK</a></p>
+      <p class="buy-note">This is an Amazon UK search link. It isn't a single confirmed product listing. Check the model number matches before you buy.</p>
+
+      <h3 id="erbauer-eri1107com">8. Erbauer ERI1107COM</h3>
+
+      <p><VerdictBadge verdict="caution" label="Torque figure unverified" /></p>
+
+      <p>The Erbauer ERI1107COM is a brushless combi drill on Erbauer's EXT platform. It's sold as a kit with 2 5.0Ah batteries for £159.99. Erbauer is one of Screwfix's 2 own-brand ranges alongside Titan.</p>
+
+      <p>This guide could not verify Erbauer's published torque and weight figures for the ERI1107COM against a live Screwfix listing. This guide states plainly that the figure is unverified instead of repeating an unconfirmed number. Check the current Screwfix listing directly for the torque spec before buying.</p>
+
+      <p><a class="buy-link buy-link--search" href={amazonSearchLink('Erbauer ERI1107COM 18V EXT Brushless Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search for the Erbauer ERI1107COM on Amazon UK</a></p>
+      <p class="buy-note">This is an Amazon UK search link. It isn't a single confirmed product listing. Check the model number matches before you buy.</p>
+
+      <h3 id="mac-allister-mcd18-li-2">9. Mac Allister MCD18-Li-2</h3>
+
+      <p><VerdictBadge verdict="caution" label="No torque figure published" /></p>
+
+      <p>The Mac Allister MCD18-Li-2 is B&amp;Q's own-brand combi drill. It's priced at £60 during the current offer against an £80 list price. It uses a brushed motor rather than the brushless motors every other drill in this ranking runs.</p>
+
+      <p>Mac Allister does not publish a torque figure for the MCD18-Li-2. That gap puts it last in this ranking. The older brushed motor is the second reason. Its 2-year warranty and low price aren't enough to offset both.</p>
+
+      <p><a class="buy-link buy-link--search" href={amazonSearchLink('Mac Allister MCD18-Li-2 18V Combi Drill')} rel={AFFILIATE_REL} target="_blank">Search for the Mac Allister MCD18-Li-2 on Amazon UK</a></p>
+      <p class="buy-note">This is an Amazon UK search link. It isn't a single confirmed product listing. Check the model number matches before you buy.</p>
+
+      <h3 id="supermarket-special-buys">What about Aldi's Ferrex or Lidl's Parkside combi drills?</h3>
+
+      <p>Aldi's Ferrex and Lidl's Parkside combi drills turn up as seasonal special-buys rather than permanent stock. Neither sells through Amazon UK. This guide can't link to either directly. Neither retailer publishes a full spec sheet the way Screwfix, B&amp;Q and the premium brands do.</p>
+
+      <p>Treat both as an opportunistic buy if the aisle timing lines up. Neither is a guaranteed like-for-like substitute for the 9 models ranked above.</p>
+
+      <p>Read our <a href="/drill-vs-combi-vs-impact-driver/">drill vs combi drill vs impact driver guide</a> to see which tool type you actually need. Our <a href="/best-budget/">best budget cordless drill guide</a> ranks the cheapest options if price matters more than masonry power. Every category this site ranks sits on the <a href="/">Best Cordless Drills homepage</a>.</p>
+
+      <FAQ faqs={faqs} />
+
+      <div class="tick-divider" aria-hidden="true"></div>
+
+      <p>Prices, torque figures and warranty terms on this page were checked in July 2026. They get corrected whenever one changes materially. Spot a price, spec or warranty term that's moved since? Email <a href="mailto:hello@bestcordlessdrills.uk">hello@bestcordlessdrills.uk</a> and it gets fixed.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.75rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+  .buy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--color-ink-950);
+    color: #fff;
+    padding: 0.6rem 1.1rem;
+    border-radius: 3px;
+    border: 1px solid var(--color-amber-500);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none !important;
+    transition: background-color 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  .buy-link:hover {
+    background: var(--color-amber-700);
+    color: var(--color-ink-950);
+  }
+  .buy-link--search {
+    background: var(--color-card);
+    color: var(--color-ink-900);
+  }
+  .buy-link--search:hover {
+    background: var(--color-paper);
+    color: var(--color-ink-950);
+  }
+  .buy-note {
+    font-size: 0.8rem !important;
+    color: var(--color-steel-500) !important;
+    margin-top: -0.5rem !important;
+  }
+
+  /* Visual 1: torque and hammer action by material */
+  .visual-torque__bg { fill: var(--color-paper); }
+  .visual-torque__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-torque__row {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-torque__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    fill: var(--color-ink-950);
+  }
+  .visual-torque__sub {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+  .visual-torque__value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 15px;
+    fill: var(--color-amber-900);
+  }
+  .visual-torque__mode-none { fill: var(--color-steel-300); }
+  .visual-torque__mode-helps { fill: var(--color-amber-300); }
+  .visual-torque__mode-required { fill: var(--color-amber-700); }
+  .visual-torque__mode-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .visual-torque__mode-text--dark { fill: var(--color-ink-950); }
+  .visual-torque__mode-text--light { fill: #fff; }
+  .visual-torque__footer {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+
+  /* Visual 2: torque bar chart */
+  .visual-bars__bg { fill: var(--color-paper); }
+  .visual-bars__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-bars__label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    fill: var(--color-ink-900);
+  }
+  .visual-bars__bar { fill: var(--color-amber-500); }
+  .visual-bars__value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 13px;
+    fill: var(--color-ink-950);
+  }
+  .visual-bars__footer {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+</style>

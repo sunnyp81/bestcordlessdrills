@@ -1,0 +1,196 @@
+---
+import { NODE_HUBS, BUYING_GUIDES, SITE } from '../lib/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+---
+<a href="#main-content" class="skip-link">Skip to content</a>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="/" class="site-header__brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="24" height="24" rx="4" fill="var(--color-ink-950)" stroke="var(--color-amber-500)" stroke-width="1.5"/>
+        <path d="M7 17 L14 8" stroke="var(--color-amber-500)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M14 8 L19 8 L19 13" stroke="var(--color-amber-500)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>{SITE.shortName}</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Primary">
+      <a href="/" class:list={{ 'is-active': isActive('/') }}>Home</a>
+      {NODE_HUBS.map((h) => (
+        <a href={`/${h.slug}/`} class:list={{ 'is-active': isActive(`/${h.slug}/`) }}>{h.label}</a>
+      ))}
+      <details class="site-header__dropdown">
+        <summary class:list={{ 'is-active': BUYING_GUIDES.some((g) => isActive(`/${g.slug}/`)) }}>
+          Buying Guides
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M1 3l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="site-header__dropdown-menu">
+          {BUYING_GUIDES.map((g) => (
+            <a href={`/${g.slug}/`}>{g.label}</a>
+          ))}
+        </div>
+      </details>
+      <a href="/about/" class:list={{ 'is-active': isActive('/about/') }}>About</a>
+    </nav>
+
+    <button id="mobile-menu-btn" class="site-header__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="site-header__mobile-nav" aria-label="Mobile primary" hidden>
+    <ul>
+      <li><a href="/">Home</a></li>
+      {NODE_HUBS.map((h) => (<li><a href={`/${h.slug}/`}>{h.label}</a></li>))}
+      <li class="site-header__mobile-group-label">Buying Guides</li>
+      {BUYING_GUIDES.map((g) => (<li><a href={`/${g.slug}/`} class="site-header__mobile-sublink">{g.label}</a></li>))}
+      <li><a href="/about/">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const willOpen = menu?.hasAttribute('hidden');
+    if (willOpen) {
+      menu?.removeAttribute('hidden');
+    } else {
+      menu?.setAttribute('hidden', '');
+    }
+    btn.setAttribute('aria-expanded', String(!!willOpen));
+    btn.setAttribute('aria-label', willOpen ? 'Close menu' : 'Open menu');
+  });
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--color-ink-950);
+    border-bottom: 1px solid var(--color-ink-800);
+  }
+  .site-header__bar {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .site-header__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .site-header__nav {
+    display: none;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  @media (min-width: 900px) {
+    .site-header__nav { display: flex; }
+    .site-header__toggle { display: none; }
+  }
+  .site-header__nav > a,
+  .site-header__dropdown summary {
+    color: var(--color-steel-300);
+    transition: color 160ms cubic-bezier(0.2, 0, 0, 1);
+    position: relative;
+    padding: 0.3rem 0;
+  }
+  .site-header__nav > a:hover,
+  .site-header__dropdown summary:hover {
+    color: var(--color-amber-500);
+  }
+  .site-header__nav > a.is-active,
+  .site-header__dropdown summary.is-active {
+    color: var(--color-amber-500);
+  }
+  .site-header__nav > a.is-active::after,
+  .site-header__dropdown summary.is-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--color-amber-500);
+  }
+  .site-header__dropdown {
+    position: relative;
+  }
+  .site-header__dropdown summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .site-header__dropdown summary::-webkit-details-marker { display: none; }
+  .site-header__dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    min-width: 12rem;
+    background: var(--color-ink-900);
+    border: 1px solid var(--color-ink-800);
+    border-radius: 4px;
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  .site-header__dropdown-menu a {
+    color: var(--color-steel-300);
+    padding: 0.5rem 0.6rem;
+    border-radius: 3px;
+    font-weight: 400;
+  }
+  .site-header__dropdown-menu a:hover {
+    background: var(--color-ink-800);
+    color: var(--color-amber-500);
+  }
+  .site-header__toggle {
+    color: #fff;
+    padding: 0.4rem;
+    margin: -0.4rem;
+  }
+  .site-header__mobile-nav {
+    border-top: 1px solid var(--color-ink-800);
+    padding: 0.75rem 1.25rem 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .site-header__mobile-nav { display: none; }
+  }
+  .site-header__mobile-nav ul { display: flex; flex-direction: column; gap: 0.1rem; }
+  .site-header__mobile-nav a {
+    display: block;
+    padding: 0.6rem 0.5rem;
+    color: var(--color-steel-300);
+    font-weight: 500;
+    border-radius: 3px;
+  }
+  .site-header__mobile-nav a:hover { background: var(--color-ink-900); color: var(--color-amber-500); }
+  .site-header__mobile-sublink { padding-left: 1.25rem !important; }
+  .site-header__mobile-group-label {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.5rem 0.2rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-steel-500);
+    border-top: 1px solid var(--color-ink-800);
+  }
+</style>

@@ -1,0 +1,468 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { breadcrumbSchema, faqSchema, itemListSchema } from '../../lib/schema';
+import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
+
+const title = 'Own-Brand vs Premium Cordless Drills: Worth It?';
+const description = 'Own-brand drills like Erbauer and Ozito match Makita and DeWalt on torque and price. Warranty terms and battery lock-in decide which is worth buying.';
+
+const ownBrandColumns = [
+  { heading: 'Erbauer', subheading: 'Screwfix', verdict: 'good' as const },
+  { heading: 'Titan', subheading: 'Screwfix', verdict: 'good' as const },
+  { heading: 'Mac Allister', subheading: 'B&Q', verdict: 'good' as const },
+  { heading: 'Ozito', subheading: 'Independent retailers', verdict: 'caution' as const },
+  { heading: 'Aldi / Lidl', subheading: 'Seasonal special-buys', verdict: 'caution' as const },
+];
+const ownBrandRows = [
+  { label: 'UK price', values: ['£159.99', '£79.99', '£60 (was £80)', '~£75 bare tool', 'From £14.99 tool-only'] },
+  { label: 'Torque', values: ['Not independently verified', '50 Nm', 'Not published', '40 Nm', 'Not published'] },
+  { label: 'Warranty', values: ['1 yr standard', '2 yr, no registration', '2 yr, no registration', 'Claims up to 5 yr, verify terms', 'Not confirmed, check in store'] },
+  { label: 'Battery platform', values: ['Erbauer EXT', 'Titan TXP', 'Mac Allister 18V', 'Ozito PXC', 'Own range only, sold separately'] },
+];
+
+const premiumColumns = [
+  { heading: 'Makita', subheading: 'LXT', verdict: 'good' as const },
+  { heading: 'DeWalt', subheading: 'XR', verdict: 'good' as const },
+  { heading: 'Bosch', subheading: 'Professional', verdict: 'good' as const },
+  { heading: 'Milwaukee', subheading: 'M18', verdict: 'good' as const },
+  { heading: 'Ryobi', subheading: 'ONE+', verdict: 'caution' as const },
+];
+const premiumRows = [
+  { label: 'UK price', values: ['£52.95 to £65 body-only', '£65.10 body-only, £109.99 kit', '£149.99 kit (was £199.99)', '£159.98 to £219.99', '£67.98 kit (was £84.98)'] },
+  { label: 'Torque', values: ['65 Nm max', '70 Nm max', '55 Nm max', '60 Nm', '50 Nm'] },
+  { label: 'Warranty', values: ['1 yr default, 3 yr if registered in 30 days', '1 yr default, 3 yr if registered in 30 days', '1 yr default, 3 yr tool/2 yr battery if registered', '1 yr default, 3 yr if registered', 'Not confirmed, historically 2 yr standard'] },
+  { label: 'Battery platform', values: ['Makita LXT', 'DeWalt XR', 'Bosch Professional 18V', 'Milwaukee M18', 'Ryobi ONE+'] },
+];
+
+const faqs = [
+  {
+    q: 'Is it worth paying more for a Makita over a cheap Ozito or Parkside drill?',
+    a: "Pay more for a Makita if you drill more than about 10 times a year. Makita's DHP484Z reaches 65 Nm against Ozito's 40 Nm. Its LXT battery platform also extends to a wide range of other tools. Ozito's 40 Nm and lower price cover most home tasks well enough for a handful of jobs a year.",
+  },
+  {
+    q: 'Are Aldi or Lidl special-buy cordless drills any good?',
+    a: "Aldi's Ferrex and Lidl's Parkside cordless drills are genuinely fine for a single one-off job if you catch the seasonal stock window. Neither is sold on Amazon UK. Their batteries only fit their own supermarket range. Treat either as a one-time task rather than an ongoing tool platform.",
+  },
+  {
+    q: 'Is Titan a Toolstation brand or a Screwfix brand?',
+    a: "Titan and Erbauer are both Screwfix own-brands. Toolstation carries no house power tool brand of its own. It resells trade brands including DeWalt, Milwaukee, Makita and Bosch instead.",
+  },
+  {
+    q: 'Do own-brand cordless drills carry the same warranty as Makita or DeWalt?',
+    a: "No. Titan and Mac Allister ship a flat 2 year guarantee with no registration step. Makita, DeWalt and Bosch default to a 1 year warranty and only extend to 3 years if you register the tool online within 30 days of purchase.",
+  },
+  {
+    q: 'Can I use an own-brand battery in a premium drill?',
+    a: "No. Erbauer EXT, Titan TXP, Mac Allister 18V and Ozito PXC batteries only fit their own tool range. Makita LXT, DeWalt XR, Bosch Professional 18V and Milwaukee M18 batteries are each locked to their own platform too. None of the ranges compared here cross-fit another brand's tools.",
+  },
+  {
+    q: 'How many times a year should I drill before buying a premium drill?',
+    a: "Buy own-brand for jobs such as shelves, curtain rails and flatpack furniture if you drill fewer than about 10 times a year. Buy premium if you drill more often than that. The registered 3 year warranty and shared battery platform earn back the extra price under regular use.",
+  },
+];
+
+const itemListItems = [
+  { name: 'Erbauer ERI1107COM 18V EXT Brushless Combi Drill', url: '/own-brand-vs-premium/#erbauer-titan', position: 1 },
+  { name: 'Titan TTI1257COM 18V TXP Combi Drill', url: '/own-brand-vs-premium/#erbauer-titan', position: 2 },
+  { name: 'Mac Allister MCD18-Li-2 18V Combi Drill', url: '/own-brand-vs-premium/#mac-allister', position: 3 },
+  { name: 'Ozito PXBHS 18V Brushless Combi Drill', url: '/own-brand-vs-premium/#ozito', position: 4 },
+  { name: 'Aldi Ferrex 20V Cordless Combi Drill', url: '/own-brand-vs-premium/#aldi-lidl', position: 5 },
+  { name: 'Lidl Parkside PSBSAP 20-Li C3 Hammer Drill Driver', url: '/own-brand-vs-premium/#aldi-lidl', position: 6 },
+  { name: 'Makita DHP484Z 18V LXT Brushless Combi Drill', url: '/own-brand-vs-premium/#makita-dewalt-bosch', position: 7 },
+  { name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill', url: '/own-brand-vs-premium/#makita-dewalt-bosch', position: 8 },
+  { name: 'Bosch GSB 18V-55 Professional Combi Drill', url: '/own-brand-vs-premium/#makita-dewalt-bosch', position: 9 },
+  { name: 'Milwaukee M18 BPD-402C Compact Combi Drill', url: '/own-brand-vs-premium/#milwaukee', position: 10 },
+  { name: 'Ryobi R18PD3 18V ONE+ Combi Drill', url: '/own-brand-vs-premium/#ryobi', position: 11 },
+];
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' },
+  ]),
+  faqSchema(faqs),
+  itemListSchema({
+    name: 'Own-brand vs premium cordless drills compared',
+    url: '/own-brand-vs-premium/',
+    items: itemListItems,
+  }),
+];
+---
+<BaseLayout {title} {description} ogImage="/og/own-brand-vs-premium.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' }]} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Independent · UK · Research-led</p>
+      <h1 class="page__title">Own-brand vs premium cordless drills: are retailer drills worth it?</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <p>Erbauer, Titan and Ozito match Makita and DeWalt on torque and no-load speed for most home jobs. The real gap between own-brand and premium cordless drills is warranty terms and battery-platform lock-in. It is not raw drilling power.</p>
+
+      <p>An own-brand drill suits occasional DIY. A premium drill's registered warranty and shared battery platform earn back the higher price under regular or heavy use.</p>
+
+      <Disclosure />
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" class="visual-warranty">
+          <title id="chart-title-1">How the premium cordless drill warranty registration window works</title>
+          <desc id="chart-desc-1">A timeline comparing warranty cover in months. Own-brand tools such as Titan and Mac Allister carry a flat 2 year guarantee with no registration step. Premium tools such as Makita, DeWalt and Bosch default to 1 year but extend to 3 years only if registered online within 30 days of purchase.</desc>
+          <rect class="visual-warranty__bg" x="0" y="0" width="640" height="320" />
+          <text class="visual-warranty__title" x="320" y="26" text-anchor="middle">Own-brand vs premium: the warranty clock</text>
+
+          <text class="visual-warranty__row-label" x="15" y="64">Own-brand</text>
+          <text class="visual-warranty__row-sub" x="15" y="79">Titan, Mac Allister</text>
+          <rect x="140" y="54" width="280" height="28" rx="3" class="visual-warranty__bar visual-warranty__bar--good" />
+          <text class="visual-warranty__bar-text" x="280" y="72" text-anchor="middle">2 years, no registration needed</text>
+
+          <text class="visual-warranty__row-label" x="15" y="124">Premium</text>
+          <text class="visual-warranty__row-sub" x="15" y="139">not registered</text>
+          <rect x="140" y="114" width="140" height="28" rx="3" class="visual-warranty__bar visual-warranty__bar--avoid" />
+          <text class="visual-warranty__bar-text" x="210" y="132" text-anchor="middle">1 year only</text>
+
+          <text class="visual-warranty__row-label" x="15" y="184">Premium</text>
+          <text class="visual-warranty__row-sub" x="15" y="199">registered in 30 days</text>
+          <rect x="140" y="174" width="420" height="28" rx="3" class="visual-warranty__bar visual-warranty__bar--good" />
+          <text class="visual-warranty__bar-text" x="350" y="192" text-anchor="middle">3 years total</text>
+          <line x1="152" y1="168" x2="152" y2="206" class="visual-warranty__marker" />
+          <text class="visual-warranty__marker-label" x="160" y="222">Register within 30 days</text>
+
+          <line x1="140" y1="246" x2="560" y2="246" class="visual-warranty__axis" />
+          <line x1="140" y1="242" x2="140" y2="250" class="visual-warranty__axis" />
+          <line x1="280" y1="242" x2="280" y2="250" class="visual-warranty__axis" />
+          <line x1="420" y1="242" x2="420" y2="250" class="visual-warranty__axis" />
+          <line x1="560" y1="242" x2="560" y2="250" class="visual-warranty__axis" />
+          <text class="visual-warranty__axis-label" x="140" y="264" text-anchor="middle">0</text>
+          <text class="visual-warranty__axis-label" x="280" y="264" text-anchor="middle">12 mo</text>
+          <text class="visual-warranty__axis-label" x="420" y="264" text-anchor="middle">24 mo</text>
+          <text class="visual-warranty__axis-label" x="560" y="264" text-anchor="middle">36 mo</text>
+
+          <text class="visual-warranty__footer" x="320" y="298" text-anchor="middle">Registering a premium drill within 30 days of purchase triples its warranty cover.</text>
+        </svg>
+        <figcaption>How own-brand flat warranty cover compares to premium cordless drill warranty registration terms.</figcaption>
+      </figure>
+
+      <h2 id="compared">Own-brand vs premium cordless drills, compared</h2>
+
+      <p>The tables below check price, torque, warranty terms and battery platform across five own-brand ranges and five premium brands sold in the UK. Every figure is dated to July 2026 and sourced from the retailer or manufacturer directly.</p>
+
+      <ComparisonTable
+        caption="Own-brand tool lines: UK price, torque, warranty and battery platform, checked July 2026"
+        columns={ownBrandColumns}
+        rows={ownBrandRows}
+      />
+
+      <p>Own-brand torque sits close to premium on paper. Titan's 50 Nm and Ozito's 40 Nm cover most masonry plugs and standard screws. Both sit in the same range as Bosch's 55 Nm.</p>
+
+      <ComparisonTable
+        caption="Premium trade brands: UK price, torque, warranty and battery platform, checked July 2026"
+        columns={premiumColumns}
+        rows={premiumRows}
+      />
+
+      <p>The gap opens in the warranty column. Erbauer, Titan and Mac Allister ship a flat term with no registration step. Makita, DeWalt and Bosch default to 1 year and only reach 3 years if you register online within 30 days of purchase.</p>
+
+      <h2 id="usage-threshold">How many times a year should you drill before buying premium?</h2>
+
+      <p>Drill fewer than 10 times a year and an own-brand tool is genuinely fine. Drill more than that and a premium tool's registered warranty and shared battery platform earn back the extra cost.</p>
+
+      <p>Own-brand warranty cover does not depend on how you use the tool. Titan's 2 year guarantee and Mac Allister's 2 year cover apply from the day of purchase. Neither requires a registration step or carries hidden small print.</p>
+
+      <p>Premium warranty cover works differently. Makita, DeWalt and Bosch all default to 1 year in the box. Register the tool online within 30 days of purchase and cover extends to 3 years on the tool. Bosch also extends the battery and charger to 2 years on registration.</p>
+
+      <p>Frequent use raises the odds of a fault appearing inside the registered window rather than after it. A drill used twice a month for a shed rebuild or a kitchen fit-out runs far more cycles in 3 years than one used for four picture hooks and a curtain rail a year.</p>
+
+      <p>Buying into a premium battery platform pays off the same way. A Makita LXT or DeWalt XR battery bought for a drill also fits an impact driver, a jigsaw or an angle grinder on the same platform. Erbauer EXT, Titan TXP, Mac Allister 18V and Ozito PXC batteries only fit their own tool range. Switching platforms later means buying batteries again from scratch.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" class="visual-threshold">
+          <title id="chart-title-2">The usage threshold for choosing an own-brand or premium cordless drill</title>
+          <desc id="chart-desc-2">A decision diagram. Drilling fewer than 10 times a year points to an own-brand drill such as Erbauer, Titan, Mac Allister or Ozito. Drilling 10 or more times a year points to a premium drill such as Makita, DeWalt, Bosch or Milwaukee, registered within 30 days of purchase.</desc>
+          <rect class="visual-threshold__bg" x="0" y="0" width="640" height="360" />
+          <text class="visual-threshold__title" x="320" y="26" text-anchor="middle">Own-brand or premium: the usage threshold</text>
+
+          <rect x="170" y="44" width="300" height="56" rx="4" class="visual-threshold__node" />
+          <text class="visual-threshold__q" x="320" y="66" text-anchor="middle">How many times a year</text>
+          <text class="visual-threshold__q" x="320" y="86" text-anchor="middle">do you pick up a drill?</text>
+
+          <line x1="320" y1="100" x2="155" y2="132" class="visual-threshold__arrow" />
+          <polygon points="155,140 148,126 162,128" class="visual-threshold__arrowhead" />
+          <line x1="320" y1="100" x2="485" y2="132" class="visual-threshold__arrow" />
+          <polygon points="485,140 478,126 492,128" class="visual-threshold__arrowhead" />
+
+          <rect x="20" y="140" width="270" height="50" rx="4" class="visual-threshold__node" />
+          <text class="visual-threshold__q" x="155" y="170" text-anchor="middle">Fewer than 10 times a year</text>
+
+          <rect x="350" y="140" width="270" height="50" rx="4" class="visual-threshold__node" />
+          <text class="visual-threshold__q" x="485" y="170" text-anchor="middle">10 or more times a year</text>
+
+          <line x1="155" y1="190" x2="155" y2="222" class="visual-threshold__arrow-accent" />
+          <polygon points="155,230 148,218 162,218" class="visual-threshold__arrowhead-accent" />
+          <line x1="485" y1="190" x2="485" y2="222" class="visual-threshold__arrow-accent" />
+          <polygon points="485,230 478,218 492,218" class="visual-threshold__arrowhead-accent" />
+
+          <rect x="20" y="232" width="270" height="92" rx="4" class="visual-threshold__verdict-box" />
+          <rect x="20" y="232" width="4" height="92" class="visual-threshold__verdict-stripe" />
+          <text class="visual-threshold__verdict-label" x="36" y="264" text-anchor="start">Own-brand is fine</text>
+          <text class="visual-threshold__verdict-sub" x="36" y="286" text-anchor="start">Erbauer, Titan,</text>
+          <text class="visual-threshold__verdict-sub" x="36" y="302" text-anchor="start">Mac Allister, Ozito</text>
+
+          <rect x="350" y="232" width="270" height="92" rx="4" class="visual-threshold__verdict-box" />
+          <rect x="350" y="232" width="4" height="92" class="visual-threshold__verdict-stripe" />
+          <text class="visual-threshold__verdict-label" x="366" y="258" text-anchor="start">Premium pays off</text>
+          <text class="visual-threshold__verdict-sub" x="366" y="280" text-anchor="start">Makita, DeWalt,</text>
+          <text class="visual-threshold__verdict-sub" x="366" y="296" text-anchor="start">Bosch, Milwaukee</text>
+          <text class="visual-threshold__verdict-note" x="366" y="312" text-anchor="start">Register within 30 days</text>
+
+          <text class="visual-threshold__footer" x="320" y="344" text-anchor="middle">Reasoned from real UK warranty terms and price gaps: not a workshop test.</text>
+        </svg>
+        <figcaption>The usage threshold that decides whether an own-brand or premium cordless drill is worth buying.</figcaption>
+      </figure>
+
+      <p>Register a premium drill within 30 days of buying it. That single step is what turns a 1 year warranty into 3.</p>
+
+      <h2 id="own-brand-verdicts">Own-brand tool lines, verdict by brand</h2>
+
+      <h3 id="erbauer-titan">Erbauer and Titan (Screwfix) <VerdictBadge verdict="good" label="Good for occasional DIY" /></h3>
+
+      <p>Erbauer and Titan are Screwfix's two own ranges. They are not two different retailers' brands. Toolstation carries no house power tool brand of its own and instead resells trade brands including DeWalt, Milwaukee, Makita, Bosch, Einhell and Draper.</p>
+
+      <p>The Titan TTI1257COM costs £79.99 with a 2x2.0Ah battery kit, delivers 50 Nm and carries a 2 year manufacturer guarantee with no registration step. The Erbauer ERI1107COM costs £159.99 with a larger 2x5.0Ah kit and a standard 1 year warranty.</p>
+
+      <p>
+        <a href={amazonSearchLink('Titan TTI1257COM 18V combi drill')} rel={AFFILIATE_REL} target="_blank">Search Titan TTI1257COM on Amazon UK</a> ·
+        <a href={amazonSearchLink('Erbauer ERI1107COM 18V combi drill')} rel={AFFILIATE_REL} target="_blank">Search Erbauer ERI1107COM on Amazon UK</a>
+      </p>
+
+      <p>Both suit occasional DIY: shelf hanging, flatpack furniture, curtain rails and the odd masonry job.</p>
+
+      <h3 id="mac-allister">Mac Allister (B&amp;Q) <VerdictBadge verdict="good" label="Good for occasional DIY" /></h3>
+
+      <p>The Mac Allister MCD18-Li-2 costs £60 (reduced from £80) with a 2x2.0Ah kit and a 2 year warranty with no registration step.</p>
+
+      <p>B&amp;Q does not publish a torque figure for this model. That omission makes it harder to compare directly against Titan or Ozito on paper. The 2 year flat warranty puts it in the same occasional-DIY bracket as Erbauer and Titan.</p>
+
+      <p><a href={amazonSearchLink('Mac Allister MCD18-Li-2 combi drill')} rel={AFFILIATE_REL} target="_blank">Search Mac Allister MCD18-Li-2 on Amazon UK</a></p>
+
+      <h3 id="ozito">Ozito <VerdictBadge verdict="caution" label="Caution: verify the warranty small print" /></h3>
+
+      <p>The Ozito PXBHS costs around £75 as a bare tool and delivers 40 Nm. That is the lowest torque figure in this comparison. It covers standard screws and softwood well. It narrows the margin on masonry and hardwood work.</p>
+
+      <p>Ozito advertises warranty cover of up to 5 years on some ranges. Check the exact terms for the PXBHS specifically before relying on that figure. It has not been verified against Ozito's own small print for this model.</p>
+
+      <p>See our <a href="/makita-vs-ozito/">Makita vs Ozito comparison</a> for a closer look at exactly how Ozito's torque and warranty stack up against a premium drill.</p>
+
+      <p><a href={amazonSearchLink('Ozito PXBHS 18V combi drill')} rel={AFFILIATE_REL} target="_blank">Search Ozito PXBHS on Amazon UK</a></p>
+
+      <h3 id="aldi-lidl">Aldi Ferrex and Lidl Parkside special-buys <VerdictBadge verdict="caution" label="Caution: seasonal stock only" /></h3>
+
+      <p>Aldi's Ferrex 20V combi drill sells for £14.99 tool-only. The battery is sold separately. Lidl's Parkside PSBSAP 20-Li C3 follows the same special-buy pattern.</p>
+
+      <p>Neither is sold on Amazon UK. There is no affiliate link to give here. Both appear as seasonal Specialbuy or middle-aisle stock rather than permanent stock. Availability comes and goes through the year.</p>
+
+      <p>Activ Energy and Parkside batteries only fit their own supermarket range. Buy one of these only for a single one-off job. Buy it only if you catch the stock window. Treat it as a one-off rather than a long-term tool platform.</p>
+
+      <h2 id="premium-verdicts">Premium trade brands, verdict by brand</h2>
+
+      <h3 id="makita-dewalt-bosch">Makita, DeWalt and Bosch <VerdictBadge verdict="good" label="Good for regular or heavy use" /></h3>
+
+      <p>Makita's DHP484Z body sells for £52.95 to £65 and delivers 65 Nm max torque at 1.2kg net weight. That is the highest torque figure in this comparison. DeWalt's DCD796N body sells for £65.10 (£109.99 as a kit with one 4.0Ah battery) and delivers 70 Nm max with a 15-position clutch.</p>
+
+      <p>Bosch's GSB 18V-55 Professional costs £149.99 as a 2x5.0Ah kit (reduced from £199.99) with 55 Nm max torque. All three default to a 1 year warranty and extend to 3 years on the tool if you register online within 30 days of purchase. Bosch also extends battery and charger cover to 2 years on registration.</p>
+
+      <p>
+        <a href={buildAmazonLink('B01LYXFYLB')} rel={AFFILIATE_REL} target="_blank">Check Makita DHP484Z price on Amazon UK</a> ·
+        <a href={buildAmazonLink('B0F5WZQ12C')} rel={AFFILIATE_REL} target="_blank">Check DeWalt DCD796N price on Amazon UK</a> ·
+        <a href={buildAmazonLink('B084GSNQLY')} rel={AFFILIATE_REL} target="_blank">Check Bosch GSB 18V-55 price on Amazon UK</a>
+      </p>
+
+      <p>All three sit on wide battery platforms. A Makita LXT, DeWalt XR or Bosch Professional 18V battery bought for this drill also runs impact drivers, jigsaws and grinders on the same platform.</p>
+
+      <h3 id="milwaukee">Milwaukee <VerdictBadge verdict="good" label="Good, with one caveat" /></h3>
+
+      <p>The Milwaukee M18 BPD-402C costs £159.98 to £219.99 with a 2x4.0Ah kit and delivers 60 Nm across 18 clutch stages. It defaults to a 1 year warranty. Registering within 30 days extends that to 3 years. Makita, DeWalt and Bosch follow the same registration pattern.</p>
+
+      <p>Some retailer listings advertise Milwaukee cover of up to 5 years. Treat that figure as an unverified marketing claim rather than a confirmed term. Check the registration small print directly with Milwaukee before buying on the strength of it.</p>
+
+      <p><a href={amazonSearchLink('Milwaukee M18 BPD-402C combi drill')} rel={AFFILIATE_REL} target="_blank">Search Milwaukee M18 BPD-402C on Amazon UK</a></p>
+
+      <h3 id="ryobi">Ryobi <VerdictBadge verdict="caution" label="Caution: check the kit before buying" /></h3>
+
+      <p>The Ryobi R18PD3 costs £67.98 as a 2x2.0Ah kit from Toolstation (reduced from £84.98) and delivers 50 Nm across 24 clutch settings on the Ryobi ONE+ platform.</p>
+
+      <p>The confirmed Amazon UK listing for this model carries a 2x1.5Ah battery pack. That is not the 2x2.0Ah kit sold at Toolstation. Check the battery capacity on the listing before buying if that difference matters for your jobs.</p>
+
+      <p><a href={buildAmazonLink('B07YT5HGH3')} rel={AFFILIATE_REL} target="_blank">Check Ryobi R18PD3 price on Amazon UK (2x1.5Ah kit)</a></p>
+
+      <p>Ryobi's own warranty term for this model was not confirmed at time of writing. Ryobi has historically shipped a 2 year standard warranty across the ONE+ range. Confirm the current term with Ryobi before buying if the warranty length is decisive for you.</p>
+
+      <h2 id="how-we-built-this">How this comparison was built</h2>
+
+      <p>Every price, spec and warranty term above comes from a live UK retailer or manufacturer page. All were checked in July 2026. This is not a workshop test.</p>
+
+      <p>Best Cordless Drills runs no test lab. See <a href="/about/#how-we-research">how we research and score drills</a> for the full method.</p>
+
+      <p>Prices move fast in this category. A £79.99 combi drill can drop to £49.99 in a bank holiday sale and climb back within a week. Treat the figures here as a snapshot rather than a permanent price.</p>
+
+      <FAQ faqs={faqs} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.75rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .prose-drills h3 :global(.verdict-badge) {
+    margin-left: 0.6rem;
+    vertical-align: middle;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+
+  /* Visual 1: warranty registration timeline */
+  .visual-warranty__bg { fill: var(--color-paper); }
+  .visual-warranty__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 16px;
+    fill: var(--color-ink-950);
+  }
+  .visual-warranty__row-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 12px;
+    fill: var(--color-ink-950);
+  }
+  .visual-warranty__row-sub {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--color-steel-500);
+  }
+  .visual-warranty__bar { stroke: var(--color-hairline); stroke-width: 1; }
+  .visual-warranty__bar--good { fill: var(--color-verdict-good); }
+  .visual-warranty__bar--avoid { fill: var(--color-verdict-avoid); }
+  .visual-warranty__bar-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    fill: #fff;
+  }
+  .visual-warranty__marker { stroke: var(--color-amber-500); stroke-width: 2; }
+  .visual-warranty__marker-label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--color-amber-900);
+  }
+  .visual-warranty__axis { stroke: var(--color-steel-300); stroke-width: 1; }
+  .visual-warranty__axis-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--color-steel-500);
+  }
+  .visual-warranty__footer {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+
+  /* Visual 2: usage-threshold decision fork */
+  .visual-threshold__bg { fill: var(--color-paper); }
+  .visual-threshold__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 16px;
+    fill: var(--color-ink-950);
+  }
+  .visual-threshold__node {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-threshold__q {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 13px;
+    fill: var(--color-ink-900);
+  }
+  .visual-threshold__arrow { stroke: var(--color-steel-300); stroke-width: 2; }
+  .visual-threshold__arrowhead { fill: var(--color-steel-300); }
+  .visual-threshold__arrow-accent { stroke: var(--color-amber-500); stroke-width: 2.5; }
+  .visual-threshold__arrowhead-accent { fill: var(--color-amber-500); }
+  .visual-threshold__verdict-box {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-threshold__verdict-stripe { fill: var(--color-verdict-good); }
+  .visual-threshold__verdict-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 13px;
+    fill: var(--color-ink-950);
+  }
+  .visual-threshold__verdict-sub {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-ink-800);
+  }
+  .visual-threshold__verdict-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--color-amber-900);
+  }
+  .visual-threshold__footer {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+</style>

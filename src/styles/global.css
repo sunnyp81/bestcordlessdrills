@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Best Cordless Drills - design tokens ("Site Identity Record")
+   Ink/steel graphite chrome + flux amber accent + blueprint steel-blue.
+   Original to this site - do not copy from sibling portfolio builds.
+   ========================================================================== */
+@theme {
+  --font-heading: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Ink / steel - dark chrome (header, footer, hero bands) */
+  --color-ink-950: #16181C;
+  --color-ink-900: #22262B;
+  --color-ink-800: #2A2F36;
+  --color-steel-500: #4B535D;
+  --color-steel-300: #9AA3AD;
+
+  /* Surfaces - light body/article areas */
+  --color-paper: #F6F7F8;
+  --color-card: #FFFFFF;
+  --color-hairline: #E2E5E9;
+
+  /* Primary accent - flux amber */
+  --color-amber-700: #E4740E;
+  --color-amber-500: #F5900F;
+  --color-amber-300: #FFA92E;
+  /* Text-safe amber: amber-700 is only ~3:1 on white/paper (fails 4.5:1 AA
+     for text). Use amber-900 for amber text/icons/borders on light surfaces;
+     keep amber-500/700 for dark ink surfaces and non-text accents (SVG fills,
+     dividers) where they already pass. */
+  --color-amber-900: #A9560A;
+
+  /* Secondary - blueprint steel-blue */
+  --color-blueprint-600: #2F5D80;
+
+  /* Functional-only verdict semantics - never used decoratively */
+  --color-verdict-good: #0C7E61;
+  --color-verdict-caution: #C4531D;
+  --color-verdict-avoid: #B93A2B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* amber-900 clears 3:1 against paper/card (the light surfaces most focusable
+   elements sit on); amber-500 is reserved for the dark ink-950 header/footer
+   where it clears 7.5:1 and amber-900 would drop to ~3.4:1. */
+:focus-visible {
+  outline: 2px solid var(--color-amber-900);
+  outline-offset: 2px;
+}
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--color-amber-500);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink-900);
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-amber-500);
+  color: var(--color-ink-950);
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  border-radius: 2px;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* Numeric/spec figures always sit in Plex Mono with tabular alignment. */
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Fine hairline + blueprint tick-mark motif for section dividers.
+   Tasteful, used sparingly - not a literal ruler on every element. */
+.tick-divider {
+  position: relative;
+  height: 1px;
+  background: var(--color-hairline);
+}
+.tick-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-steel-300) 0,
+    var(--color-steel-300) 1px,
+    transparent 1px,
+    transparent 28px
+  );
+  opacity: 0.45;
+}
+
+/* Article body prose - always on paper/card surfaces, never dark-on-dark. */
+.prose-drills {
+  color: var(--color-ink-900);
+}
+.prose-drills h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-ink-950);
+  scroll-margin-top: 6rem;
+}
+@media (min-width: 768px) {
+  .prose-drills h2 { font-size: 1.875rem; }
+}
+.prose-drills h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-ink-950);
+}
+.prose-drills p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: var(--color-ink-800);
+}
+.prose-drills ul, .prose-drills ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  color: var(--color-ink-800);
+}
+.prose-drills ul { list-style: disc; }
+.prose-drills ol { list-style: decimal; }
+.prose-drills li { margin-bottom: 0.35rem; }
+.prose-drills a {
+  color: var(--color-amber-900);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-drills a:hover { color: var(--color-blueprint-600); }
+.prose-drills blockquote {
+  border-left: 3px solid var(--color-amber-500);
+  background: var(--color-paper);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-ink-800);
+}
+
+/* Motion: restrained, precise ease-out. No bounce, no spring. */
+.transition-precise {
+  transition-property: color, background-color, border-color, box-shadow, transform;
+  transition-duration: 160ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}

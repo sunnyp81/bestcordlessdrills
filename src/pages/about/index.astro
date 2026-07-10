@@ -1,0 +1,397 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import VerdictBadge from '../../components/VerdictBadge.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { aboutPageSchema, personSchema, breadcrumbSchema } from '../../lib/schema';
+
+const title = 'About Best Cordless Drills: How We Score Tools';
+const description = 'Meet Gareth Vaughan and see how Best Cordless Drills checks UK prices, warranty terms and owner reviews. No test lab, no invented claims.';
+
+const schema = [
+  aboutPageSchema({ name: title, description, url: '/about/' }),
+  personSchema(),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'About', url: '/about/' },
+  ]),
+];
+
+const methodologyColumns = [
+  { heading: 'What we look at' },
+  { heading: 'Source' },
+];
+const methodologyRows = [
+  { label: 'Spec sheet', values: ['Torque, no-load speed, chuck size, weight, voltage', 'Manufacturer datasheet'] },
+  { label: 'Live UK price', values: ['Current price and any live offer', 'Amazon UK, Screwfix, B&Q, Toolstation'] },
+  { label: 'Warranty term', values: ['Length, registration rules, exclusions', 'Retailer and manufacturer terms'] },
+  { label: 'Owner consensus', values: ['Recurring faults and satisfaction', 'Verified buyer reviews, DIY forums'] },
+];
+---
+<BaseLayout {title} {description} ogImage="/og/about.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'About', url: '/about/' }]} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Independent · UK · Research-led</p>
+      <h1 class="page__title">About Best Cordless Drills</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <p>Best Cordless Drills scores UK cordless drills, combi drills and impact drivers on price, warranty and battery platform data instead of lab tests.</p>
+
+      <p>The site compares retailer own-brand tool lines such as Erbauer, Mac Allister, Titan and Ozito against premium trade brands such as Makita, DeWalt, Bosch and Milwaukee. Every verdict traces back to a spec sheet, a live UK price and a warranty term a reader can check independently.</p>
+
+      <p>Gareth Vaughan writes and edits the site. He has 20+ years of hands-on DIY experience across two UK properties. He is not a qualified tradesperson. He runs no testing workshop.</p>
+
+      <p>This page covers what the site is, who writes it, how a verdict gets built, why there's no lab, how the affiliate links work and how often the content gets checked.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg" class="visual-flow">
+          <title id="chart-title-1">How Best Cordless Drills scores a cordless drill</title>
+          <desc id="chart-desc-1">A four-step research method used for every verdict on this site: check the manufacturer spec sheet, check the live UK retail price, check the warranty term, then read owner and DIY forum consensus. The four checks combine into one verdict of good, caution or avoid for a specific use case.</desc>
+          <rect class="visual-flow__bg" x="0" y="0" width="640" height="640" />
+          <text class="visual-flow__title" x="320" y="26" text-anchor="middle">How a verdict gets built</text>
+
+          <g class="visual-flow__node">
+            <rect x="80" y="46" width="480" height="66" rx="4" />
+            <circle cx="112" cy="79" r="14" class="visual-flow__num-bg" />
+            <text x="112" y="84" text-anchor="middle" class="visual-flow__num">1</text>
+            <text x="140" y="72" class="visual-flow__label">Spec sheet</text>
+            <text x="140" y="92" class="visual-flow__sub">Torque, no-load speed, chuck size, weight, voltage</text>
+          </g>
+          <line x1="320" y1="112" x2="320" y2="152" class="visual-flow__arrow" />
+          <polygon points="320,160 314,150 326,150" class="visual-flow__arrow-head" />
+
+          <g class="visual-flow__node">
+            <rect x="80" y="162" width="480" height="66" rx="4" />
+            <circle cx="112" cy="195" r="14" class="visual-flow__num-bg" />
+            <text x="112" y="200" text-anchor="middle" class="visual-flow__num">2</text>
+            <text x="140" y="188" class="visual-flow__label">Live UK price</text>
+            <text x="140" y="208" class="visual-flow__sub">Amazon UK, Screwfix, B&amp;Q, Toolstation, checked and dated</text>
+          </g>
+          <line x1="320" y1="228" x2="320" y2="268" class="visual-flow__arrow" />
+          <polygon points="320,276 314,266 326,266" class="visual-flow__arrow-head" />
+
+          <g class="visual-flow__node">
+            <rect x="80" y="278" width="480" height="66" rx="4" />
+            <circle cx="112" cy="311" r="14" class="visual-flow__num-bg" />
+            <text x="112" y="316" text-anchor="middle" class="visual-flow__num">3</text>
+            <text x="140" y="304" class="visual-flow__label">Warranty term</text>
+            <text x="140" y="324" class="visual-flow__sub">Length, registration rules, what's excluded</text>
+          </g>
+          <line x1="320" y1="344" x2="320" y2="384" class="visual-flow__arrow" />
+          <polygon points="320,392 314,382 326,382" class="visual-flow__arrow-head" />
+
+          <g class="visual-flow__node">
+            <rect x="80" y="394" width="480" height="66" rx="4" />
+            <circle cx="112" cy="427" r="14" class="visual-flow__num-bg" />
+            <text x="112" y="432" text-anchor="middle" class="visual-flow__num">4</text>
+            <text x="140" y="420" class="visual-flow__label">Owner and forum consensus</text>
+            <text x="140" y="440" class="visual-flow__sub">Verified buyer reviews, Screwfix Community Forum, DIYnot</text>
+          </g>
+          <line x1="320" y1="460" x2="320" y2="500" class="visual-flow__arrow visual-flow__arrow--accent" />
+          <polygon points="320,508 313,496 327,496" class="visual-flow__arrow-head visual-flow__arrow-head--accent" />
+
+          <g>
+            <rect x="80" y="510" width="480" height="100" rx="4" class="visual-flow__verdict-box" />
+            <text x="320" y="536" text-anchor="middle" class="visual-flow__verdict-label">One verdict</text>
+            <rect x="120" y="552" width="120" height="30" rx="3" class="visual-flow__swatch visual-flow__swatch--good" />
+            <text x="180" y="572" text-anchor="middle" class="visual-flow__swatch-text">Good</text>
+            <rect x="260" y="552" width="120" height="30" rx="3" class="visual-flow__swatch visual-flow__swatch--caution" />
+            <text x="320" y="572" text-anchor="middle" class="visual-flow__swatch-text">Caution</text>
+            <rect x="400" y="552" width="120" height="30" rx="3" class="visual-flow__swatch visual-flow__swatch--avoid" />
+            <text x="460" y="572" text-anchor="middle" class="visual-flow__swatch-text">Avoid</text>
+            <text x="320" y="598" text-anchor="middle" class="visual-flow__verdict-sub">Tied to a specific use case, not one "best drill" claim</text>
+          </g>
+        </svg>
+        <figcaption>The four checks Best Cordless Drills runs on every drill before it publishes a verdict.</figcaption>
+      </figure>
+
+      <h2 id="what-this-site-is">What this site is</h2>
+
+      <p>Best Cordless Drills is a UK buying guide for occasional-to-keen home DIYers who need to choose between a retailer own-brand drill and a premium trade brand.</p>
+
+      <p>Own-brand tool lines from Screwfix (Erbauer and Titan), B&amp;Q (Mac Allister) and Ozito have closed much of the spec gap with premium brands on paper. The real gap sits in warranty terms, battery platform lock-in and long-run reliability. None of that shows up on a spec sheet alone.</p>
+
+      <p>Best Cordless Drills reads the spec sheet, checks the live UK price and reads the warranty small print for both sides. It then weighs that against what real UK owners report in reviews and DIY forum threads.</p>
+
+      <p>The output is a verdict tied to a specific use case: occasional DIY, regular weekend projects, or masonry-heavy period-property work. It is never a single "best drill" claim that ignores what the reader actually needs.</p>
+
+      <h2 id="gareth-vaughan">Who's behind it: Gareth Vaughan</h2>
+
+      <p>Gareth Vaughan edits Best Cordless Drills and has done hands-on home DIY for 20+ years.</p>
+
+      <p>That experience spans two very different UK properties: a Victorian terrace with solid brick and lime mortar, and a 1990s new-build with stud walls and modern masonry. Gareth has drilled into most wall types a UK homeowner will meet, hung shelves, fitted a kitchen, built decking and worked through enough dead batteries and stripped screw heads to know where the cheap corners get cut on a tool.</p>
+
+      <p>Gareth is not a qualified tradesperson. He holds no NVQ, no City &amp; Guilds certificate and no trade membership. He does not fit kitchens or extensions for a living. That's stated plainly here because it matters: this site's authority comes from research method, not from a trade card.</p>
+
+      <p>The method is reading spec sheets accurately, checking warranty small print line by line, tracking live UK retail prices and cross-referencing owner reviews and forum threads until a consistent picture emerges. That's the skill this site sells, nothing more.</p>
+
+      <h2 id="how-we-research">How we research and score drills</h2>
+
+      <p>Every verdict on this site starts with the same four checks: spec sheet, price, warranty and owner consensus.</p>
+
+      <p>First, the spec sheet: torque in Nm, no-load speed, chuck size, weight and voltage. These figures come from the manufacturer's own published data, not a marketing summary. Second, live UK pricing: Amazon UK, Screwfix, B&amp;Q and Toolstation prices are checked and dated because a £129 drill on offer at £79 changes the verdict.</p>
+
+      <p>Third, the warranty term: length, whether it's a "register within 30 days" extension turning 1 year into 3, and what it actually excludes. Own-brand tools frequently carry shorter or more conditional cover than trade brands. Fourth, owner consensus: real UK buyer reviews on Amazon and retailer sites, plus DIY forum threads such as the Screwfix Community Forum and DIYnot. These get read for recurring complaints like chuck slip, battery degradation or trigger failure.</p>
+
+      <ComparisonTable
+        caption="How each verdict on this site gets built, check by check"
+        columns={methodologyColumns}
+        rows={methodologyRows}
+      />
+
+      <p>These four checks feed a single verdict, not four separate scores. A reader planning a weekend of shelf-hanging needs one clear answer, not four numbers to weigh up themselves.</p>
+
+      <div class="badge-row">
+        <VerdictBadge verdict="good" />
+        <VerdictBadge verdict="caution" />
+        <VerdictBadge verdict="avoid" />
+      </div>
+
+      <h2 id="no-lab">No workshop, no lab: why that's honesty, not a shortcut</h2>
+
+      <p>Best Cordless Drills runs no physical testing workshop. Gareth owns no lab and no test rig.</p>
+
+      <p>No drill on this site gets bench-tested for torque, drop resistance or battery-cycle life. That equipment does not exist here. This is a plain fact, not an apology.</p>
+
+      <p>Several rival buying-guide sites in this niche claim to have tested thousands of products. None show a workshop photo, a named reviewer or a test log. Best Cordless Drills makes no such claim because an unverifiable claim is a dishonest one.</p>
+
+      <p>Every verdict here comes from a spec sheet, a live UK price, a warranty term and owner reviews: the same sources a reader could check directly. That's a narrower claim than "we tested it ourselves." It's also one this site can actually back up.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" class="visual-honesty">
+          <title id="chart-title-2">No test workshop: sourced research instead of lab testing</title>
+          <desc id="chart-desc-2">Best Cordless Drills runs no physical testing workshop and does not bench-test drills for torque, drop resistance or battery life. Instead, every verdict is built from four checkable sources: the manufacturer spec sheet, the live UK retail price, the warranty terms and small print, and owner and forum reviews.</desc>
+          <rect class="visual-honesty__panel-a" x="0" y="0" width="640" height="200" />
+          <circle cx="95" cy="95" r="55" class="visual-honesty__no-circle" />
+          <rect x="90" y="65" width="10" height="12" class="visual-honesty__flask" />
+          <path d="M 85 77 L 70 115 L 120 115 L 105 77 Z" class="visual-honesty__flask" />
+          <line x1="56" y1="56" x2="134" y2="134" class="visual-honesty__strike" />
+          <text x="200" y="80" class="visual-honesty__heading">No workshop. No lab.</text>
+          <text x="200" y="112" class="visual-honesty__sub">No drill on this site is bench-tested for torque,</text>
+          <text x="200" y="134" class="visual-honesty__sub">drop resistance or battery-cycle life.</text>
+          <rect x="0" y="196" width="640" height="6" class="visual-honesty__divider" />
+          <rect x="0" y="202" width="640" height="258" class="visual-honesty__panel-b" />
+          <text x="40" y="245" class="visual-honesty__heading-b">Sourced research instead</text>
+          <rect x="40" y="264" width="24" height="24" rx="3" class="visual-honesty__tick-bg" />
+          <path d="M 46 277 L 51 282 L 60 270" class="visual-honesty__tick-mark" />
+          <text x="80" y="281" class="visual-honesty__row">Manufacturer spec sheet</text>
+          <rect x="40" y="308" width="24" height="24" rx="3" class="visual-honesty__tick-bg" />
+          <path d="M 46 321 L 51 326 L 60 314" class="visual-honesty__tick-mark" />
+          <text x="80" y="325" class="visual-honesty__row">Live UK retail price</text>
+          <rect x="40" y="352" width="24" height="24" rx="3" class="visual-honesty__tick-bg" />
+          <path d="M 46 365 L 51 370 L 60 358" class="visual-honesty__tick-mark" />
+          <text x="80" y="369" class="visual-honesty__row">Warranty terms and small print</text>
+          <rect x="40" y="396" width="24" height="24" rx="3" class="visual-honesty__tick-bg" />
+          <path d="M 46 409 L 51 414 L 60 402" class="visual-honesty__tick-mark" />
+          <text x="80" y="413" class="visual-honesty__row">Owner and forum reviews</text>
+          <text x="40" y="450" class="visual-honesty__footer">Every figure traces to a source a reader can check.</text>
+        </svg>
+        <figcaption>No test lab: every Best Cordless Drills verdict is built from four sources a reader can check directly.</figcaption>
+      </figure>
+
+      <h2 id="affiliate-links">How the affiliate links work</h2>
+
+      <Disclosure />
+
+      <p>Best Cordless Drills earns a small commission when a reader buys through an Amazon UK link on this site. That costs the reader nothing extra.</p>
+
+      <p>That commission never decides a verdict. A £24.99 Ozito drill can outscore a £149 premium-brand drill for a specific use case. That happens whenever the warranty and battery platform data point that way. Amazon Associates UK pays out on most items bought in that shopping session, not just the drill in the link. That's why it's disclosed here rather than left to small print.</p>
+
+      <p>Every outbound product link on this site carries a nofollow, sponsored tag. That matches Google's and the Advertising Standards Authority's disclosure rules.</p>
+
+      <h2 id="editorial-standards">Editorial standards and how often we update</h2>
+
+      <p>Best Cordless Drills corrects and re-dates a page whenever a price, spec or warranty term changes materially, not just once a year.</p>
+
+      <p>Cordless drill pricing moves fast. A £99.99 combi drill can be £69.99 during a bank holiday sale and back to full price a week later. That's why pages get re-checked on a schedule rather than left to go stale.</p>
+
+      <p>That matters in this niche because much of the existing content here was written around 2019 and hasn't been touched since. Prices, warranty terms and even discontinued model numbers are still sitting on page one of Google as a result.</p>
+
+      <p>Coverage grows the same way. Best Cordless Drills rebuilds its comparisons whenever own-brand ranges add or drop models. The line-up compared is always the current one, not the one from launch.</p>
+
+      <div class="tick-divider" aria-hidden="true"></div>
+
+      <h2 id="get-in-touch">Get in touch</h2>
+
+      <p>Spot a price, spec or warranty term that's changed since we last checked it? Email <a href="mailto:hello@bestcordlessdrills.uk">hello@bestcordlessdrills.uk</a> and it gets corrected.</p>
+
+      <p>That's the fastest way to flag an error. It's also how this site keeps its research honest: readers checking our numbers against their own receipt or retailer page.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.75rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+
+  /* Visual 1: how-a-verdict-gets-built flow */
+  .visual-flow__bg { fill: var(--color-paper); }
+  .visual-flow__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-flow__node rect {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-flow__num-bg { fill: var(--color-amber-500); }
+  .visual-flow__num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    fill: #fff;
+  }
+  .visual-flow__label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    fill: var(--color-ink-950);
+  }
+  .visual-flow__sub {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+  .visual-flow__arrow { stroke: var(--color-steel-300); stroke-width: 2; }
+  .visual-flow__arrow-head { fill: var(--color-steel-300); }
+  .visual-flow__arrow--accent { stroke: var(--color-amber-500); stroke-width: 2.5; }
+  .visual-flow__arrow-head--accent { fill: var(--color-amber-500); }
+  .visual-flow__verdict-box { fill: var(--color-ink-950); }
+  .visual-flow__verdict-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 15px;
+    fill: #fff;
+  }
+  .visual-flow__swatch-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    fill: #fff;
+    text-transform: uppercase;
+  }
+  .visual-flow__swatch--good { fill: var(--color-verdict-good); }
+  .visual-flow__swatch--caution { fill: var(--color-verdict-caution); }
+  .visual-flow__swatch--avoid { fill: var(--color-verdict-avoid); }
+  .visual-flow__verdict-sub {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    fill: var(--color-steel-300);
+  }
+
+  /* Visual 2: no-workshop honesty panel */
+  .visual-honesty__panel-a { fill: var(--color-ink-950); }
+  .visual-honesty__panel-b { fill: var(--color-card); }
+  .visual-honesty__divider { fill: var(--color-amber-500); }
+  .visual-honesty__no-circle {
+    fill: none;
+    stroke: var(--color-steel-300);
+    stroke-width: 3;
+  }
+  .visual-honesty__flask {
+    fill: none;
+    stroke: var(--color-steel-300);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+  }
+  .visual-honesty__strike {
+    stroke: var(--color-amber-500);
+    stroke-width: 6;
+    stroke-linecap: round;
+  }
+  .visual-honesty__heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    fill: #fff;
+  }
+  .visual-honesty__sub {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    fill: var(--color-steel-300);
+  }
+  .visual-honesty__heading-b {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 20px;
+    fill: var(--color-ink-950);
+  }
+  .visual-honesty__tick-bg { fill: var(--color-amber-500); }
+  .visual-honesty__tick-mark {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .visual-honesty__row {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 15px;
+    fill: var(--color-ink-900);
+  }
+  .visual-honesty__footer {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    fill: var(--color-steel-500);
+  }
+</style>

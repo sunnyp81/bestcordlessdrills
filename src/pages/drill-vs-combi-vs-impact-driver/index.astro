@@ -1,0 +1,410 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import FAQ from '../../components/FAQ.astro';
+import { faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
+import { buildAmazonLink, amazonSearchLink } from '../../lib/affiliate';
+
+const title = 'Drill vs Combi Drill vs Impact Driver: Which Do You Need?';
+const description = 'A combi drill drills brick with hammer action, a drill driver cannot, and an impact driver drives fasteners fast. See which UK DIY job needs which tool.';
+const pageUrl = '/drill-vs-combi-vs-impact-driver/';
+
+const faqs = [
+  {
+    q: 'Do I need a hammer drill for UK brick walls?',
+    a: "Yes. Solid brick or blockwork needs hammer, or percussion, action. That's standard on any combi drill. A plain drill driver has no hammer mode and cannot break through brick or mortar. It will skid on the surface or snap the bit.",
+  },
+  {
+    q: 'Cordless drill vs impact driver: which should I buy first?',
+    a: 'Buy a combi drill first. It covers drilling, driving and masonry in one tool. That combination handles most UK DIY jobs on its own. Add an impact driver later, once decking, fencing or bulk screw driving jobs start slowing down a plain drill.',
+  },
+  {
+    q: 'Can an impact driver drill holes?',
+    a: 'Only roughly. An impact driver can turn a drill bit, but its pulsing action makes a hole hard to start cleanly and hold steady, and it carries no hammer mode for masonry. Use a combi drill or drill driver for an actual hole.',
+  },
+];
+
+const matrixColumns = [
+  { heading: 'Right tool' },
+  { heading: 'Why' },
+];
+const matrixRows = [
+  {
+    label: 'Flat-pack furniture',
+    values: ['Drill driver, or a combi drill on a low torque setting', 'Needs control and a low clutch stop, not raw power'],
+  },
+  {
+    label: 'Shelves and curtain rails',
+    values: ['Drill driver or combi drill', 'No hammer action needed unless the fixing continues into brick behind'],
+  },
+  {
+    label: 'UK brick or masonry walls',
+    values: ['Combi drill, hammer mode on', 'Only percussion action breaks brick and mortar cleanly'],
+  },
+  {
+    label: 'Decking and fence panel fixings',
+    values: ['Impact driver', 'High torque and fast, repetitive driving matter more here than fine control'],
+  },
+  {
+    label: 'General screw driving',
+    values: ['Impact driver for speed, or a drill driver on a low clutch for delicate work', 'Impact driver resists stalling on long screws under bulk fastening'],
+  },
+];
+
+const schema = [
+  itemListSchema({
+    name: 'Task to tool matrix: cordless drill, combi drill and impact driver',
+    url: pageUrl,
+    items: matrixRows.map((r, i) => ({ name: `${r.label}: ${r.values[0]}`, url: `${pageUrl}#task-to-tool-matrix`, position: i + 1 })),
+  }),
+  faqSchema(faqs),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Drill vs Combi vs Impact Driver', url: pageUrl },
+  ]),
+];
+---
+<BaseLayout {title} {description} canonical={`https://bestcordlessdrills.uk${pageUrl}`} ogImage="/og/drill-vs-combi-vs-impact-driver.png" {schema}>
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Drill vs Combi vs Impact Driver', url: pageUrl }]} />
+
+    <header class="page__header">
+      <p class="page__eyebrow">Decision tool · UK DIY · No hype, no test lab</p>
+      <h1 class="page__title">Drill vs combi drill vs impact driver: which one do you actually need?</h1>
+    </header>
+
+    <div class="tick-divider" aria-hidden="true"></div>
+
+    <div class="prose-drills">
+      <h2 id="quick-answer">The quick answer</h2>
+
+      <p>A drill driver spins a chuck to bore holes and drive screws. It has no hammer action, so it cannot break through brick or masonry.</p>
+
+      <p>A combi drill does everything a drill driver does, plus a hammer, or percussion, mode. Flip that mode on and the chuck spins and thrusts forward at the same time. That action breaks up brick and mortar.</p>
+
+      <p>An impact driver works on a different mechanism again. Instead of a steady spin, a spring-loaded hammer strikes the drive shaft rotationally, hundreds of times a minute. That delivers far higher torque for driving fasteners, but it makes a poor substitute for actually drilling a hole.</p>
+
+      <p>The torque numbers show the gap clearly. A typical 18V combi drill delivers 50 to 65 Nm through a continuous twist. A compact impact driver delivers 100 Nm or more through pulses. That output sinks a 100mm decking screw in seconds without stalling or camming out.</p>
+
+      <p>Choose by task, not by name. Flat-pack furniture and shelving want control, not raw power. Brick walls want hammer action. Decking and fence panels want fastening speed. This is a decision tool, not a single "best drill" verdict: the matrix below maps five common UK DIY jobs to the right tool.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" class="visual-mech">
+          <title id="chart-title-1">Three different drive mechanisms: drill driver, combi drill and impact driver</title>
+          <desc id="chart-desc-1">A drill driver spins its chuck continuously with no hammer action, suited to softwood, plasterboard and light metal. A combi drill adds a hammer, or percussion, stroke on top of the spin, delivering 50 to 65 Nm and breaking through brick and mortar. An impact driver replaces the continuous spin with rapid rotational impacts, delivering 100 Nm or more for driving fasteners, but it has no hammer mode and drills a hole poorly.</desc>
+          <rect class="visual-mech__bg" x="0" y="0" width="640" height="400" />
+          <text class="visual-mech__title" x="320" y="26" text-anchor="middle">How the three mechanisms differ</text>
+
+          <g>
+            <rect class="visual-mech__panel" x="14" y="46" width="196" height="330" rx="4" />
+            <text class="visual-mech__name" x="112" y="76" text-anchor="middle">Drill driver</text>
+            <circle class="visual-mech__chuck visual-mech__chuck--driver" cx="112" cy="150" r="40" />
+            <path class="visual-mech__arrow visual-mech__arrow--driver" d="M 112 110 A 40 40 0 1 1 80 128" />
+            <polygon class="visual-mech__arrowhead visual-mech__arrowhead--driver" points="80,128 76,114 92,120" />
+            <text class="visual-mech__torque" x="112" y="222" text-anchor="middle">No hammer mode</text>
+            <text class="visual-mech__note" x="112" y="252" text-anchor="middle">Continuous spin only</text>
+            <text class="visual-mech__note" x="112" y="272" text-anchor="middle">Softwood, plasterboard,</text>
+            <text class="visual-mech__note" x="112" y="290" text-anchor="middle">light metal</text>
+            <text class="visual-mech__note" x="112" y="340" text-anchor="middle">Cannot drill brick</text>
+          </g>
+
+          <g>
+            <rect class="visual-mech__panel" x="222" y="46" width="196" height="330" rx="4" />
+            <text class="visual-mech__name" x="320" y="76" text-anchor="middle">Combi drill</text>
+            <circle class="visual-mech__chuck visual-mech__chuck--combi" cx="320" cy="150" r="40" />
+            <path class="visual-mech__arrow visual-mech__arrow--combi" d="M 320 110 A 40 40 0 1 1 288 128" />
+            <polygon class="visual-mech__arrowhead visual-mech__arrowhead--combi" points="288,128 284,114 300,120" />
+            <line class="visual-mech__tick" x1="320" y1="96" x2="320" y2="86" />
+            <line class="visual-mech__tick" x1="352" y1="118" x2="360" y2="112" />
+            <line class="visual-mech__tick" x1="352" y1="182" x2="360" y2="188" />
+            <text class="visual-mech__torque" x="320" y="222" text-anchor="middle">50 to 65 Nm</text>
+            <text class="visual-mech__note" x="320" y="252" text-anchor="middle">Spin plus hammer strokes</text>
+            <text class="visual-mech__note" x="320" y="272" text-anchor="middle">Wood, metal and</text>
+            <text class="visual-mech__note" x="320" y="290" text-anchor="middle">brick or mortar</text>
+            <text class="visual-mech__note visual-mech__note--accent" x="320" y="340" text-anchor="middle">Covers all five tasks below</text>
+          </g>
+
+          <g>
+            <rect class="visual-mech__panel" x="430" y="46" width="196" height="330" rx="4" />
+            <text class="visual-mech__name" x="528" y="76" text-anchor="middle">Impact driver</text>
+            <polygon class="visual-mech__burst" points="528,110 536,138 528,150 520,138" />
+            <polygon class="visual-mech__burst" points="528,190 536,162 528,150 520,162" />
+            <polygon class="visual-mech__burst" points="492,150 520,142 528,150 520,158" />
+            <polygon class="visual-mech__burst" points="564,150 536,142 528,150 536,158" />
+            <circle class="visual-mech__chuck visual-mech__chuck--impact" cx="528" cy="150" r="18" />
+            <text class="visual-mech__torque" x="528" y="222" text-anchor="middle">100 Nm and up</text>
+            <text class="visual-mech__note" x="528" y="252" text-anchor="middle">Rotational impact pulses</text>
+            <text class="visual-mech__note" x="528" y="272" text-anchor="middle">Decking, fencing,</text>
+            <text class="visual-mech__note" x="528" y="290" text-anchor="middle">bulk screw driving</text>
+            <text class="visual-mech__note" x="528" y="340" text-anchor="middle">Poor at drilling holes</text>
+          </g>
+        </svg>
+        <figcaption>Same job category, three different mechanisms: continuous spin, spin plus hammer, or rotational impact pulses.</figcaption>
+      </figure>
+
+      <h2 id="naming">What each tool actually does (and the naming confusion, sorted)</h2>
+
+      <p>"Drill driver" and "combi drill" get used as if they're the same thing, and retailer listings don't always help. Here's the actual distinction, tool by tool.</p>
+
+      <h3 id="drill-driver">Drill driver</h3>
+
+      <p>A drill driver spins one chuck at a constant speed, in drilling mode or screwdriving mode. It has no third, hammer setting.</p>
+
+      <p>Dropping the hammer mechanism cuts weight and price. A drill driver handles softwood, plasterboard, plastic and light metal without trouble.</p>
+
+      <p>A drill driver cannot break through brick, block or mortar. Push one against a brick wall and the bit rides the surface or snaps.</p>
+
+      <h3 id="combi-drill">Combi drill</h3>
+
+      <p>A combi drill is a drill driver with a third mode added: hammer action, also called percussion mode.</p>
+
+      <p>Flip the collar to the hammer symbol and the chuck spins and thrusts forward in short strokes, thousands of times a minute. That combined spin-and-strike motion breaks up brick and mortar joints.</p>
+
+      <p>Most 18V combi drills deliver 50 to 65 Nm and weigh 1.5 to 2.2kg with a battery fitted, barely more than a drill driver in the same range. A combi drill covers every drill driver task plus masonry. That's why most UK retailers now sell the combi version as standard and the plain drill driver as the cut-price sibling. See our full picks in <a href="/best-combi-drill/">our best combi drill guide</a>.</p>
+
+      <h3 id="impact-driver">Impact driver</h3>
+
+      <p>An impact driver looks similar from across a room. The mechanism inside is not a scaled-up drill: a spring-loaded hammer and anvil strike the drive shaft rotationally, in short bursts, instead of spinning it continuously.</p>
+
+      <p>That mechanism delivers far higher torque: 100 Nm and up, against a combi drill's 50 to 65 Nm. The pulses also cut kickback in the user's wrist because the force never arrives as one steady twist.</p>
+
+      <p>An impact driver drives screws and bolts fast. It is a poor tool for boring a hole: the pulsing action makes a hole hard to start cleanly. It also carries no hammer or masonry mode at all.</p>
+
+      <p>Impact driver and impact wrench are not the same tool either. The names get mixed up often enough to matter. An impact wrench uses a square drive built for wheel nuts and heavy structural bolts, in automotive and trade work, not woodworking or general DIY fixings. Everything on this page refers to the impact driver, the smaller quarter-inch hex-drive tool sold alongside combi drills.</p>
+
+      <h2 id="task-to-tool-matrix">Which tool for which job: the task-to-tool matrix</h2>
+
+      <p>Each of these five everyday UK DIY tasks calls for a specific tool, not whichever one is closest to hand.</p>
+
+      <ComparisonTable
+        caption="Match the job in front of you to the right tool, not the other way round"
+        columns={matrixColumns}
+        rows={matrixRows}
+      />
+
+      <p>Control and speed sit at opposite ends of this list. A drill driver, or a low clutch setting, protects a delicate fixing from overdriving. An impact driver trades that fine control for speed and stall-free torque on bulk fastening jobs.</p>
+
+      <p>A clutch is the numbered dial behind the chuck on a drill driver or combi drill. It limits how much torque reaches the screw before the drive slips. That stops a flat-pack cam-lock fixing or a thin batten screw from being overdriven and stripped.</p>
+
+      <p>An impact driver carries no clutch at all. Its output is either full pulse or nothing. That's exactly why it suits bulk fastening into decking or fence rails rather than a delicate flat-pack panel.</p>
+
+      <figure class="content-visual">
+        <svg role="img" aria-labelledby="chart-title-2 chart-desc-2" viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" class="visual-matrix">
+          <title id="chart-title-2">Five UK DIY tasks mapped to the right cordless tool</title>
+          <desc id="chart-desc-2">Flat-pack furniture and shelves or curtain rails call for a drill driver or a combi drill on a low torque setting, because they need control rather than power. UK brick or masonry walls call for a combi drill with hammer mode on, because only percussion action breaks brick and mortar. Decking and fence panel fixings, and fast general screw driving, call for an impact driver, because high torque and speed matter more than fine control.</desc>
+          <rect class="visual-matrix__bg" x="0" y="0" width="640" height="380" />
+          <text class="visual-matrix__title" x="320" y="26" text-anchor="middle">Five tasks, three tools</text>
+
+          <g>
+            <rect class="visual-matrix__row" x="24" y="46" width="592" height="46" rx="3" />
+            <text class="visual-matrix__task" x="40" y="74">Flat-pack furniture</text>
+            <rect class="visual-matrix__pill visual-matrix__pill--driver" x="420" y="55" width="176" height="28" rx="3" />
+            <text class="visual-matrix__pill-text" x="508" y="74" text-anchor="middle">Drill driver</text>
+          </g>
+
+          <g>
+            <rect class="visual-matrix__row" x="24" y="100" width="592" height="46" rx="3" />
+            <text class="visual-matrix__task" x="40" y="128">Shelves and curtain rails</text>
+            <rect class="visual-matrix__pill visual-matrix__pill--driver" x="420" y="109" width="176" height="28" rx="3" />
+            <text class="visual-matrix__pill-text" x="508" y="128" text-anchor="middle">Drill driver</text>
+          </g>
+
+          <g>
+            <rect class="visual-matrix__row visual-matrix__row--accent" x="24" y="154" width="592" height="46" rx="3" />
+            <text class="visual-matrix__task" x="40" y="182">UK brick or masonry walls</text>
+            <rect class="visual-matrix__pill visual-matrix__pill--combi" x="420" y="163" width="176" height="28" rx="3" />
+            <text class="visual-matrix__pill-text" x="508" y="182" text-anchor="middle">Combi drill, hammer on</text>
+          </g>
+
+          <g>
+            <rect class="visual-matrix__row" x="24" y="208" width="592" height="46" rx="3" />
+            <text class="visual-matrix__task" x="40" y="236">Decking and fence panels</text>
+            <rect class="visual-matrix__pill visual-matrix__pill--impact" x="420" y="217" width="176" height="28" rx="3" />
+            <text class="visual-matrix__pill-text" x="508" y="236" text-anchor="middle">Impact driver</text>
+          </g>
+
+          <g>
+            <rect class="visual-matrix__row" x="24" y="262" width="592" height="46" rx="3" />
+            <text class="visual-matrix__task" x="40" y="290">General screw driving</text>
+            <rect class="visual-matrix__pill visual-matrix__pill--impact" x="420" y="271" width="176" height="28" rx="3" />
+            <text class="visual-matrix__pill-text" x="508" y="290" text-anchor="middle">Impact driver</text>
+          </g>
+
+          <text class="visual-matrix__footer" x="320" y="340" text-anchor="middle">Match the job to the mechanism, not the tool with the most Nm on the box.</text>
+        </svg>
+        <figcaption>The task-to-tool matrix at a glance: only one row needs hammer action.</figcaption>
+      </figure>
+
+      <h2 id="brick-and-masonry">Drilling into UK brick and masonry: what actually changes</h2>
+
+      <p>UK brick and blockwork need a hammer, or percussion, setting. A plain drill driver will not break through fletton brick or a mortar joint, however hard it's pushed.</p>
+
+      <p>Most UK house brick, common fletton brick and the mortar joints between courses are soft enough for a combi drill's hammer mode paired with a matching masonry bit. Screwfix and B&amp;Q both sell combi drills pitched at exactly this job.</p>
+
+      <p>Harder material changes the tool needed. Engineering brick, dense concrete lintels and reinforced concrete want an SDS drill, a heavier tool built around a different chuck and a stronger hammer mechanism than any combi drill carries. That's outside the scope of this page and covered in <a href="/hammer-drill-for-masonry/">our masonry drilling guide</a>.</p>
+
+      <p>So which one do you actually need for the wall in front of you? For a standard UK house wall, fletton or common brick, block, or a mortar joint, a combi drill's hammer mode is enough. Step up to SDS only for engineering brick or structural concrete.</p>
+
+      <h2 id="one-real-example">One real example of each tool</h2>
+
+      <Disclosure compact={true} />
+
+      <p>One real model from each category makes the difference concrete rather than abstract.</p>
+
+      <p>The <a href={buildAmazonLink('B0F5WZQ12C')} rel="nofollow sponsored noopener noreferrer" target="_blank">DeWalt DCD796N 18V XR Brushless Compact Combi Drill</a> (body only, around £65) delivers 70 Nm through a two-speed motor and carries a dedicated hammer mode. It copes with flat-pack, shelving and brick walls in one tool.</p>
+
+      <p>Other 18V combi drills follow the same pattern. The <a href={buildAmazonLink('B01LYXFYLB')} rel="nofollow sponsored noopener noreferrer" target="_blank">Makita DHP484Z LXT</a> (body only, £53 to £65) delivers up to 65 Nm with a 3-year warranty on 30-day registration, and the <a href={buildAmazonLink('B084GSNQLY')} rel="nofollow sponsored noopener noreferrer" target="_blank">Bosch GSB 18V-55 Professional</a> (2x5.0Ah kit, £149.99) adds a metal Röhm chuck rated to 55 Nm. Both carry a hammer mode as standard, because on a combi drill, hammer action isn't an upgrade: it's the whole point of the "combi" name.</p>
+
+      <p>A plain <a href={amazonSearchLink('18V drill driver no hammer action')} rel="nofollow sponsored noopener noreferrer" target="_blank">18V drill driver</a> from the same premium ranges drops the hammer mechanism entirely and typically undercuts its combi sibling by £15 to £25.</p>
+
+      <p>An <a href={amazonSearchLink('18V impact driver')} rel="nofollow sponsored noopener noreferrer" target="_blank">18V impact driver</a>, DeWalt, Makita and Bosch all sell one, trades the masonry mode for 100 Nm-plus of pulsed fastening torque, built for decking, fencing and bulk screw driving.</p>
+
+      <p>Check the battery platform before buying any of the three. A combi drill, drill driver and impact driver from the same manufacturer's range usually share one battery. A second or third tool from that range then costs less than starting a new platform from scratch. See <a href="/battery-platforms-explained/">how battery platforms work</a> before committing to a brand.</p>
+
+      <div class="tick-divider" aria-hidden="true"></div>
+
+      <FAQ faqs={faqs} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .page__header {
+    padding: 0.5rem 0 2rem;
+  }
+  .page__eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+    margin-bottom: 0.75rem;
+  }
+  .page__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.18;
+    color: var(--color-ink-950);
+  }
+  @media (min-width: 768px) {
+    .page__title { font-size: 2.5rem; }
+  }
+  .prose-drills {
+    padding-top: 2rem;
+  }
+  .content-visual {
+    margin: 2rem 0;
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    background: var(--color-card);
+    padding: 1rem 1rem 0.85rem;
+  }
+  .content-visual svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .content-visual figcaption {
+    margin-top: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+    text-align: center;
+  }
+
+  /* Visual 1: three-mechanisms comparison */
+  .visual-mech__bg { fill: var(--color-paper); }
+  .visual-mech__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-mech__panel {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-mech__name {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 15px;
+    fill: var(--color-ink-950);
+  }
+  .visual-mech__chuck {
+    fill: none;
+    stroke-width: 3;
+  }
+  .visual-mech__chuck--driver { stroke: var(--color-steel-500); }
+  .visual-mech__chuck--combi { stroke: var(--color-amber-500); }
+  .visual-mech__chuck--impact { fill: var(--color-blueprint-600); stroke: none; }
+  .visual-mech__arrow {
+    fill: none;
+    stroke-width: 3;
+  }
+  .visual-mech__arrow--driver { stroke: var(--color-steel-500); }
+  .visual-mech__arrow--combi { stroke: var(--color-amber-500); }
+  .visual-mech__arrowhead--driver { fill: var(--color-steel-500); }
+  .visual-mech__arrowhead--combi { fill: var(--color-amber-500); }
+  .visual-mech__tick {
+    stroke: var(--color-amber-500);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .visual-mech__burst { fill: var(--color-blueprint-600); }
+  .visual-mech__torque {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 14px;
+    fill: var(--color-ink-950);
+  }
+  .visual-mech__note {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    fill: var(--color-steel-500);
+  }
+  .visual-mech__note--accent { fill: var(--color-amber-900); font-weight: 600; }
+
+  /* Visual 2: task-to-tool matrix */
+  .visual-matrix__bg { fill: var(--color-paper); }
+  .visual-matrix__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    fill: var(--color-ink-950);
+  }
+  .visual-matrix__row {
+    fill: var(--color-card);
+    stroke: var(--color-hairline);
+    stroke-width: 1;
+  }
+  .visual-matrix__row--accent { stroke: var(--color-amber-500); stroke-width: 1.5; }
+  .visual-matrix__task {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    fill: var(--color-ink-900);
+  }
+  .visual-matrix__pill { }
+  .visual-matrix__pill--driver { fill: var(--color-steel-500); }
+  .visual-matrix__pill--combi { fill: var(--color-amber-500); }
+  .visual-matrix__pill--impact { fill: var(--color-blueprint-600); }
+  .visual-matrix__pill-text {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    fill: #fff;
+    text-transform: uppercase;
+  }
+  .visual-matrix__footer {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-steel-500);
+  }
+</style>

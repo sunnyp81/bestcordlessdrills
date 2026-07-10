@@ -1,0 +1,120 @@
+---
+// "The Spec Ledger" - instrument-plate spec panel with a verdict rail.
+// Recurring layout signature used across product/comparison pages.
+interface DrillSpec {
+  name: string;
+  torqueNm: number;
+  voltage: number;
+  weightKg: number;
+  chuckSizeMm: number;
+  priceGBP: number;
+  warrantyYears: number;
+  batteryPlatform: string;
+}
+type Verdict = 'good' | 'caution' | 'avoid';
+interface Props {
+  spec: DrillSpec;
+  verdict: Verdict;
+  verdictLabel?: string;
+}
+const { spec, verdict, verdictLabel } = Astro.props as Props;
+const DEFAULT_LABEL: Record<Verdict, string> = {
+  good: 'Recommended',
+  caution: 'Caution',
+  avoid: 'Avoid',
+};
+const rows: { label: string; value: string }[] = [
+  { label: 'Torque', value: `${spec.torqueNm} Nm` },
+  { label: 'Voltage', value: `${spec.voltage} V` },
+  { label: 'Weight', value: `${spec.weightKg} kg` },
+  { label: 'Chuck size', value: `${spec.chuckSizeMm} mm` },
+  { label: 'UK price', value: `£${spec.priceGBP.toFixed(2)}` },
+  { label: 'Warranty', value: `${spec.warrantyYears} yr` },
+  { label: 'Battery platform', value: spec.batteryPlatform },
+];
+---
+<div class="spec-panel" data-verdict={verdict}>
+  <div class="spec-panel__body">
+    <p class="spec-panel__name">{spec.name}</p>
+    <dl class="spec-panel__grid">
+      {rows.map((r) => (
+        <div class="spec-panel__row">
+          <dt>{r.label}</dt>
+          <dd class="figure">{r.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+  <div class="spec-panel__rail" role="img" aria-label={`Verdict: ${verdictLabel ?? DEFAULT_LABEL[verdict]}`}>
+    <span class="spec-panel__rail-label">{verdictLabel ?? DEFAULT_LABEL[verdict]}</span>
+  </div>
+</div>
+
+<style>
+  .spec-panel {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 22px;
+    background: var(--color-card);
+    border: 1px solid var(--color-hairline);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .spec-panel__body {
+    padding: 1.25rem 1.5rem 1.5rem;
+  }
+  .spec-panel__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-ink-950);
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .spec-panel__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.15rem 1.5rem;
+    margin: 0;
+  }
+  .spec-panel__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed var(--color-hairline);
+  }
+  .spec-panel__row dt {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-500);
+    font-family: var(--font-sans);
+  }
+  .spec-panel__row dd {
+    margin: 0;
+    font-weight: 500;
+    color: var(--color-ink-900);
+    font-size: 0.95rem;
+  }
+  .spec-panel__rail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spec-panel__rail-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+    white-space: nowrap;
+  }
+  .spec-panel[data-verdict="good"] .spec-panel__rail { background: var(--color-verdict-good); }
+  .spec-panel[data-verdict="caution"] .spec-panel__rail { background: var(--color-verdict-caution); }
+  .spec-panel[data-verdict="avoid"] .spec-panel__rail { background: var(--color-verdict-avoid); }
+</style>

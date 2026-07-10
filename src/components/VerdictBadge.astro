@@ -1,0 +1,55 @@
+---
+// Flat, small-radius, text-forward tag. NOT a rounded "sticker" pill with offset shadow.
+type Verdict = 'good' | 'caution' | 'avoid';
+interface Props { verdict: Verdict; label?: string; }
+const { verdict, label } = Astro.props as Props;
+const DEFAULT_LABEL: Record<Verdict, string> = {
+  good: 'Recommended',
+  caution: 'Caution',
+  avoid: 'Avoid',
+};
+const text = label ?? DEFAULT_LABEL[verdict];
+---
+<span class="verdict-badge" data-verdict={verdict}>
+  <span class="verdict-badge__dot" aria-hidden="true"></span>{text}
+</span>
+
+<style>
+  .verdict-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    padding: 0.2rem 0.55rem;
+    line-height: 1;
+  }
+  .verdict-badge__dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .verdict-badge[data-verdict="good"] {
+    color: var(--color-verdict-good);
+    border: 1px solid var(--color-verdict-good);
+    background: color-mix(in srgb, var(--color-verdict-good) 10%, transparent);
+  }
+  .verdict-badge[data-verdict="good"] .verdict-badge__dot { background: var(--color-verdict-good); }
+  .verdict-badge[data-verdict="caution"] {
+    color: var(--color-verdict-caution);
+    border: 1px solid var(--color-verdict-caution);
+    background: color-mix(in srgb, var(--color-verdict-caution) 10%, transparent);
+  }
+  .verdict-badge[data-verdict="caution"] .verdict-badge__dot { background: var(--color-verdict-caution); }
+  .verdict-badge[data-verdict="avoid"] {
+    color: var(--color-verdict-avoid);
+    border: 1px solid var(--color-verdict-avoid);
+    background: color-mix(in srgb, var(--color-verdict-avoid) 10%, transparent);
+  }
+  .verdict-badge[data-verdict="avoid"] .verdict-badge__dot { background: var(--color-verdict-avoid); }
+</style>

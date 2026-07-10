@@ -1,0 +1,48 @@
+---
+interface Props { faqs: { q: string; a: string }[]; heading?: string; }
+const { faqs, heading = 'Frequently asked questions' } = Astro.props as Props;
+---
+{faqs.length > 0 && (
+  <section class="faq mt-16">
+    <h2 class="text-2xl md:text-3xl font-bold mb-6" style="color: var(--color-ink-950); font-family: var(--font-heading);">{heading}</h2>
+    <div class="faq__list" style="border: 1px solid var(--color-hairline); border-radius: 4px; background: var(--color-card);">
+      {faqs.map((f, i) => (
+        <details class="faq__item" style={i > 0 ? 'border-top: 1px solid var(--color-hairline);' : ''}>
+          <summary class="faq__summary">
+            <span>{f.q}</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq-answer" set:html={f.a} />
+        </details>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .faq__item { padding: 1.1rem 1.25rem; }
+  .faq__summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--color-ink-950);
+  }
+  .faq__summary::-webkit-details-marker { display: none; }
+  .faq__icon {
+    color: var(--color-amber-900);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 160ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  details[open] .faq__icon { transform: rotate(45deg); }
+  .faq-answer {
+    margin-top: 0.75rem;
+    color: var(--color-ink-800);
+    line-height: 1.7;
+  }
+</style>

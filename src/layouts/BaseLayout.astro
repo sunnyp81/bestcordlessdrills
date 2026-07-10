@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SchemaJsonLd from '../components/SchemaJsonLd.astro';
+import { organizationSchema, websiteSchema, speakableSchema } from '../lib/schema';
+import { SITE } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  noindex?: boolean;
+  ogImage?: string;
+  schema?: unknown[];
+}
+const {
+  title,
+  description,
+  canonical,
+  noindex = false,
+  ogImage = '/og/default.png',
+  schema = [],
+} = Astro.props as Props;
+
+const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+const allSchema = [organizationSchema(), websiteSchema(), speakableSchema(url), ...schema].filter(Boolean);
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={url} />
+  {noindex && <meta name="robots" content="noindex,follow" />}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={url} />
+  <meta property="og:image" content={new URL(ogImage, SITE.url).toString()} />
+  <meta property="og:locale" content={SITE.locale} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <SchemaJsonLd data={allSchema as Record<string, unknown>[]} />
+  <slot name="head" />
+
+  <!-- [MANUAL: Sunny] Replace G-PLACEHOLDER000 with the real GA4 measurement ID once a property is created for bestcordlessdrills.uk -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLACEHOLDER000"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PLACEHOLDER000');
+  </script>
+</head>
+<body>
+  <Header />
+  <main id="main-content">
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

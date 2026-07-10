@@ -143,22 +143,93 @@ const schema = [
     </div>
   </div>
   <div class="page">
+    <section class="toppicks" aria-labelledby="tp-heading">
+      <div class="toppicks__head">
+        <h2 id="tp-heading" class="toppicks__title">The picks, at a glance</h2>
+        <p class="toppicks__sub">Four combi drills that cover most UK home DIY. Prices and specs checked July 2026. Full write-ups and the master table sit below.</p>
+      </div>
+      <div class="toppicks__grid">
+        <a class="tpcard tpcard--featured" href="#best-overall">
+          <span class="tpcard__rank">Best overall</span>
+          <span class="tpcard__name">DeWalt DCD796N</span>
+          <span class="tpcard__figure figure">70<span class="tpcard__unit">Nm</span></span>
+          <span class="tpcard__price figure">£65 body &middot; £110 kit</span>
+          <span class="tpcard__why">Strongest torque here and the widest battery platform. The safe first drill.</span>
+          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
+        </a>
+        <a class="tpcard" href="#best-budget">
+          <span class="tpcard__rank">Best value</span>
+          <span class="tpcard__name">Titan TTI1257COM</span>
+          <span class="tpcard__figure figure">50<span class="tpcard__unit">Nm</span></span>
+          <span class="tpcard__price figure">£79.99</span>
+          <span class="tpcard__why">Half the price of premium, a real 2-year guarantee, no registration step.</span>
+          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
+        </a>
+        <a class="tpcard" href="#best-combi">
+          <span class="tpcard__rank">Best for masonry</span>
+          <span class="tpcard__name">Bosch GSB 18V-55</span>
+          <span class="tpcard__figure figure">55<span class="tpcard__unit">Nm</span></span>
+          <span class="tpcard__price figure">£149.99</span>
+          <span class="tpcard__why">Metal chuck built for repeated hammer use on solid brick and lime mortar.</span>
+          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
+        </a>
+        <a class="tpcard" href="#best-occasional">
+          <span class="tpcard__rank">Cheapest pick</span>
+          <span class="tpcard__name">Mac Allister MCD18-Li-2</span>
+          <span class="tpcard__figure figure">£60</span>
+          <span class="tpcard__price figure">torque not published</span>
+          <span class="tpcard__why">The lowest price here, if you only drill a few times a year.</span>
+          <span class="tpcard__foot"><VerdictBadge verdict="caution" label="Spec gap" /><span class="tpcard__link">See the pick &darr;</span></span>
+        </a>
+      </div>
+    </section>
+
     <div class="prose-drills">
-      <p>The right pick depends on how often you will use it, what walls you are drilling into and which battery platform you can already borrow from, not one best drill that suits everyone.</p>
-
-      <p>Best Cordless Drills UK compares retailer own-brand combi drills, Erbauer and Titan at Screwfix, Mac Allister at B&amp;Q, Ozito, and the Aldi and Lidl special-buys Ferrex and Parkside, against established premium brands including Makita, DeWalt, Bosch, Milwaukee and Ryobi. Every comparison runs on real UK retail prices, published warranty terms and owner reviews, not a physical test bench.</p>
-
-      <p>Own-brand torque figures have closed much of the paper gap with premium tools over the past few years. What still separates the two tiers is warranty small print, how far a battery platform stretches across other tools you might buy later, and how a drill holds up after two years of Saturday jobs. That is what the picks and the master comparison table below actually weigh up.</p>
+      <p>Every pick below is compared on real UK retail prices, published warranty terms and owner reviews, not a physical test bench. The right one depends on how often you will use it, what walls you are drilling into and which battery platform you can already borrow from, not one best drill that suits everyone.</p>
 
       <Disclosure />
 
-      <h2 id="how-we-score">How we score every cordless drill</h2>
+      <h2 id="top-picks">The picks in full</h2>
 
-      <p>Every verdict on this site starts with the same four checks: the manufacturer spec sheet, a live UK retail price, the warranty term and owner or forum consensus. No drill here gets bench-tested for torque, drop resistance or battery-cycle life, because Best Cordless Drills runs no physical testing workshop. That is stated plainly rather than buried in small print: a lab-test claim is one this site could not back up, so it does not make one.</p>
+      <p>The four picks in full below. Each links through to the deeper comparison for its category rather than repeating everything here.</p>
 
-      <p>Instead, every figure traces back to a source a reader can check directly. Torque, no-load speed and chuck size come from the manufacturer's own published data. Prices are checked against Amazon UK, Screwfix, B&amp;Q and Toolstation and dated, because a £129 drill on a bank holiday offer at £79 changes the maths. Warranty terms get read line by line for length, registration rules and what is excluded, since own-brand tools often carry shorter or more conditional cover than trade brands. See the full method on the <a href="/about/">about page</a>.</p>
+      <div class="pick">
+        <h3 id="best-overall">Best overall: DeWalt DCD796N 18V XR Brushless Combi Drill</h3>
+        <p>The DeWalt DCD796N is the drill most UK reviewers and forum threads point a first-time buyer toward. Its 70 Nm max torque and two-speed, 15-position clutch handle everything from flat-pack screws to masonry drilling without strain. DeWalt's XR 18V platform also runs across more tools than any other premium range sold in the UK. £65.10 buys the body-only tool for existing XR battery owners. Buyers starting from scratch should budget £109.99 for the kit version with one 4.0Ah battery and a charger included. Register within 30 days and the warranty runs to 3 years; skip that step and it defaults to 1.</p>
+        <SpecPanel spec={dewaltSpec} verdict="good" />
+        <p class="pick__actions"><a href={dewaltLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
+      </div>
 
-      <p>Use case decides which tier of drill actually earns its price. The diagram below matches three common UK DIY situations to the tier worth paying for.</p>
+      <div class="pick">
+        <h3 id="best-budget">Best budget and own-brand value: Titan TTI1257COM 18V TXP Combi Drill</h3>
+        <p>Titan is one of Screwfix's two own ranges. The other is Erbauer, not a Toolstation brand: Toolstation carries no house tool line and resells trade brands instead. The TTI1257COM delivers a genuine 50 Nm and weighs 1.8kg with its battery fitted. It costs £79.99 with a 2-year manufacturer guarantee that needs no registration step. That is roughly half of what a premium combi drill costs for a tool that will comfortably outlast an occasional-to-regular DIY workload.</p>
+        <SpecPanel spec={titanSpec} verdict="good" />
+        <p class="pick__actions"><a href={titanLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-budget/">Read the full budget drill guide</a></p>
+      </div>
+
+      <div class="pick">
+        <h3 id="best-combi">Best combi drill for masonry and period-property brick: Bosch GSB 18V-55 Professional</h3>
+        <p>Bosch's GSB 18V-55 Professional pairs a 55 Nm max torque with a metal Röhm chuck built for repeated hammer-action use. That matters on the solid brick and lime mortar found in older UK properties. The current 2×5.0Ah kit costs £149.99, down from a £199.99 list price at the time of writing. Register within 30 days for 3 years' cover on the tool and 2 on the battery and charger; default cover is 1 year. Weight runs from 1.1 to 1.7kg depending on which battery you fit; the figure below is for the heavier 5.0Ah kit.</p>
+        <SpecPanel spec={boschSpec} verdict="good" />
+        <p class="pick__actions"><a href={boschLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
+      </div>
+
+      <div class="pick">
+        <h3 id="best-occasional">Best for occasional DIY: Mac Allister MCD18-Li-2 18V Combi Drill</h3>
+        <p>B&amp;Q's Mac Allister MCD18-Li-2 is the cheapest drill on this page at £60, down from an £80 list price. It comes with a 2-year warranty and a 2×2.0Ah battery kit included. Unusually for this price point, B&amp;Q does not publish a torque or body weight figure for this model. We could not confirm either figure against a manufacturer datasheet, so treat that gap as a known unknown rather than a fault. For someone hanging a handful of pictures and shelves a year, that gap matters less than the price.</p>
+        <div class="mini-facts" data-verdict="caution">
+          <p class="mini-facts__name">Mac Allister MCD18-Li-2 18V Combi Drill <VerdictBadge verdict="caution" label="Torque/weight unpublished" /></p>
+          <dl class="mini-facts__grid">
+            <div class="mini-facts__row"><dt>UK price</dt><dd class="figure">£60 (was £80)</dd></div>
+            <div class="mini-facts__row"><dt>Chuck</dt><dd class="figure">13mm keyless</dd></div>
+            <div class="mini-facts__row"><dt>Battery kit</dt><dd class="figure">2×2.0Ah</dd></div>
+            <div class="mini-facts__row"><dt>Warranty</dt><dd class="figure">2yr, no registration</dd></div>
+            <div class="mini-facts__row"><dt>Battery platform</dt><dd class="figure">Mac Allister 18V</dd></div>
+            <div class="mini-facts__row"><dt>Torque / weight</dt><dd class="figure">Not published by B&amp;Q</dd></div>
+          </dl>
+        </div>
+        <p class="pick__actions"><a href={macAllisterLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/own-brand-vs-premium/">Read own-brand vs premium</a></p>
+      </div>
 
       <figure class="content-visual">
         <svg role="img" aria-labelledby="chart-title-1 chart-desc-1" viewBox="0 0 640 460" xmlns="http://www.w3.org/2000/svg" class="visual-decision">
@@ -206,52 +277,10 @@ const schema = [
             <text x="360" y="354" class="visual-decision__sub visual-decision__sub--light">Bosch, DeWalt or Makita</text>
           </g>
 
-          <text x="320" y="430" text-anchor="middle" class="visual-decision__footer">Matched to the top picks below</text>
+          <text x="320" y="430" text-anchor="middle" class="visual-decision__footer">Matched to the four picks above</text>
         </svg>
         <figcaption>Which cordless drill tier fits occasional, regular and masonry-heavy UK DIY use cases.</figcaption>
       </figure>
-
-      <h2 id="top-picks">Best cordless drills UK: top picks for every kind of DIYer</h2>
-
-      <p>Four picks cover most UK home DIY situations. Each links through to the full comparison for its category rather than repeating a full review here.</p>
-
-      <div class="pick">
-        <h3 id="best-overall">Best overall: DeWalt DCD796N 18V XR Brushless Combi Drill</h3>
-        <p>The DeWalt DCD796N is the drill most UK reviewers and forum threads point a first-time buyer toward. Its 70 Nm max torque and two-speed, 15-position clutch handle everything from flat-pack screws to masonry drilling without strain. DeWalt's XR 18V platform also runs across more tools than any other premium range sold in the UK. £65.10 buys the body-only tool for existing XR battery owners. Buyers starting from scratch should budget £109.99 for the kit version with one 4.0Ah battery and a charger included. Register within 30 days and the warranty runs to 3 years; skip that step and it defaults to 1.</p>
-        <SpecPanel spec={dewaltSpec} verdict="good" />
-        <p class="pick__actions"><a href={dewaltLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
-      </div>
-
-      <div class="pick">
-        <h3 id="best-budget">Best budget and own-brand value: Titan TTI1257COM 18V TXP Combi Drill</h3>
-        <p>Titan is one of Screwfix's two own ranges. The other is Erbauer, not a Toolstation brand: Toolstation carries no house tool line and resells trade brands instead. The TTI1257COM delivers a genuine 50 Nm and weighs 1.8kg with its battery fitted. It costs £79.99 with a 2-year manufacturer guarantee that needs no registration step. That is roughly half of what a premium combi drill costs for a tool that will comfortably outlast an occasional-to-regular DIY workload.</p>
-        <SpecPanel spec={titanSpec} verdict="good" />
-        <p class="pick__actions"><a href={titanLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-budget/">Read the full budget drill guide</a></p>
-      </div>
-
-      <div class="pick">
-        <h3 id="best-combi">Best combi drill for masonry and period-property brick: Bosch GSB 18V-55 Professional</h3>
-        <p>Bosch's GSB 18V-55 Professional pairs a 55 Nm max torque with a metal Röhm chuck built for repeated hammer-action use. That matters on the solid brick and lime mortar found in older UK properties. The current 2×5.0Ah kit costs £149.99, down from a £199.99 list price at the time of writing. Register within 30 days for 3 years' cover on the tool and 2 on the battery and charger; default cover is 1 year. Weight runs from 1.1 to 1.7kg depending on which battery you fit; the figure below is for the heavier 5.0Ah kit.</p>
-        <SpecPanel spec={boschSpec} verdict="good" />
-        <p class="pick__actions"><a href={boschLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
-      </div>
-
-      <div class="pick">
-        <h3 id="best-occasional">Best for occasional DIY: Mac Allister MCD18-Li-2 18V Combi Drill</h3>
-        <p>B&amp;Q's Mac Allister MCD18-Li-2 is the cheapest drill on this page at £60, down from an £80 list price. It comes with a 2-year warranty and a 2×2.0Ah battery kit included. Unusually for this price point, B&amp;Q does not publish a torque or body weight figure for this model. We could not confirm either figure against a manufacturer datasheet, so treat that gap as a known unknown rather than a fault. For someone hanging a handful of pictures and shelves a year, that gap matters less than the price.</p>
-        <div class="mini-facts" data-verdict="caution">
-          <p class="mini-facts__name">Mac Allister MCD18-Li-2 18V Combi Drill <VerdictBadge verdict="caution" label="Torque/weight unpublished" /></p>
-          <dl class="mini-facts__grid">
-            <div class="mini-facts__row"><dt>UK price</dt><dd class="figure">£60 (was £80)</dd></div>
-            <div class="mini-facts__row"><dt>Chuck</dt><dd class="figure">13mm keyless</dd></div>
-            <div class="mini-facts__row"><dt>Battery kit</dt><dd class="figure">2×2.0Ah</dd></div>
-            <div class="mini-facts__row"><dt>Warranty</dt><dd class="figure">2yr, no registration</dd></div>
-            <div class="mini-facts__row"><dt>Battery platform</dt><dd class="figure">Mac Allister 18V</dd></div>
-            <div class="mini-facts__row"><dt>Torque / weight</dt><dd class="figure">Not published by B&amp;Q</dd></div>
-          </dl>
-        </div>
-        <p class="pick__actions"><a href={macAllisterLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/own-brand-vs-premium/">Read own-brand vs premium</a></p>
-      </div>
 
       <h2 id="master-comparison">Own-brand vs premium: the master comparison</h2>
 
@@ -309,6 +338,12 @@ const schema = [
 
       <p>See the full breakdown of which UK job needs which tool on <a href="/drill-vs-combi-vs-impact-driver/">Drill vs Combi Drill vs Impact Driver</a>. Battery platform lock-in matters just as much once you own more than one cordless tool, and that question gets its own guide below.</p>
 
+      <h2 id="how-we-score">How we score every cordless drill</h2>
+
+      <p>Every verdict on this site starts with the same four checks: the manufacturer spec sheet, a live UK retail price, the warranty term and owner or forum consensus. No drill here gets bench-tested for torque, drop resistance or battery-cycle life, because Best Cordless Drills runs no physical testing workshop. That is stated plainly rather than buried in small print: a lab-test claim is one this site could not back up, so it does not make one.</p>
+
+      <p>Instead, every figure traces back to a source a reader can check directly. Torque, no-load speed and chuck size come from the manufacturer's own published data. Prices are checked against Amazon UK, Screwfix, B&amp;Q and Toolstation and dated, because a £129 drill on a bank holiday offer at £79 changes the maths. Warranty terms get read line by line for length, registration rules and what is excluded, since own-brand tools often carry shorter or more conditional cover than trade brands. See the full method on the <a href="/about/">about page</a>.</p>
+
       <div class="tick-divider" aria-hidden="true"></div>
 
       <h2 id="go-deeper">Go deeper: guides, hubs and the glossary</h2>
@@ -348,6 +383,121 @@ const schema = [
   .prose-drills {
     padding-top: 0.5rem;
   }
+
+  /* Top picks band - the immediate answer, directly under the hero. */
+  .toppicks {
+    margin: 0 0 2.75rem;
+  }
+  .toppicks__head {
+    margin-bottom: 1.15rem;
+  }
+  .toppicks__title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.1;
+    color: var(--color-ink-950);
+    margin: 0 0 0.4rem;
+  }
+  .toppicks__sub {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-steel-500);
+    max-width: 42rem;
+  }
+  .toppicks__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .toppicks__grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1000px) {
+    .toppicks__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .tpcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.15rem 1.2rem 1.2rem;
+    border: 1px solid var(--color-hairline);
+    border-radius: 6px;
+    background: var(--color-card);
+    text-decoration: none;
+    transition-property: transform, border-color, box-shadow;
+    transition-duration: 160ms;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  }
+  .tpcard:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-amber-500);
+    box-shadow: 0 12px 24px -14px rgba(22, 24, 28, 0.4);
+  }
+  .tpcard--featured {
+    background: var(--color-ink-950);
+    border-color: var(--color-ink-950);
+    box-shadow: 0 12px 28px -12px rgba(22, 24, 28, 0.45);
+  }
+  .tpcard__rank {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-amber-900);
+  }
+  .tpcard--featured .tpcard__rank { color: var(--color-amber-300); }
+  .tpcard__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.02rem;
+    line-height: 1.2;
+    color: var(--color-ink-950);
+  }
+  .tpcard--featured .tpcard__name { color: #fff; }
+  .tpcard__figure {
+    font-size: 2.1rem;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-amber-900);
+    margin-top: 0.1rem;
+  }
+  .tpcard--featured .tpcard__figure { color: var(--color-amber-300); }
+  .tpcard__unit {
+    font-size: 0.95rem;
+    margin-left: 0.12rem;
+  }
+  .tpcard__price {
+    font-size: 0.8rem;
+    color: var(--color-steel-500);
+  }
+  .tpcard--featured .tpcard__price { color: var(--color-steel-300); }
+  .tpcard__why {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--color-ink-800);
+    flex-grow: 1;
+  }
+  .tpcard--featured .tpcard__why { color: var(--color-steel-300); }
+  .tpcard__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-top: 0.35rem;
+    flex-wrap: wrap;
+  }
+  .tpcard__link {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: var(--color-amber-900);
+    white-space: nowrap;
+  }
+  .tpcard--featured .tpcard__link { color: var(--color-amber-300); }
+  .tpcard:hover .tpcard__link { text-decoration: underline; text-underline-offset: 2px; }
 
   .pick {
     margin: 2rem 0 2.5rem;

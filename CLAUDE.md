@@ -10,13 +10,16 @@ Brand: **Best Cordless Drills**. UK cordless-drill and power-tool buying guide f
 
 Astro 5 + Tailwind 4, static output, self-hosted fonts (Space Grotesk / IBM Plex Sans / IBM Plex Mono via fontsource), Satori-generated OG images (build-time, `scripts/generate-og.mjs`), no server/API routes.
 
-## Design state (2026-07-10, after 2 fix passes)
+## Design state (2026-07-10, after 3 fix passes)
 
-Sunny twice called the first build "bland, flavourless". Two follow-up passes:
+Sunny twice called the first build "bland, flavourless". Three follow-up passes:
 1. Chrome fix (commit `de6677e`, all 7 pages + shared components): full-bleed dark `.hero-band` (dot-grid + amber glow) on every page, page shell widened 44rem->58rem, `SpecPanel.astro` rebuilt as a dark instrument plate with an amber headline figure, `VerdictBadge.astro` switched to solid-fill.
-2. Picks-first restructure (commit `49879de`, **homepage `/` ONLY so far**): a `.toppicks` "picks at a glance" card band directly under the hero (1 dark featured card + 3 light, Spec Ledger mono figures + verdict badges + jump links); intro trimmed to one line; "how we score" methodology moved from top to foot of page; use-case decision diagram moved next to the picks. Content reordered, not rewritten.
+2. Picks-first restructure (commit `49879de`, homepage `/` only): a `.toppicks` "picks at a glance" card band directly under the hero (1 dark featured card + 3 light, Spec Ledger mono figures + verdict badges + jump links); intro trimmed to one line; "how we score" methodology moved from top to foot of page; use-case decision diagram moved next to the picks. Content reordered, not rewritten.
+3. Answer-first band rollout (commit `de2c6b9`, **committed locally, NOT pushed/deployed yet** as of this session): extracted the picks band into a reusable `src/components/TopPicks.astro` (2-4 cols via `--tp-cols`, per-page `picks[]` prop), refactored `index.astro` to use it (byte-identical output, ~110 lines of scoped CSS removed), and added a band adapted per page type to all 5 remaining product pages — `best-budget`/`best-combi-drill` (4 ranked cards), `drill-vs-combi-vs-impact-driver` (3 tool-chooser cards), `own-brand-vs-premium`/`makita-vs-ozito` (2-card verdict). **`/about/` deliberately left with no band** (trust/method page, no product answer). No prose or product-data changes; jump links verified to resolve to real on-page anchors.
 
-⚠️ **The other 6 pages still have the old methodology-first / buried-answer order** — they have NOT had the picks-first treatment yet (was paused for Sunny to judge the homepage first). If rolling it out, replicate the `.toppicks` pattern from `src/pages/index.astro`. Nothing this session was ever *visually* verified rendered — browser screenshot tooling was dead all session; verification was DOM inspection + live-HTML source order only.
+Correction to the earlier note: on reading them, the "other 6 pages" were NOT methodology-first — every one already led with an answer-first hero lede and kept methodology at the foot. What they lacked was only the scannable card band, which is what pass 3 added. To reuse the band on a new page: import `TopPicks`, define a `picks[]` const, drop `<TopPicks heading sub picks>` right after `<Breadcrumbs>`.
+
+⚠️ **Still not pixel-verified.** Browser screenshot/read_page tooling times out on every page (`document_idle` never fires) — root cause is the `G-PLACEHOLDER000` GA4 script in `BaseLayout.astro` blocking page-idle. Verification this session was: clean `npm run build`, structural HTML checks (band present on 6 pages, all jump-link anchors resolve), and CSS identical to the already-live homepage band. Swapping in a real GA4 ID should also unblock the browser tooling.
 
 ## Content status
 
@@ -34,7 +37,8 @@ All 7 wave-1 pages live, each passed `/semantic-audit` >=85: `/` (91), `/own-bra
 - Cloudflare Pages project: `bestcordlessdrills` (sunnypat81 account, `aba0a6722a4510842ca473315a8ba13e`). Deploy: `npm run build && npx wrangler pages deploy dist --project-name bestcordlessdrills --commit-dirty=true`.
 - **Live URL right now: https://bestcordlessdrills.pages.dev/** — this is the real, current, working site.
 - **Custom domain bestcordlessdrills.uk is NOT yet attached.** `bestcordlessdrills.uk` is not a zone in the sunnypat81 Cloudflare account, and the wrangler OAuth token available this session lacked zone-create permission. **[MANUAL: Sunny]** needs to either confirm the domain's current registrar/nameserver state and point it at Cloudflare, or supply a token with zone-create scope, then the custom domain can be attached to the Pages project in a few minutes.
-- GA4 is wired in `BaseLayout.astro` with placeholder ID `G-PLACEHOLDER000` — **[MANUAL: Sunny]** create a real GA4 property and swap it in.
+- GA4 is wired in `BaseLayout.astro` with placeholder ID `G-PLACEHOLDER000` — **[MANUAL: Sunny]** create a real GA4 property and swap it in. (This placeholder also breaks claude-in-chrome screenshot/read_page — see Design state.)
+- ⚠️ **Amazon Associates tag is `chainsaw0f6-21` in `src/lib/affiliate.ts` — this is bestchainsaw's tracking ID, copy-pasted into this build.** Convention is a per-site tag (`cthome-21`, `thebestmowers-21`). Commissions still land in Sunny's account but report under the wrong site. **Sunny decided 2026-07-10 to leave it as-is for now** rather than swap in an unverified new tag that would earn nothing until created in Associates. Do NOT "fix" it without Sunny giving the correct existing tracking ID. (The growth-plan's mention of `chainsaw0f6-21` reflects this known issue, not a correct value.)
 
 ## Technical SEO
 

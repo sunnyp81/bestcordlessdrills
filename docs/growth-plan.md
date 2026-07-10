@@ -24,7 +24,8 @@ Enrol **4 weeks after the custom domain actually goes live** (not from this buil
 
 ## 4. Monetisation activation milestones
 
-- Amazon Associates UK links are already live (tag `chainsaw0f6-21`), using only 4 confirmed-real ASINs (Makita B01LYXFYLB, DeWalt B0F5WZQ12C, Bosch B084GSNQLY, Ryobi B07YT5HGH3) plus search-tag links for every unconfirmed product. **[MANUAL: Sunny]** click-verify the unconfirmed products before they've been live long, and swap in confirmed ASINs where found.
+- Amazon Associates UK links are already live using only 4 confirmed-real ASINs (Makita B01LYXFYLB, DeWalt B0F5WZQ12C, Bosch B084GSNQLY, Ryobi B07YT5HGH3) plus search-tag links for every unconfirmed product. **[MANUAL: Sunny]** click-verify the unconfirmed products before they've been live long, and swap in confirmed ASINs where found.
+- ⚠️ **Tracking tag is `chainsaw0f6-21` (bestchainsaw's ID, not this site's) — Sunny chose 2026-07-10 to leave it for now.** Attribution reports under the wrong site until Sunny supplies the correct per-site tracking ID for `src/lib/affiliate.ts`. See repo brain Deploy section.
 - No ad network application until a real, stable traffic threshold exists (per portfolio rule: no premature AdSense). Ezoic has no minimum, so it can be evaluated first once traffic exists; Mediavine needs ~50k sessions/mo, well beyond the 12-month horizon in the dossier.
 - First-£ checkpoint: track first Amazon Associates commission event as the go/no-go signal that the arithmetic in the dossier is holding.
 

@@ -6,6 +6,7 @@ import VerdictBadge from '../../components/VerdictBadge.astro';
 import SpecPanel from '../../components/SpecPanel.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import FAQ from '../../components/FAQ.astro';
+import TopPicks from '../../components/TopPicks.astro';
 import { itemListSchema, productSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 import { amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
 
@@ -98,6 +99,13 @@ const titanSpec = {
   warrantyYears: 2,
   batteryPlatform: 'Titan TXP',
 };
+
+const budgetPicks = [
+  { rank: '1 · Best value', name: 'Titan TTI1257COM', figure: '50', unit: 'Nm', price: '£79.99 · 2yr guarantee', why: 'The only budget pick with every spec confirmed. Complete kit, no registration step.', verdict: 'good' as const, verdictLabel: 'Best value pick', href: '#titan-tti1257com', featured: true },
+  { rank: '2 · Cheapest kit', name: 'Mac Allister MCD18-Li-2', figure: '£60', price: 'torque not published', why: "Cheapest complete kit here, though B&Q publishes no torque figure.", verdict: 'good' as const, verdictLabel: 'Cheapest kit, decent', href: '#mac-allister-mcd18-li-2' },
+  { rank: '3 · If you own Ozito', name: 'Ozito PXBHS', figure: '40', unit: 'Nm', price: '~£75 bare tool', why: 'Undercuts Titan only if you already own Ozito PXC batteries. Verify the warranty.', verdict: 'caution' as const, verdictLabel: 'Bare tool, verify warranty', href: '#ozito-pxbhs' },
+  { rank: '4 · Stretch pick', name: 'Erbauer ERI1107COM', figure: '£159.99', price: 'above the budget line', why: "Screwfix's higher-spec own-brand with a 2×5.0Ah kit, but torque is unverified.", verdict: 'caution' as const, verdictLabel: 'Above budget, verify specs', href: '#erbauer-eri1107com' },
+];
 ---
 <BaseLayout {title} {description} ogImage="/og/best-budget.png" {schema}>
   <div class="hero-band hero-band--page">
@@ -109,6 +117,12 @@ const titanSpec = {
   </div>
   <div class="page">
     <Breadcrumbs items={breadcrumbItems} />
+
+    <TopPicks
+      heading="The budget ranking, at a glance"
+      sub="Four own-brand and value combi drills, ranked on confirmed specs. Prices checked July 2026. Full write-ups below."
+      picks={budgetPicks}
+    />
 
     <div class="prose-drills">
       <p>Screwfix's own Mac Allister MCD18-Li-2 costs less at £60, but B&amp;Q has not published a torque or weight figure for it, which is why the Titan takes the top spot: it is the only budget-tier drill in this guide with every spec confirmed.</p>

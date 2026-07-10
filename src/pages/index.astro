@@ -4,6 +4,7 @@ import Disclosure from '../components/Disclosure.astro';
 import SpecPanel from '../components/SpecPanel.astro';
 import ComparisonTable from '../components/ComparisonTable.astro';
 import VerdictBadge from '../components/VerdictBadge.astro';
+import TopPicks from '../components/TopPicks.astro';
 import FAQ from '../components/FAQ.astro';
 import { itemListSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
 import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../lib/affiliate';
@@ -133,6 +134,13 @@ const schema = [
   faqSchema(schemaFaqs),
   breadcrumbSchema([{ name: 'Home', url: '/' }]),
 ];
+
+const homePicks = [
+  { rank: 'Best overall', name: 'DeWalt DCD796N', figure: '70', unit: 'Nm', price: '£65 body · £110 kit', why: 'Strongest torque here and the widest battery platform. The safe first drill.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-overall', featured: true },
+  { rank: 'Best value', name: 'Titan TTI1257COM', figure: '50', unit: 'Nm', price: '£79.99', why: 'Half the price of premium, a real 2-year guarantee, no registration step.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-budget' },
+  { rank: 'Best for masonry', name: 'Bosch GSB 18V-55', figure: '55', unit: 'Nm', price: '£149.99', why: 'Metal chuck built for repeated hammer use on solid brick and lime mortar.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-combi' },
+  { rank: 'Cheapest pick', name: 'Mac Allister MCD18-Li-2', figure: '£60', price: 'torque not published', why: 'The lowest price here, if you only drill a few times a year.', verdict: 'caution' as const, verdictLabel: 'Spec gap', href: '#best-occasional' },
+];
 ---
 <BaseLayout {title} {description} {schema}>
   <div class="hero-band">
@@ -143,46 +151,11 @@ const schema = [
     </div>
   </div>
   <div class="page">
-    <section class="toppicks" aria-labelledby="tp-heading">
-      <div class="toppicks__head">
-        <h2 id="tp-heading" class="toppicks__title">The picks, at a glance</h2>
-        <p class="toppicks__sub">Four combi drills that cover most UK home DIY. Prices and specs checked July 2026. Full write-ups and the master table sit below.</p>
-      </div>
-      <div class="toppicks__grid">
-        <a class="tpcard tpcard--featured" href="#best-overall">
-          <span class="tpcard__rank">Best overall</span>
-          <span class="tpcard__name">DeWalt DCD796N</span>
-          <span class="tpcard__figure figure">70<span class="tpcard__unit">Nm</span></span>
-          <span class="tpcard__price figure">£65 body &middot; £110 kit</span>
-          <span class="tpcard__why">Strongest torque here and the widest battery platform. The safe first drill.</span>
-          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
-        </a>
-        <a class="tpcard" href="#best-budget">
-          <span class="tpcard__rank">Best value</span>
-          <span class="tpcard__name">Titan TTI1257COM</span>
-          <span class="tpcard__figure figure">50<span class="tpcard__unit">Nm</span></span>
-          <span class="tpcard__price figure">£79.99</span>
-          <span class="tpcard__why">Half the price of premium, a real 2-year guarantee, no registration step.</span>
-          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
-        </a>
-        <a class="tpcard" href="#best-combi">
-          <span class="tpcard__rank">Best for masonry</span>
-          <span class="tpcard__name">Bosch GSB 18V-55</span>
-          <span class="tpcard__figure figure">55<span class="tpcard__unit">Nm</span></span>
-          <span class="tpcard__price figure">£149.99</span>
-          <span class="tpcard__why">Metal chuck built for repeated hammer use on solid brick and lime mortar.</span>
-          <span class="tpcard__foot"><VerdictBadge verdict="good" label="Recommended" /><span class="tpcard__link">See the pick &darr;</span></span>
-        </a>
-        <a class="tpcard" href="#best-occasional">
-          <span class="tpcard__rank">Cheapest pick</span>
-          <span class="tpcard__name">Mac Allister MCD18-Li-2</span>
-          <span class="tpcard__figure figure">£60</span>
-          <span class="tpcard__price figure">torque not published</span>
-          <span class="tpcard__why">The lowest price here, if you only drill a few times a year.</span>
-          <span class="tpcard__foot"><VerdictBadge verdict="caution" label="Spec gap" /><span class="tpcard__link">See the pick &darr;</span></span>
-        </a>
-      </div>
-    </section>
+    <TopPicks
+      heading="The picks, at a glance"
+      sub="Four combi drills that cover most UK home DIY. Prices and specs checked July 2026. Full write-ups and the master table sit below."
+      picks={homePicks}
+    />
 
     <div class="prose-drills">
       <p>Every pick below is compared on real UK retail prices, published warranty terms and owner reviews, not a physical test bench. The right one depends on how often you will use it, what walls you are drilling into and which battery platform you can already borrow from, not one best drill that suits everyone.</p>
@@ -383,121 +356,6 @@ const schema = [
   .prose-drills {
     padding-top: 0.5rem;
   }
-
-  /* Top picks band - the immediate answer, directly under the hero. */
-  .toppicks {
-    margin: 0 0 2.75rem;
-  }
-  .toppicks__head {
-    margin-bottom: 1.15rem;
-  }
-  .toppicks__title {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.6rem;
-    line-height: 1.1;
-    color: var(--color-ink-950);
-    margin: 0 0 0.4rem;
-  }
-  .toppicks__sub {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: var(--color-steel-500);
-    max-width: 42rem;
-  }
-  .toppicks__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  @media (min-width: 640px) {
-    .toppicks__grid { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1000px) {
-    .toppicks__grid { grid-template-columns: repeat(4, 1fr); }
-  }
-  .tpcard {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.15rem 1.2rem 1.2rem;
-    border: 1px solid var(--color-hairline);
-    border-radius: 6px;
-    background: var(--color-card);
-    text-decoration: none;
-    transition-property: transform, border-color, box-shadow;
-    transition-duration: 160ms;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-  }
-  .tpcard:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-amber-500);
-    box-shadow: 0 12px 24px -14px rgba(22, 24, 28, 0.4);
-  }
-  .tpcard--featured {
-    background: var(--color-ink-950);
-    border-color: var(--color-ink-950);
-    box-shadow: 0 12px 28px -12px rgba(22, 24, 28, 0.45);
-  }
-  .tpcard__rank {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--color-amber-900);
-  }
-  .tpcard--featured .tpcard__rank { color: var(--color-amber-300); }
-  .tpcard__name {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.02rem;
-    line-height: 1.2;
-    color: var(--color-ink-950);
-  }
-  .tpcard--featured .tpcard__name { color: #fff; }
-  .tpcard__figure {
-    font-size: 2.1rem;
-    font-weight: 500;
-    line-height: 1;
-    color: var(--color-amber-900);
-    margin-top: 0.1rem;
-  }
-  .tpcard--featured .tpcard__figure { color: var(--color-amber-300); }
-  .tpcard__unit {
-    font-size: 0.95rem;
-    margin-left: 0.12rem;
-  }
-  .tpcard__price {
-    font-size: 0.8rem;
-    color: var(--color-steel-500);
-  }
-  .tpcard--featured .tpcard__price { color: var(--color-steel-300); }
-  .tpcard__why {
-    font-size: 0.86rem;
-    line-height: 1.45;
-    color: var(--color-ink-800);
-    flex-grow: 1;
-  }
-  .tpcard--featured .tpcard__why { color: var(--color-steel-300); }
-  .tpcard__foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem;
-    margin-top: 0.35rem;
-    flex-wrap: wrap;
-  }
-  .tpcard__link {
-    font-family: var(--font-mono);
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    color: var(--color-amber-900);
-    white-space: nowrap;
-  }
-  .tpcard--featured .tpcard__link { color: var(--color-amber-300); }
-  .tpcard:hover .tpcard__link { text-decoration: underline; text-underline-offset: 2px; }
 
   .pick {
     margin: 2rem 0 2.5rem;

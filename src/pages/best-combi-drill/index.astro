@@ -6,6 +6,7 @@ import SpecPanel from '../../components/SpecPanel.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import VerdictBadge from '../../components/VerdictBadge.astro';
 import FAQ from '../../components/FAQ.astro';
+import TopPicks from '../../components/TopPicks.astro';
 import { itemListSchema, productSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
 
@@ -129,6 +130,13 @@ const schema = [
   }),
   faqSchema(faqs),
 ];
+
+const combiPicks = [
+  { rank: 'Best overall', name: 'DeWalt DCD796N', figure: '70', unit: 'Nm', price: '£65 body · £110 kit', why: 'Highest torque here on the widely stocked XR platform. The safe pick if you own no batteries yet.', verdict: 'good' as const, verdictLabel: 'Best overall', href: '#dewalt-dcd796n', featured: true },
+  { rank: 'Best if you own Makita', name: 'Makita DHP484Z', figure: '65', unit: 'Nm', price: '£53-65 body-only', why: 'Buy body-only once you already run Makita LXT batteries for another tool.', verdict: 'good' as const, verdictLabel: 'Best if you own Makita', href: '#makita-dhp484z' },
+  { rank: 'Best for masonry', name: 'Bosch GSB 18V-55', figure: '55', unit: 'Nm', price: '£149.99 kit', why: 'Metal Röhm chuck built for repeated hammer use on solid brick and lime mortar.', verdict: 'good' as const, verdictLabel: 'Good masonry pick', href: '#bosch-gsb-18v-55' },
+  { rank: 'Best value', name: 'Titan TTI1257COM', figure: '50', unit: 'Nm', price: '£79.99 kit', why: 'A real 50 Nm and a 2-year guarantee for under £80, batteries in the box.', verdict: 'good' as const, verdictLabel: 'Best value', href: '#titan-tti1257com' },
+];
 ---
 <BaseLayout {title} {description} ogImage="/og/best-combi-drill.png" {schema}>
   <div class="hero-band hero-band--page">
@@ -140,6 +148,12 @@ const schema = [
   </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Best Combi Drill', url: '/best-combi-drill/' }]} />
+
+    <TopPicks
+      heading="The top picks, at a glance"
+      sub="The four combi drills worth most buyers' attention, from a 9-drill ranking. Full list and the master table sit below."
+      picks={combiPicks}
+    />
 
     <div class="prose-drills">
       <p>Buyers who already own Makita or Bosch batteries get equally masonry-capable performance from the Makita DHP484Z or Bosch GSB 18V-55 Professional instead. Buyers working to a tighter budget get real hammer-drill capability from Screwfix's own Titan TTI1257COM for under £80.</p>

@@ -5,6 +5,7 @@ import Disclosure from '../../components/Disclosure.astro';
 import VerdictBadge from '../../components/VerdictBadge.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import FAQ from '../../components/FAQ.astro';
+import TopPicks from '../../components/TopPicks.astro';
 import { breadcrumbSchema, faqSchema, itemListSchema } from '../../lib/schema';
 import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
 
@@ -92,6 +93,11 @@ const schema = [
     items: itemListItems,
   }),
 ];
+
+const worthItPicks = [
+  { rank: 'Fewer than 10× a year', name: 'Own-brand is fine', figure: '~£60-80', price: 'Titan, Mac Allister', why: 'Matches premium on torque for home jobs, with a flat 2-year guarantee and no registration step.', verdict: 'good' as const, verdictLabel: 'Good for occasional DIY', href: '#usage-threshold', linkText: 'See the threshold ↓' },
+  { rank: '10+ times a year', name: 'Premium is worth it', figure: '~£65-150', price: 'Makita, DeWalt, Bosch', why: 'A registered 3-year warranty and a battery platform that fits dozens of other tools.', verdict: 'good' as const, verdictLabel: 'Worth it for regular use', href: '#usage-threshold', linkText: 'See the threshold ↓' },
+];
 ---
 <BaseLayout {title} {description} ogImage="/og/own-brand-vs-premium.png" {schema}>
   <div class="hero-band hero-band--page">
@@ -103,6 +109,12 @@ const schema = [
   </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' }]} />
+
+    <TopPicks
+      heading="The verdict, at a glance"
+      sub="Own-brand has closed the spec gap. Warranty terms and battery lock-in decide it, and both come down to how often you drill."
+      picks={worthItPicks}
+    />
 
     <div class="prose-drills">
       <p>An own-brand drill suits occasional DIY. A premium drill's registered warranty and shared battery platform earn back the higher price under regular or heavy use.</p>

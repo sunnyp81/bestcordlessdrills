@@ -5,6 +5,7 @@ import Disclosure from '../../components/Disclosure.astro';
 import VerdictBadge from '../../components/VerdictBadge.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import FAQ from '../../components/FAQ.astro';
+import TopPicks from '../../components/TopPicks.astro';
 import { productSchema, reviewSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
 import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
 
@@ -79,6 +80,11 @@ const costRows = [
   { label: 'Cost per year (confirmed)', values: ['£19.67/yr', 'No reliable figure'] },
   { label: 'Cost per year (if claim holds)', values: ['n/a', '~£15/yr, if the 5yr claim is accurate'] },
 ];
+
+const verdictPicks = [
+  { rank: 'Regular or frequent use', name: 'Makita DHP484Z', figure: '65', unit: 'Nm', price: '£53-65 · 3yr confirmed', why: 'More torque, a documented 3-year warranty and the huge LXT battery platform behind it.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#verdict', linkText: 'See the verdict ↓' },
+  { rank: 'Light, occasional jobs', name: 'Ozito PXBHS', figure: '40', unit: 'Nm', price: '~£75 · warranty unverified', why: 'Covers occasional DIY without issue. The extra torque and warranty headroom go unused.', verdict: 'caution' as const, verdictLabel: 'Occasional use only', href: '#verdict', linkText: 'See the verdict ↓' },
+];
 ---
 <BaseLayout {title} {description} ogImage="/og/makita-vs-ozito.png" {schema}>
   <div class="hero-band hero-band--page">
@@ -94,6 +100,12 @@ const costRows = [
       { name: 'Own-Brand vs Premium', url: '/own-brand-vs-premium/' },
       { name: 'Makita vs Ozito', url: '/makita-vs-ozito/' },
     ]} />
+
+    <TopPicks
+      heading="The verdict, at a glance"
+      sub="Both are 18V brushless combi drills. How often you'll use it decides whether Makita's premium is worth paying."
+      picks={verdictPicks}
+    />
 
     <div class="prose-drills">
 

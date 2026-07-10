@@ -4,6 +4,7 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Disclosure from '../../components/Disclosure.astro';
 import ComparisonTable from '../../components/ComparisonTable.astro';
 import FAQ from '../../components/FAQ.astro';
+import TopPicks from '../../components/TopPicks.astro';
 import { faqSchema, itemListSchema, breadcrumbSchema } from '../../lib/schema';
 import { buildAmazonLink, amazonSearchLink } from '../../lib/affiliate';
 
@@ -65,6 +66,12 @@ const schema = [
     { name: 'Drill vs Combi vs Impact Driver', url: pageUrl },
   ]),
 ];
+
+const toolPicks = [
+  { rank: 'Buy this first', name: 'Combi drill', figure: '50-65', unit: 'Nm', price: 'spin + hammer mode', why: 'Drilling, driving and masonry in one tool. The right first buy for most UK homes.', verdict: 'good' as const, verdictLabel: 'Covers most jobs', href: '#combi-drill', featured: true, linkText: 'What it does ↓' },
+  { rank: 'Lighter, cheaper', name: 'Drill driver', figure: 'No', unit: 'hammer', price: 'no masonry mode', why: 'Fine for flat-pack, shelves and stud walls. Cannot break through brick or block.', verdict: 'caution' as const, verdictLabel: 'No masonry', href: '#drill-driver', linkText: 'What it does ↓' },
+  { rank: 'Fast fastening', name: 'Impact driver', figure: '100+', unit: 'Nm', price: 'hex bits, no chuck', why: 'Sinks decking and long screws fast. A poor tool for drilling a clean hole.', verdict: 'good' as const, verdictLabel: 'Driving, not drilling', href: '#impact-driver', linkText: 'What it does ↓' },
+];
 ---
 <BaseLayout {title} {description} canonical={`https://bestcordlessdrills.uk${pageUrl}`} ogImage="/og/drill-vs-combi-vs-impact-driver.png" {schema}>
   <div class="hero-band hero-band--page">
@@ -76,6 +83,12 @@ const schema = [
   </div>
   <div class="page">
     <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Drill vs Combi vs Impact Driver', url: pageUrl }]} />
+
+    <TopPicks
+      heading="Which tool, at a glance"
+      sub="Three tools, three jobs. Pick by the task in front of you, not the name on the box."
+      picks={toolPicks}
+    />
 
     <div class="prose-drills">
       <h2 id="quick-answer">The quick answer</h2>

@@ -37,8 +37,12 @@ const rows: { label: string; value: string }[] = [
 <div class="spec-panel" data-verdict={verdict}>
   <div class="spec-panel__rail-top" aria-hidden="true"></div>
   <div class="spec-panel__body">
+    {image && (
+      <div class="spec-panel__image-frame">
+        <img src={image} alt={spec.name} loading="lazy" decoding="async" width="260" height="260" class="spec-panel__image" />
+      </div>
+    )}
     <div class="spec-panel__name-row">
-      {image && <img src={image} alt={spec.name} loading="lazy" decoding="async" width="56" height="56" class="spec-panel__image" />}
       <p class="spec-panel__name">{spec.name}</p>
     </div>
     <p class="spec-panel__headline">
@@ -90,14 +94,29 @@ const rows: { label: string; value: string }[] = [
     padding-bottom: 0.8rem;
     border-bottom: 1px solid var(--color-ink-800);
   }
-  .spec-panel__image {
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
-    object-fit: contain;
+  .spec-panel__image-frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    margin: 0 0 1.2rem;
+    padding: 1rem;
     background: #fff;
-    border-radius: 4px;
-    padding: 0.25rem;
+    border: 1px solid var(--color-ink-800);
+    border-radius: 10px;
+    box-shadow: 0 12px 28px -14px rgba(22, 24, 28, 0.5);
+  }
+  @media (min-width: 640px) {
+    .spec-panel__image-frame {
+      height: 260px;
+    }
+  }
+  .spec-panel__image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .spec-panel__name {
     font-family: var(--font-heading);

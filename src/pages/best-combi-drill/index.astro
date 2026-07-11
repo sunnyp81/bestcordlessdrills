@@ -8,7 +8,7 @@ import VerdictBadge from '../../components/VerdictBadge.astro';
 import FAQ from '../../components/FAQ.astro';
 import TopPicks from '../../components/TopPicks.astro';
 import { itemListSchema, productSchema, faqSchema, breadcrumbSchema } from '../../lib/schema';
-import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../../lib/affiliate';
+import { buildAmazonLink, amazonSearchLink, amazonImage, AFFILIATE_REL } from '../../lib/affiliate';
 
 const title = 'Best Cordless Combi Drill UK: 9 Ranked and Compared';
 const description = 'The DeWalt DCD796N ranks best overall in this 9-drill combi drill comparison by torque, Ah and price, checked against live UK retailer prices.';
@@ -297,6 +297,7 @@ const combiPicks = [
         spec={{ name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill (body only)', torqueNm: 70, voltage: 18, weightKg: 1.3, chuckSizeMm: 13, priceGBP: 65.10, warrantyYears: 3, batteryPlatform: 'DeWalt XR 18V' }}
         verdict="good"
         verdictLabel="Best overall"
+        image={amazonImage('B0F5WZQ12C')}
       />
 
       <p>£65.10 buys the DCD796N body-only for existing DeWalt XR owners. Buyers starting from scratch should budget £109.99 for the kit version with 1 4.0Ah battery and a charger included. The 3-year warranty figure above needs free registration within 30 days of purchase. It defaults to 1 year if you skip that step.</p>
@@ -313,6 +314,7 @@ const combiPicks = [
         spec={{ name: 'Makita DHP484Z 18V LXT Brushless Combi Drill (body only)', torqueNm: 65, voltage: 18, weightKg: 1.2, chuckSizeMm: 13, priceGBP: 52.95, warrantyYears: 3, batteryPlatform: 'Makita LXT 18V' }}
         verdict="good"
         verdictLabel="Best if you own Makita"
+        image={amazonImage('B01LYXFYLB')}
       />
 
       <p>£52.95 to £65 buys the DHP484Z body-only depending on retailer. The panel above uses the lower figure. Net weight is 1.2kg body-only. That rises to 1.6 to 2.2kg once a battery's fitted. Buying a battery and charger from scratch on top of the body-only price erases most of the saving over a boxed kit from another brand.</p>

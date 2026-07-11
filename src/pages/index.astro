@@ -7,7 +7,7 @@ import VerdictBadge from '../components/VerdictBadge.astro';
 import TopPicks from '../components/TopPicks.astro';
 import FAQ from '../components/FAQ.astro';
 import { itemListSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
-import { buildAmazonLink, amazonSearchLink, AFFILIATE_REL } from '../lib/affiliate';
+import { buildAmazonLink, amazonSearchLink, amazonImage, AFFILIATE_REL } from '../lib/affiliate';
 import { NODE_HUBS, BUYING_GUIDES } from '../lib/site';
 
 const title = 'Best Cordless Drills UK: The Sourced Buying Guide';
@@ -169,7 +169,7 @@ const homePicks = [
       <div class="pick">
         <h3 id="best-overall">Best overall: DeWalt DCD796N 18V XR Brushless Combi Drill</h3>
         <p>The DeWalt DCD796N is the drill most UK reviewers and forum threads point a first-time buyer toward. Its 70 Nm max torque and two-speed, 15-position clutch handle everything from flat-pack screws to masonry drilling without strain. DeWalt's XR 18V platform also runs across more tools than any other premium range sold in the UK. £65.10 buys the body-only tool for existing XR battery owners. Buyers starting from scratch should budget £109.99 for the kit version with one 4.0Ah battery and a charger included. Register within 30 days and the warranty runs to 3 years; skip that step and it defaults to 1.</p>
-        <SpecPanel spec={dewaltSpec} verdict="good" />
+        <SpecPanel spec={dewaltSpec} verdict="good" image={amazonImage(ASIN_DEWALT)} />
         <p class="pick__actions"><a href={dewaltLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
       </div>
 
@@ -183,7 +183,7 @@ const homePicks = [
       <div class="pick">
         <h3 id="best-combi">Best combi drill for masonry and period-property brick: Bosch GSB 18V-55 Professional</h3>
         <p>Bosch's GSB 18V-55 Professional pairs a 55 Nm max torque with a metal Röhm chuck built for repeated hammer-action use. That matters on the solid brick and lime mortar found in older UK properties. The current 2×5.0Ah kit costs £149.99, down from a £199.99 list price at the time of writing. Register within 30 days for 3 years' cover on the tool and 2 on the battery and charger; default cover is 1 year. Weight runs from 1.1 to 1.7kg depending on which battery you fit; the figure below is for the heavier 5.0Ah kit.</p>
-        <SpecPanel spec={boschSpec} verdict="good" />
+        <SpecPanel spec={boschSpec} verdict="good" image={amazonImage(ASIN_BOSCH)} />
         <p class="pick__actions"><a href={boschLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
       </div>
 

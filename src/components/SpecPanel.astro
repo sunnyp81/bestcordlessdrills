@@ -16,8 +16,9 @@ interface Props {
   spec: DrillSpec;
   verdict: Verdict;
   verdictLabel?: string;
+  image?: string;
 }
-const { spec, verdict, verdictLabel } = Astro.props as Props;
+const { spec, verdict, verdictLabel, image } = Astro.props as Props;
 const DEFAULT_LABEL: Record<Verdict, string> = {
   good: 'Recommended',
   caution: 'Caution',
@@ -36,7 +37,10 @@ const rows: { label: string; value: string }[] = [
 <div class="spec-panel" data-verdict={verdict}>
   <div class="spec-panel__rail-top" aria-hidden="true"></div>
   <div class="spec-panel__body">
-    <p class="spec-panel__name">{spec.name}</p>
+    <div class="spec-panel__name-row">
+      {image && <img src={image} alt={spec.name} loading="lazy" decoding="async" width="56" height="56" class="spec-panel__image" />}
+      <p class="spec-panel__name">{spec.name}</p>
+    </div>
     <p class="spec-panel__headline">
       <span class="figure spec-panel__headline-value">{spec.torqueNm}<span class="spec-panel__headline-unit">Nm</span></span>
       <span class="spec-panel__headline-label">torque</span>
@@ -78,14 +82,29 @@ const rows: { label: string; value: string }[] = [
     position: relative;
     padding: 1.4rem 1.6rem 1.6rem;
   }
+  .spec-panel__name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-ink-800);
+  }
+  .spec-panel__image {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 4px;
+    padding: 0.25rem;
+  }
   .spec-panel__name {
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1.15rem;
     color: #fff;
-    margin: 0 0 1rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 1px solid var(--color-ink-800);
+    margin: 0;
   }
   .spec-panel__headline {
     display: flex;

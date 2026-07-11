@@ -16,6 +16,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# build-time Amazon image cache (TOS: regenerate per build, never commit)
+src/data/amazon-images.json
+
 # wrangler
 .wrangler/
 

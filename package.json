@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/amazon-image-sync.mjs chainsaw0f6-21 src/pages/index.astro src/pages/best-combi-drill/index.astro src/pages/makita-vs-ozito/index.astro src/pages/own-brand-vs-premium/index.astro src/pages/drill-vs-combi-vs-impact-driver/index.astro",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",

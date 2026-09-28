@@ -7,11 +7,13 @@ const cell = (v: unknown) => {
 };
 
 export const GET: APIRoute = () => {
-  const header = ['model', 'brand', 'seller', 'platform', 'voltage_v', 'motor', 'torque_nm', 'torque_basis', 'top_no_load_rpm', 'impact_bpm', 'chuck_mm', 'clutch_settings', 'weight_kg', 'weight_basis', 'source_url', 'checked'];
+  const header = ['model', 'brand', 'seller', 'platform', 'voltage_v', 'motor', 'torque_nm', 'torque_basis', 'top_no_load_rpm', 'impact_bpm', 'chuck_mm', 'clutch_settings', 'weight_kg', 'weight_basis', 'source_url', 'extra_sources', 'checked'];
   const rows = DRILL_SPECS.map((d) => [
     d.name, d.brand, d.seller, d.platform, d.voltage,
     d.brushless === null ? 'not stated' : d.brushless ? 'brushless' : 'brushed',
-    d.torqueNm, d.torqueBasis, d.topRpm, d.impactBpm, d.chuckMm, d.clutch, d.weightKg, d.weightBasis, d.source, d.checked,
+    d.torqueNm, d.torqueBasis, d.topRpm, d.impactBpm, d.chuckMm, d.clutch, d.weightKg, d.weightBasis, d.source,
+    (d.extraSources ?? []).map((x) => `${x.label}: ${x.href}`).join(' | '),
+    d.checked,
   ]);
   const body = [header, ...rows].map((r) => r.map(cell).join(',')).join('\n') + '\n';
   return new Response(body, { headers: { 'Content-Type': 'text/csv; charset=utf-8' } });

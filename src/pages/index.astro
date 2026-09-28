@@ -26,7 +26,7 @@ const dewaltSpec = {
   name: 'DeWalt DCD796N 18V XR Brushless Compact Combi Drill (body only)',
   torqueNm: 70,
   voltage: 18,
-  weightKg: 1.3,
+  weightKg: 1.2,
   chuckSizeMm: 13,
   priceGBP: 65.10,
   warrantyYears: 3,
@@ -63,7 +63,7 @@ const masterColumns = [
 const masterRows = [
   { label: 'UK price', values: ['£79.99', '£60 (was £80)', '£52.95-£65 (body only)', '£109.99 kit / £65.10 body only', '£149.99 (2×5.0Ah kit)'] },
   { label: 'Torque', values: ['50 Nm', 'Not published', '65 Nm max', '70 Nm max', '55 Nm max'] },
-  { label: 'Weight', values: ['1.8kg w/ battery', 'Not listed', '1.2kg net (body)', '~1.3kg (body)', '1.1-1.7kg (varies)'] },
+  { label: 'Weight', values: ['1.8kg w/ battery', 'Not listed', '1.2kg net (body)', '1.2kg (body)', '1.0kg (body)'] },
   { label: 'Chuck', values: ['13mm keyless', '13mm keyless', '1.5-13mm keyless', '13mm keyless', '13mm Röhm metal'] },
   { label: 'Battery kit', values: ['2×2.0Ah', '2×2.0Ah', 'Body only; 3.0/5.0Ah kits', 'Body only; 1×4.0Ah or 2×5.0Ah kits', '2×5.0Ah or 2×2.0Ah'] },
   { label: 'Warranty', values: ['2yr, no registration', '2yr, no registration', '1yr default, 3yr registered', '1yr default, 3yr registered', '1yr default, 3yr tool/2yr battery'] },
@@ -74,7 +74,7 @@ const hubBlurbs: Record<string, string> = {
   'own-brand-vs-premium': 'Where own-brand tools genuinely match premium brands, and where they do not.',
   'drill-vs-combi-vs-impact-driver': 'Which tool actually fits the job before you spend anything.',
   'battery-platforms-explained': 'Why the battery you already own should decide your next drill.',
-  glossary: 'Every spec term used on this site, defined in one place.',
+  'cordless-drill-spec-data': 'Published torque, speed and impact figures for 9 combi drills, with sources and a CSV.',
 };
 const guideBlurbs: Record<string, string> = {
   'best-budget': 'The full own-brand and budget combi drill shortlist.',
@@ -136,7 +136,7 @@ const schema = [
 ];
 
 const homePicks = [
-  { rank: 'Best overall', name: 'DeWalt DCD796N', figure: '70', unit: 'Nm', price: '£65 body · £110 kit', why: 'Strongest torque here and the widest battery platform. The safe first drill.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-overall', featured: true },
+  { rank: 'Best overall', name: 'DeWalt DCD796N', figure: '70', unit: 'Nm', price: '£65 body · £110 kit', why: 'Strongest published torque here on a 250+ product battery platform. The safe first drill.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-overall', featured: true },
   { rank: 'Best value', name: 'Titan TTI1257COM', figure: '50', unit: 'Nm', price: '£79.99', why: 'Half the price of premium, a real 2-year guarantee, no registration step.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-budget' },
   { rank: 'Best for masonry', name: 'Bosch GSB 18V-55', figure: '55', unit: 'Nm', price: '£149.99', why: 'Metal chuck built for repeated hammer use on solid brick and lime mortar.', verdict: 'good' as const, verdictLabel: 'Recommended', href: '#best-combi' },
   { rank: 'Cheapest pick', name: 'Mac Allister MCD18-Li-2', figure: '£60', price: 'torque not published', why: 'The lowest price here, if you only drill a few times a year.', verdict: 'caution' as const, verdictLabel: 'Spec gap', href: '#best-occasional' },
@@ -168,7 +168,7 @@ const homePicks = [
 
       <div class="pick">
         <h3 id="best-overall">Best overall: DeWalt DCD796N 18V XR Brushless Combi Drill</h3>
-        <p>The DeWalt DCD796N is the drill most UK reviewers and forum threads point a first-time buyer toward. Its 70 Nm max torque and two-speed, 15-position clutch handle everything from flat-pack screws to masonry drilling without strain. DeWalt's XR 18V platform also runs across more tools than any other premium range sold in the UK. £65.10 buys the body-only tool for existing XR battery owners. Buyers starting from scratch should budget £109.99 for the kit version with one 4.0Ah battery and a charger included. Register within 30 days and the warranty runs to 3 years; skip that step and it defaults to 1.</p>
+        <p>The DeWalt DCD796N is the drill most UK reviewers and forum threads point a first-time buyer toward. Its 70 Nm max torque and two-speed, 15-position clutch handle everything from flat-pack screws to masonry drilling without strain. DeWalt says its 18V XR range covers over 250 products. £65.10 buys the body-only tool for existing XR battery owners. Buyers starting from scratch should budget £109.99 for the kit version with one 4.0Ah battery and a charger included. Register within 30 days and the warranty runs to 3 years; skip that step and it defaults to 1.</p>
         <SpecPanel spec={dewaltSpec} verdict="good" image={amazonImage(ASIN_DEWALT)} />
         <p class="pick__actions"><a href={dewaltLink} rel={AFFILIATE_REL} target="_blank">Check the current price on Amazon UK</a> · <a href="/best-combi-drill/">Read the full combi drill comparison</a></p>
       </div>
@@ -319,7 +319,7 @@ const homePicks = [
 
       <div class="tick-divider" aria-hidden="true"></div>
 
-      <h2 id="go-deeper">Go deeper: guides, hubs and the glossary</h2>
+      <h2 id="go-deeper">Go deeper: guides, hubs and spec data</h2>
 
       <p>Every claim on this page traces back to one of the guides below.</p>
 

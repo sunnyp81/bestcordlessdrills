@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SpecBarChart from '../../components/SpecBarChart.astro';
+import { breadcrumbSchema } from '../../lib/schema';
+import { SITE } from '../../lib/site';
+import { DRILL_SPECS, SPECS_CHECKED } from '../../data/drill-specs';
+
+const title = 'UK Combi Drill Spec Data: 9 Models, Every Figure Sourced';
+const description = 'Published torque, speed, impact rate, clutch and weight for 9 UK 18V combi drills, with the source page for every figure and a free CSV download.';
+const url = '/cordless-drill-spec-data/';
+const checkedLabel = new Date(SPECS_CHECKED).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const byDesc = <T,>(arr: T[], key: (x: T) => number | null) =>
+  [...arr].sort((a, b) => (key(b) ?? -1) - (key(a) ?? -1));
+
+const torqueRows = byDesc(DRILL_SPECS, (d) => d.torqueNm).map((d) => ({
+  label: d.name,
+  sub: d.id === 'makita-dhp484z' ? `${d.seller} · 54 Nm hard-joint figure also listed` : d.seller,
+  value: d.torqueNm,
+  missing: d.id === 'erbauer-eri1107com' ? '150 Nm quoted, basis not stated' : 'Not published',
+  tone: d.tier,
+}));
+const rpmRows = byDesc(DRILL_SPECS, (d) => d.topRpm).map((d) => ({
+  label: d.name,
+  sub: d.seller,
+  value: d.topRpm,
+  display: `${d.topRpm.toLocaleString('en-GB')} rpm`,
+  tone: d.tier,
+}));
+const bpmRows = byDesc(DRILL_SPECS, (d) => d.impactBpm).map((d) => ({
+  label: d.name,
+  sub: d.seller,
+  value: d.impactBpm,
+  display: d.impactBpm ? `${(d.impactBpm / 1000).toLocaleString('en-GB', { maximumFractionDigits: 1 })}k bpm` : undefined,
+  tone: d.tier,
+}));
+
+const withTorque = DRILL_SPECS.filter((d) => d.torqueNm !== null);
+const minTorque = Math.min(...withTorque.map((d) => d.torqueNm as number));
+const maxTorque = Math.max(...withTorque.map((d) => d.torqueNm as number));
+const brushedOwn = DRILL_SPECS.filter((d) => d.tier === 'own' && d.brushless === false).length;
+const ownCount = DRILL_SPECS.filter((d) => d.tier === 'own').length;
+
+const sourceList = [
+  { label: 'Manufacturer and UK retailer spec pages, linked per row in the table below' },
+];
+
+const motor = (b: boolean | null) => (b === null ? 'Not stated' : b ? 'Brushless' : 'Brushed');
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Combi Drill Spec Data', url },
+  ]),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Dataset',
+    name: 'UK 18V combi drill published specifications',
+    description: 'Manufacturer and UK retailer published specifications for 9 18V cordless combi drills sold in the UK: torque, top no-load speed, impact rate, chuck size, clutch settings, weight and motor type, with a source URL for every figure.',
+    url: new URL(url, SITE.url).toString(),
+    creator: { '@id': SITE.organizationId },
+    publisher: { '@id': SITE.organizationId },
+    dateModified: SPECS_CHECKED,
+    inLanguage: 'en-GB',
+    spatialCoverage: 'United Kingdom',
+    variableMeasured: ['Torque (Nm)', 'No-load speed (rpm)', 'Impact rate (bpm)', 'Chuck capacity (mm)', 'Clutch settings', 'Weight (kg)', 'Motor type'],
+    distribution: [{
+      '@type': 'DataDownload',
+      encodingFormat: 'text/csv',
+      contentUrl: new URL('/cordless-drill-spec-data/combi-drill-specs.csv', SITE.url).toString(),
+    }],
+  },
+];
+---
+<BaseLayout {title} {description} {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Open data &middot; Checked {checkedLabel}</p>
+      <h1 class="hero-band__title">UK combi drill spec data: 9 models, every figure sourced</h1>
+      <p class="hero-band__lede">Published torque, top speed, impact rate, clutch settings and weight for the 9 18V combi drills we rank, taken from each maker's or UK retailer's own spec page. Where a figure is missing or unclear, the table says so rather than filling the gap.</p>
+    </div>
+  </div>
+
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Combi Drill Spec Data', url }]} />
+
+    <section class="findings" aria-labelledby="findings-title">
+      <h2 id="findings-title" class="findings__title">What the published figures show</h2>
+      <ul class="findings__list">
+        <li><span class="findings__fig figure">{minTorque} to {maxTorque} Nm</span><span>Headline torque across the {withTorque.length} drills we chart. Erbauer's quoted 150 Nm has no stated basis so is left off, and Mac Allister publishes no figure.</span></li>
+        <li><span class="findings__fig figure">1,500 to 2,000 rpm</span><span>Top no-load speed. DeWalt, Makita and Erbauer reach 2,000 rpm; Ozito and Mac Allister stop at 1,500 rpm.</span></li>
+        <li><span class="findings__fig figure">2 figures, 1 drill</span><span>Makita lists 65 Nm max torque and 54 Nm max fastening torque for the DHP484Z. Brands do not all measure torque the same way.</span></li>
+        <li><span class="findings__fig figure">{brushedOwn} of {ownCount}</span><span>Own-brand drills here that still use a brushed motor (Titan and Mac Allister). Ryobi's R18PD3 is brushed too.</span></li>
+      </ul>
+    </section>
+
+    <div class="prose-drills">
+      <h2 id="torque">Published torque, in newton metres</h2>
+      <p>Torque decides whether a combi drill copes with masonry and long fixings. Treat small gaps with caution: each brand chooses its own test basis, and only some say whether a figure is a hard-joint or a peak reading.</p>
+
+      <SpecBarChart
+        id="chart-torque"
+        title="Published max torque, 9 UK combi drills"
+        unit="Nm"
+        max={80}
+        ticks={[0, 20, 40, 60, 80]}
+        rows={torqueRows}
+        note="Bars show each maker's headline figure. Makers do not all state whether a figure is a hard-joint or peak reading, so small gaps may not reflect a real difference."
+        sources={[{ label: 'maker and retailer spec pages, linked in the full table', href: '#full-table' }]}
+      />
+
+      <h2 id="speed">Top no-load speed, in rpm</h2>
+      <p>No-load speed is the fastest the chuck turns in top gear with nothing in it. Higher speed helps with wood and small-diameter holes. It says little about power under load.</p>
+
+      <SpecBarChart
+        id="chart-rpm"
+        title="Top-gear no-load speed"
+        unit="rpm"
+        max={2000}
+        ticks={[0, 500, 1000, 1500, 2000]}
+        rows={rpmRows}
+        sources={[{ label: 'maker and retailer spec pages, linked in the full table', href: '#full-table' }]}
+      />
+
+      <h2 id="impact">Impact rate, in blows per minute</h2>
+      <p>The impact rate is how many times a minute the hammer action pulses the bit forward in masonry mode. Bosch confirms its drill has a hammer action but does not publish the rate on its GB spec table.</p>
+
+      <SpecBarChart
+        id="chart-bpm"
+        title="Maximum impact rate in hammer mode"
+        unit="bpm"
+        max={40000}
+        ticks={[0, 10000, 20000, 30000, 40000]}
+        rows={bpmRows}
+        sources={[{ label: 'maker and retailer spec pages, linked in the full table', href: '#full-table' }]}
+      />
+
+      <h2 id="full-table">The full dataset</h2>
+      <p>Every row links to the page each figure came from. All 9 drills are 18V with a 13 mm chuck. <a href="/cordless-drill-spec-data/combi-drill-specs.csv" download>Download the data as CSV</a>.</p>
+    </div>
+
+    <div class="data-table" role="region" aria-label="Combi drill spec dataset (scrolls sideways)" tabindex="0">
+      <table>
+        <caption>Published specifications for 9 UK 18V combi drills, checked {checkedLabel} <span class="data-table__hint">Swipe sideways to see every column.</span></caption>
+        <thead>
+          <tr>
+            <th scope="col">Drill</th>
+            <th scope="col">Platform</th>
+            <th scope="col">Motor</th>
+            <th scope="col">Torque</th>
+            <th scope="col">Top speed</th>
+            <th scope="col">Impact rate</th>
+            <th scope="col">Clutch</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Source and check date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {DRILL_SPECS.map((d) => (
+            <tr>
+              <th scope="row"><span class="dt__name">{d.name}</span><span class="dt__sub">{d.seller}</span></th>
+              <td>{d.platform}</td>
+              <td>{motor(d.brushless)}</td>
+              <td><span class="figure">{d.torqueNm !== null ? `${d.torqueNm} Nm` : d.id === 'erbauer-eri1107com' ? '150 Nm quoted' : 'Not published'}</span><span class="dt__sub">{d.torqueBasis}</span></td>
+              <td class="figure">{d.topRpm.toLocaleString('en-GB')} rpm</td>
+              <td class="figure">{d.impactBpm ? `${d.impactBpm.toLocaleString('en-GB')} bpm` : 'Not published'}</td>
+              <td class="figure">{d.clutch}</td>
+              <td><span class="figure">{d.weightKg !== null ? `${d.weightKg} kg` : 'Not published'}</span><span class="dt__sub">{d.weightBasis}</span></td>
+              <td>
+                <a href={d.source} rel="nofollow noopener" target="_blank">{d.sourceLabel}</a>
+                {d.extraSources?.map((s) => (<><br /><a href={s.href} rel="nofollow noopener" target="_blank">{s.label}</a></>))}
+                <span class="dt__sub">Checked <time datetime={d.checked}>{new Date(d.checked).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</time></span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose-drills">
+      <h2 id="gaps">Gaps and conflicts in the published data</h2>
+      <ul>
+        {DRILL_SPECS.filter((d) => d.note).map((d) => (<li><strong>{d.name}:</strong> {d.note}</li>))}
+      </ul>
+
+      <h2 id="method">How this data was collected</h2>
+      <p>Each figure was read on {checkedLabel} from the maker's own spec page or instruction manual, UK pages first. Milwaukee's figures come from its European site because its UK pages show no specs. Own-brand drills use the retailer that sells them (Screwfix or B&amp;Q), Ozito uses Tooled-Up because Ozito's UK site did not load, and Ryobi's motor type comes from Toolstation. Every source is named in the table. Nothing here was bench-tested, and no figure has been estimated or rounded to fill a gap.</p>
+      <p>Weights are not like-for-like: some makers weigh the bare tool, some include a battery, and some do not say. The weight basis sits under each figure for that reason.</p>
+      <p>Prices are left out on purpose because they change weekly. For current prices and our verdict on each drill, see the <a href="/best-combi-drill/">best combi drill ranking</a>, or the <a href="/own-brand-vs-premium/">own-brand vs premium comparison</a> for warranty terms. Battery systems are covered in <a href="/battery-platforms-explained/">battery platforms explained</a>.</p>
+
+      <h2 id="cite">Using this data</h2>
+      <p>If you quote these figures, please link to this page as the source so readers can see the original spec pages. Spot a figure that has changed? Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> with the model and the page it now shows.</p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+</style>

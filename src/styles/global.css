@@ -271,3 +271,122 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
   gap: 0.6rem;
 }
+
+/* Key-findings panel and sourced data tables used by the linkable data pages. */
+.findings {
+  margin: 0.5rem 0 1.5rem;
+  border: 1px solid var(--color-hairline);
+  background: var(--color-card);
+  border-radius: 3px;
+  padding: 1.25rem 1.25rem 0.5rem;
+}
+.findings__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-ink-950);
+  margin-bottom: 0.75rem;
+}
+.findings__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+@media (min-width: 720px) {
+  .findings__list { grid-template-columns: 1fr 1fr; column-gap: 1.75rem; }
+}
+.findings__list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--color-hairline);
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--color-ink-800);
+}
+.findings__fig {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-amber-900);
+}
+.data-table {
+  margin: 0.5rem 0 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--color-hairline);
+  border-radius: 3px;
+  background: var(--color-card);
+}
+.data-table table {
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 58rem;
+  font-size: 0.85rem;
+}
+.data-table caption {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: var(--color-steel-500);
+  background: var(--color-paper);
+  border-bottom: 1px solid var(--color-hairline);
+}
+.data-table__hint {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-amber-900);
+}
+@media (min-width: 960px) {
+  .data-table__hint { display: none; }
+}
+.data-table thead th {
+  background: var(--color-ink-900);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  white-space: nowrap;
+}
+.data-table tbody th,
+.data-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.65rem 0.8rem;
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-ink-900);
+}
+.data-table tbody th {
+  background: var(--color-paper);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  min-width: 10rem;
+  max-width: 12rem;
+}
+.data-table thead th:first-child,
+.data-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  box-shadow: 1px 0 0 var(--color-hairline);
+}
+.data-table .dt__name { display: block; }
+.data-table .dt__sub {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-steel-500);
+  margin-top: 0.15rem;
+}
+.data-table a {
+  color: var(--color-amber-900);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.data-table a:hover { color: var(--color-blueprint-600); }

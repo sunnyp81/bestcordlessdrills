@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import SpecBarChart from '../../components/SpecBarChart.astro';
+import FAQ from '../../components/FAQ.astro';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+import { PLATFORMS, PLATFORMS_CHECKED } from '../../data/battery-platforms';
+
+const title = 'Cordless Battery Platforms Explained: UK 18V Systems Compared';
+const description = 'How many tools run on each UK 18V battery platform, which batteries work across brands, and why 18V and 20V Max are the same thing. Every figure sourced.';
+const url = '/battery-platforms-explained/';
+const checkedLabel = new Date(PLATFORMS_CHECKED).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const toneFor = (k: string) => (k === 'trade' ? 'premium' : k === 'alliance' ? 'alliance' : 'own') as 'premium' | 'alliance' | 'own';
+
+const chartRows = PLATFORMS.map((p) => ({
+  label: p.name,
+  sub: p.countScope,
+  value: p.toolCount,
+  display: p.toolCount !== null ? `${p.toolCount}+` : undefined,
+  missing: p.countLabel,
+  tone: toneFor(p.kind),
+}));
+
+const faqs = [
+  {
+    q: 'Can I use a Makita battery in a DeWalt drill?',
+    a: 'No. Each major brand designs its 18V batteries for its own tools, so a Makita LXT battery will not fit a DeWalt XR tool. Batteries cross between brands only inside a formal alliance such as AMPShare, POWER FOR ALL or CAS, or a partner scheme such as Einhell’s.',
+  },
+  {
+    q: 'Do Bosch blue and Bosch green batteries fit each other’s tools?',
+    a: 'No. Bosch Professional (blue) tools use AMPShare batteries and Bosch DIY (green) tools use POWER FOR ALL batteries. The AMPShare FAQ says the two battery systems are not compatible.',
+  },
+  {
+    q: 'Is 18V the same as 20V Max?',
+    a: 'Yes, for the same cells. DeWalt explains that its 20V Max figure is the battery’s maximum initial voltage with no load, and that the nominal voltage is 18. UK tools are labelled 18V; some US and supermarket ranges use the 20V figure.',
+  },
+  {
+    q: 'Which battery platform is best for occasional DIY?',
+    a: 'Stay with a platform you already own. If you are starting fresh and only drill a few times a year, a retailer range such as Titan TXP or Mac Allister Solo is enough. If you expect to add a saw, grinder or garden tools, a larger system such as Makita LXT, DeWalt XR or Ryobi ONE+ gives more to add later.',
+  },
+];
+
+const schema = [
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Battery Platforms Explained', url },
+  ]),
+  faqSchema(faqs),
+];
+---
+<BaseLayout {title} {description} {schema}>
+  <div class="hero-band hero-band--page">
+    <div class="hero-band__inner">
+      <p class="hero-band__eyebrow">Battery systems &middot; Checked {checkedLabel}</p>
+      <h1 class="hero-band__title">Cordless battery platforms explained: which UK 18V system to buy into</h1>
+      <p class="hero-band__lede">A cordless drill battery only fits tools from the same platform, so the first drill you buy decides which tools you can add cheaply later. Here is how big each UK 18V platform is by its maker's own count, and where batteries do and do not cross brands.</p>
+    </div>
+  </div>
+
+  <div class="page">
+    <Breadcrumbs items={[{ name: 'Home', url: '/' }, { name: 'Battery Platforms Explained', url }]} />
+
+    <section class="findings" aria-labelledby="findings-title">
+      <h2 id="findings-title" class="findings__title">The short version</h2>
+      <ul class="findings__list">
+        <li><span class="findings__fig">One brand, one battery</span><span>Makita, DeWalt, Milwaukee, Ryobi and the retailer own-brands each design their batteries for their own tools only.</span></li>
+        <li><span class="findings__fig">3 alliances cross brands</span><span>AMPShare, POWER FOR ALL and CAS let one battery run tools from several makers. Einhell has a smaller partner scheme.</span></li>
+        <li><span class="findings__fig">Bosch blue ≠ Bosch green</span><span>The two Bosch systems use different batteries that do not swap.</span></li>
+        <li><span class="findings__fig">18V = 20V Max</span><span>The same cells, labelled by nominal voltage (18V) or peak voltage with no load (20V).</span></li>
+      </ul>
+    </section>
+
+    <div class="prose-drills">
+      <h2 id="how-big">How many tools run on each platform?</h2>
+      <p>The chart uses each maker's own published figure, so treat it as a marketing claim rather than an audited count. Alliance figures cover every member brand, not one maker. Screwfix and B&amp;Q publish no count for their own-brand ranges.</p>
+
+      <SpecBarChart
+        id="chart-platforms"
+        title="Tools or products per battery, by each maker's own count"
+        unit="tools"
+        max={500}
+        ticks={[0, 100, 200, 300, 400, 500]}
+        rows={chartRows}
+        rowHeading="Platform"
+        legend={[
+          { tone: 'premium', label: 'Trade brand' },
+          { tone: 'own', label: 'DIY, budget or own-brand' },
+          { tone: 'alliance', label: 'Multi-brand alliance' },
+        ]}
+        note={`Counts as published on each official site on ${checkedLabel}. Makers add and drop tools often.`}
+        sources={[{ label: 'official platform pages, linked in the table below', href: '#platform-table' }]}
+      />
+
+      <h2 id="platform-table">Major UK 18V platforms, plus Parkside X 20 V, side by side</h2>
+      <p>Who sells each system in the UK, whether it runs garden tools, and whether its batteries work with any other brand. Parkside sells its range under a 20V label and does not state a nominal voltage, as explained below.</p>
+    </div>
+
+    <div class="data-table" role="region" aria-label="UK 18V battery platforms and Parkside X 20 V compared (scrolls sideways)" tabindex="0">
+      <table>
+        <caption>UK 18V cordless battery platforms plus Parkside X 20 V, checked {checkedLabel} <span class="data-table__hint">Swipe sideways to see every column.</span></caption>
+        <thead>
+          <tr>
+            <th scope="col">Platform</th>
+            <th scope="col">Sold in the UK by</th>
+            <th scope="col">Maker's tool count</th>
+            <th scope="col">Garden tools</th>
+            <th scope="col">Works with other brands</th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PLATFORMS.map((p) => (
+            <tr>
+              <th scope="row">{p.name}</th>
+              <td>{p.soldBy}</td>
+              <td><span class="figure">{p.countLabel}</span><span class="dt__sub">{p.countScope}</span></td>
+              <td>{p.garden}</td>
+              <td>{p.crossBrand}</td>
+              <td><a href={p.source} rel="nofollow noopener" target="_blank">{p.sourceLabel}</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="prose-drills">
+      <h2 id="cross-brand">Do cordless batteries work across brands?</h2>
+      <p>Mostly only inside an alliance or a maker's own partner scheme. AMPShare, led by Bosch Professional, says its batteries run tools from more than 35 brands. POWER FOR ALL links Bosch's green DIY range with Gardena and Husqvarna garden tools. CAS, led by Metabo, covers mostly trade and specialist brands.</p>
+      <p>Bosch's two systems are the trap. Asked whether AMPShare (blue) and POWER FOR ALL (green) batteries are compatible, the <a href="https://ampshare.com/gb/en/" rel="nofollow noopener" target="_blank">AMPShare FAQ</a> answers: “No. The two battery systems are not compatible.” Check the colour before buying a Bosch bare tool.</p>
+      <p>Einhell's Power X-Change batteries also run a small set of specialist partner tools. Ozito sells a range also called PXC and describes it as “powered by Einhell” on its Australian site, but we found no statement from either maker that the two batteries swap, so do not assume they do.</p>
+
+      <h2 id="18v-20v">Is 18V the same as 20V Max?</h2>
+      <p>Yes. The number depends on how the battery is measured, not on a different cell. DeWalt's own footnote reads: “Maximum initial battery voltage (measured without a workload) is 20 volts. Nominal voltage is 18.” (<a href="https://www.dewalt.com/en-us/products/systems/cordless-platforms" rel="nofollow noopener" target="_blank">DeWalt US</a>). DeWalt sells the same platform as 18V XR in the UK.</p>
+      <p>Lidl's Parkside range is sold as X 20 V. Parkside's GB pages do not state a nominal voltage, so we have not labelled it 18V here.</p>
+
+      <h2 id="which-platform">Which platform should you buy into?</h2>
+      <p>Start with the batteries you already own. A bare tool on your existing platform usually costs far less than a new kit with batteries and a charger, which is why premium brands sell so many body-only drills.</p>
+      <p>Starting from nothing, match the platform to how far you expect the kit to grow:</p>
+      <ul>
+        <li><strong>A few jobs a year:</strong> a retailer range such as Titan TXP (Screwfix) or Mac Allister Solo (B&amp;Q) is enough. Our <a href="/own-brand-vs-premium/">own-brand vs premium comparison</a> covers the warranty trade-off.</li>
+        <li><strong>A growing home and garden kit:</strong> Ryobi ONE+ and Einhell Power X-Change each publish 200 or more tools, garden kit included.</li>
+        <li><strong>Heavy or trade-level use:</strong> Makita LXT, DeWalt XR and Milwaukee M18 each publish 250 or more tools on one battery.</li>
+        <li><strong>Garden first:</strong> POWER FOR ALL shares one battery across Bosch green, Gardena and Husqvarna tools.</li>
+      </ul>
+      <p>Once you have a platform, the drill itself is the easy part. Compare published torque, speed and impact rate in our <a href="/cordless-drill-spec-data/">combi drill spec data</a>, or go straight to the <a href="/best-combi-drill/">best combi drill ranking</a>.</p>
+
+      <h2 id="method">How we checked these figures</h2>
+      <p>Every tool count, compatibility statement and quote above was read from the maker's or alliance's official site on {checkedLabel} and is linked in the table. Where a UK page was missing we say which site was used instead. Aldi's Ferrex range is left out because its product pages could not be reached on the check date.</p>
+
+      <FAQ faqs={faqs} />
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 58rem;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+</style>

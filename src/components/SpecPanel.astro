@@ -7,7 +7,6 @@ interface DrillSpec {
   voltage: number;
   weightKg: number;
   chuckSizeMm: number;
-  priceGBP: number;
   warrantyYears: number;
   batteryPlatform: string;
 }
@@ -29,7 +28,6 @@ const rows: { label: string; value: string }[] = [
   { label: 'Voltage', value: `${spec.voltage} V` },
   { label: 'Weight', value: `${spec.weightKg} kg` },
   { label: 'Chuck size', value: `${spec.chuckSizeMm} mm` },
-  { label: 'UK price', value: `£${spec.priceGBP.toFixed(2)}` },
   { label: 'Warranty', value: `${spec.warrantyYears} yr` },
   { label: 'Battery platform', value: spec.batteryPlatform },
 ];

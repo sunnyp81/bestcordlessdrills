@@ -100,8 +100,12 @@ export const productSchema = (args: {
   image?: string;
   description: string;
   url: string;
+  // Only pass a price alongside a real priceValidUntil (Google requires it for
+  // static, non-live prices). Without priceValidUntil we omit offers entirely
+  // rather than publish a stale price with no expiry.
   priceLow?: number;
   priceHigh?: number;
+  priceValidUntil?: string;
   // Only pass when a real, sourced owner-rating count exists.
   aggRating?: number;
   aggCount?: number;
@@ -113,12 +117,13 @@ export const productSchema = (args: {
   ...(args.image ? { image: abs(args.image) } : {}),
   description: args.description,
   url: abs(args.url),
-  ...(args.priceLow && args.priceHigh ? {
+  ...(args.priceLow && args.priceHigh && args.priceValidUntil ? {
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'GBP',
       lowPrice: args.priceLow,
       highPrice: args.priceHigh,
+      priceValidUntil: args.priceValidUntil,
       availability: 'https://schema.org/InStock',
     },
   } : {}),

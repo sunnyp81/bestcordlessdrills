@@ -22,7 +22,7 @@ export const NODE_HUBS = [
   { slug: 'own-brand-vs-premium', label: 'Own-Brand vs Premium' },
   { slug: 'drill-vs-combi-vs-impact-driver', label: 'Drill vs Combi vs Impact Driver' },
   { slug: 'battery-platforms-explained', label: 'Battery Platforms Explained' },
-  { slug: 'glossary', label: 'Glossary' },
+  { slug: 'cordless-drill-spec-data', label: 'Spec Data' },
 ] as const;
 
 // Grouped under the "Buying Guides" nav dropdown.

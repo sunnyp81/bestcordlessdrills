@@ -19,12 +19,15 @@ interface Props {
 const { columns, rows, caption } = Astro.props as Props;
 ---
 <figure class="comparison-table">
-  {caption && <figcaption class="comparison-table__caption">{caption}</figcaption>}
-  <div class="comparison-table__scroll">
+  <figcaption class="comparison-table__caption">
+    {caption}
+    <span class="comparison-table__hint">Swipe sideways to see every column.</span>
+  </figcaption>
+  <div class="comparison-table__scroll" tabindex="0" role="region" aria-label={caption ? `${caption} (scrolls sideways)` : 'Comparison table (scrolls sideways)'}>
     <table>
       <thead>
         <tr>
-          <th scope="col" class="comparison-table__row-head"></th>
+          <th scope="col" class="comparison-table__row-head"><span class="sr-only">Specification</span></th>
           {columns.map((c) => (
             <th scope="col" data-verdict={c.verdict}>
               <span class="comparison-table__heading">{c.heading}</span>
@@ -59,6 +62,16 @@ const { columns, rows, caption } = Astro.props as Props;
     color: var(--color-steel-500);
     border-bottom: 1px solid var(--color-hairline);
     background: var(--color-paper);
+  }
+  .comparison-table__hint {
+    display: block;
+    margin-top: 0.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-amber-900);
+  }
+  @media (min-width: 900px) {
+    .comparison-table__hint { display: none; }
   }
   .comparison-table__scroll {
     overflow-x: auto;
